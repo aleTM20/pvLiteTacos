@@ -1,0 +1,7 @@
+/nbproject
+/test
+/build
+
+*.class
+*.form
+manifest.mf

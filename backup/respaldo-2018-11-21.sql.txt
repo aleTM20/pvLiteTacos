@@ -1,0 +1,336 @@
+-- MySQL dump 10.16  Distrib 10.1.31-MariaDB, for Win32 (AMD64)
+--
+-- Host: localhost    Database: taquitos
+-- ------------------------------------------------------
+-- Server version       10.1.31-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `compra`
+--
+
+DROP TABLE IF EXISTS `compra`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `compra` (
+  `idCompra` int(11) DEFAULT NULL,
+  `idgasto` int(11) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `compra`
+--
+
+LOCK TABLES `compra` WRITE;
+/*!40000 ALTER TABLE `compra` DISABLE KEYS */;
+INSERT INTO `compra` VALUES (1,1,'activo'),(1,2,'activo'),(1,3,'activo'),(1,4,'activo'),(1,5,'activo'),(1,6,'activo'),(1,7,'activo'),(1,8,'activo'),(1,9,'activo'),(1,10,'activo'),(1,11,'activo'),(1,12,'activo'),(1,13,'activo'),(1,14,'activo'),(1,15,'activo'),(1,16,'activo'),(1,17,'activo'),(1,18,'activo'),(1,19,'activo'),(1,20,'activo'),(1,21,'activo'),(1,22,'activo'),(1,23,'activo'),(1,24,'activo'),(1,25,'activo'),(1,26,'activo'),(1,27,'activo'),(1,28,'activo'),(1,29,'activo'),(1,30,'activo'),(1,31,'activo'),(1,32,'activo'),(1,33,'activo');
+/*!40000 ALTER TABLE `compra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gastos`
+--
+
+DROP TABLE IF EXISTS `gastos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gastos` (
+  `idgasto` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` text NOT NULL,
+  `gastado` double(10,2) NOT NULL,
+  `fecha_gasto` varchar(50) NOT NULL,
+  `cantidad` float DEFAULT NULL,
+  `idInsumo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idgasto`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gastos`
+--
+
+LOCK TABLES `gastos` WRITE;
+/*!40000 ALTER TABLE `gastos` DISABLE KEYS */;
+INSERT INTO `gastos` VALUES (1,'AGUA ',200.00,'2018-11-21',40,33),(2,'BISTECK',480.00,'2018-11-21',4,2),(3,'BOING GUAYABA ',360.00,'2018-11-21',40,25),(4,'BOING MANGO ',520.00,'2018-11-21',40,24),(5,'CEBOLLA',100.00,'2018-11-21',10,15),(6,'CEBOLLITAS DE CAMBRAY ',100.00,'2018-11-21',10,19),(7,'CERVEZA BOHEMIA ',300.00,'2018-11-21',20,37),(8,'CERVEZA CARTA BLANCA ',300.00,'2018-11-21',20,30),(9,'CERVEZA CORONA ',300.00,'2018-11-21',20,27),(10,'CERVEZA HEINEKEN',300.00,'2018-11-21',20,34),(11,'CERVEZA INDIO',300.00,'2018-11-21',20,26),(12,'CERVEZA TECATE ',300.00,'2018-11-21',20,29),(13,'CERVEZA TECATE LIGHT',300.00,'2018-11-21',20,36),(14,'CERVEZA XX AMBAR',300.00,'2018-11-21',20,35),(15,'CERVEZA XX LAGER AMBAR',300.00,'2018-11-21',20,28),(16,'CHORIZO',240.00,'2018-11-21',3,4),(17,'CHULETA',620.00,'2018-11-21',10,3),(18,'COCA COLA ',360.00,'2018-11-21',40,20),(19,'COSTILLA',1200.00,'2018-11-21',10,6),(20,'FANTA',260.00,'2018-11-21',20,23),(21,'JAMON',1000.00,'2018-11-21',10,7),(22,'PIMIENTO',300.00,'2018-11-21',10,11),(23,'JITOMATE',100.00,'2018-11-21',10,14),(24,'MANZANA ',180.00,'2018-11-21',20,21),(25,'PI+ÊA ',300.00,'2018-11-21',10,13),(26,'POLLO',600.00,'2018-11-21',10,5),(27,'QUESO AMARILLO ',600.00,'2018-11-21',10,17),(28,'QUESO MANCHEGO',1800.00,'2018-11-21',10,10),(29,'QUESO OAXACA',900.00,'2018-11-21',15,9),(30,'SPRITE ',260.00,'2018-11-21',20,22),(31,'TOCINO',1100.00,'2018-11-21',10,8),(32,'TORTILLA',600.00,'2018-11-21',40,12),(33,'TORTILLA DE HARINA',1000.00,'2018-11-21',50,16);
+/*!40000 ALTER TABLE `gastos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `insumos`
+--
+
+DROP TABLE IF EXISTS `insumos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `insumos` (
+  `idInsumo` int(11) NOT NULL AUTO_INCREMENT,
+  `insumo` varchar(100) NOT NULL,
+  `existencias` float NOT NULL,
+  `unidad_medida` varchar(10) NOT NULL,
+  `precio_compra` float NOT NULL,
+  PRIMARY KEY (`idInsumo`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `insumos`
+--
+
+LOCK TABLES `insumos` WRITE;
+/*!40000 ALTER TABLE `insumos` DISABLE KEYS */;
+INSERT INTO `insumos` VALUES (1,'PASTOR',99.5,'KG',62),(2,'BISTECK',10.675,'KG',120),(3,'CHULETA',10,'KG',62),(4,'CHORIZO',11.775,'KG',80),(5,'POLLO',10,'KG',60),(6,'COSTILLA',10,'KG',120),(7,'JAMON',10,'KG',100),(8,'TOCINO',10,'KG',110),(9,'QUESO OAXACA',15,'KG',60),(10,'QUESO MANCHEGO',10,'KG',180),(11,'PIMIENTO',10,'KG',30),(12,'TORTILLA',42.93,'KG',15),(13,'PI+ÊA ',10,'KG',30),(14,'JITOMATE',10,'KG',10),(15,'CEBOLLA',10,'KG',10),(16,'TORTILLA DE HARINA',66,'PZA',20),(17,'QUESO AMARILLO ',10,'KG',60),(18,'BOLILLO',0,'KG',1.25),(19,'CEBOLLITAS DE CAMBRAY ',10,'KG',10),(20,'COCA COLA ',39,'PZA',9),(21,'MANZANA ',20,'PZA',9),(22,'SPRITE ',20,'PZA',13),(23,'FANTA',20,'PZA',13),(24,'BOING MANGO ',40,'PZA',13),(25,'BOING GUAYABA ',40,'PZA',9),(26,'CERVEZA INDIO',20,'PZA',15),(27,'CERVEZA CORONA ',20,'PZA',15),(28,'CERVEZA XX LAGER AMBAR',20,'PZA',15),(29,'CERVEZA TECATE ',20,'PZA',15),(30,'CERVEZA CARTA BLANCA ',20,'PZA',15),(31,'ESCARCHADOS DE LITRO ',0,'PZA',30),(32,'ESCARCHADOS ',0,'PZA',15),(33,'AGUA ',40,'PZA',5),(34,'CERVEZA HEINEKEN',20,'PZA',15),(35,'CERVEZA XX AMBAR',20,'PZA',15),(36,'CERVEZA TECATE LIGHT',20,'PZA',15),(37,'CERVEZA BOHEMIA ',20,'PZA',15);
+/*!40000 ALTER TABLE `insumos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `insumovencido`
+--
+
+DROP TABLE IF EXISTS `insumovencido`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `insumovencido` (
+  `idInsumo` int(11) DEFAULT NULL,
+  `insumo` varchar(20) DEFAULT NULL,
+  `cantidad` float DEFAULT NULL,
+  `fechaDev` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `insumovencido`
+--
+
+LOCK TABLES `insumovencido` WRITE;
+/*!40000 ALTER TABLE `insumovencido` DISABLE KEYS */;
+/*!40000 ALTER TABLE `insumovencido` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `inventario`
+--
+
+DROP TABLE IF EXISTS `inventario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `inventario` (
+  `idProducto` int(11) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `inventario`
+--
+
+LOCK TABLES `inventario` WRITE;
+/*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `producto`
+--
+
+DROP TABLE IF EXISTS `producto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `producto` (
+  `idproducto` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `descripcion` text NOT NULL,
+  `tipoproducto` varchar(100) NOT NULL,
+  `precio` float NOT NULL,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idproducto`)
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `producto`
+--
+
+LOCK TABLES `producto` WRITE;
+/*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` VALUES (1,'TACO','BISTECK','COMIDA',14,1),(2,'TACO','CHORIZO','COMIDA',14,1),(3,'TACO BISTEC','TORTILLA DE HARINA','COMIDA',18,1),(4,'TACO CHORIZO','TORTILLA DE HARINA','COMIDA',18,1),(5,'TACO ','AL PASTOR ','COMIDA',7,1),(6,'TACO PASTOR','TORTILLA DE HARINA','COMIDA',12,1),(7,'TACO ','CHULETA ','COMIDA',14,1),(8,'TACO CHULETA ','TORTILLA DE HARINA','COMIDA',18,1),(9,'TACO ','POLLO ','COMIDA',14,1),(10,'TACO POLLO ','TORTILLA DE HARINA','COMIDA',18,1),(11,'TACO ','COSTILLA ','COMIDA',14,1),(12,'TACO COSTILLA ','TORTILLA DE HARINA ','COMIDA',18,1),(13,'TACO ','CAMPECHANO ','COMIDA',14,1),(14,'TACO CAMPECHANO ','TORTILLA DE HARINA ','COMIDA',18,1),(15,'COSTILLA','ROAST BEEF','COMIDA',50,1),(16,'COSTILLA ROAST',' CON QUESO','COMIDA',55,1),(17,'COSTILLA ROAST ','CON ENSALADA','COMIDA',65,1),(18,'BISTEC CON QUESO','ORDEN ','COMIDA',65,1),(19,'COMBINADO','ORDEN ','COMIDA',65,1),(20,'ALAMBRE','ORDEN ','COMIDA',70,1),(21,'CEBOLLITAS DE CAMBRAY ','ORDEN ','COMIDA',15,1),(22,'GRINGA ','AL PASTOR ','COMIDA',25,2),(23,'GRINGA  ','BISTECK ','COMIDA',30,1),(24,'SINCRONIZADA','SENCILLA ','COMIDA',20,1),(25,'SINCRONIZADA ',' BISTECK','COMIDA',35,1),(26,'NORTE+ÊA','NORTE+ÊA','COMIDA',12,1),(27,'QUESO FUNDIDO','TOLUQUE+ÊO ','COMIDA',65,1),(28,'QUESO FUNDIDO ','MEXICANO ','COMIDA',65,1),(29,'ENCEBOLLADO ','ENCEBOLLADO ','COMIDA',55,1),(30,'QUESO FUNDIDO ','MANCHEGO ','COMIDA',50,1),(31,'QUESO FUNDIDO ','SUIZO ','COMIDA',50,1),(32,'HUARACHE','SENCILLO ','COMIDA',25,1),(33,'HUARACHE ','CON POLLO ','COMIDA',50,1),(34,'HUARCHE ','CON BISTECK ','COMIDA',50,1),(35,'HUARACHE ','DE COSTILLA','COMIDA',50,1),(36,'HUARACHE ','CAMPECHANO ','COMIDA',50,1),(37,'COCA COLA ','VIDRIO','BEBIDA',13,2),(38,'MANZANA ','VIDRIO ','BEBIDA',13,2),(39,'SPRITE','VIDRIO','BEBIDA',13,2),(40,'FANTA','VIDRIO ','BEBIDA',13,2),(41,'BOING ','GUAYABA ','BEBIDA',13,2),(42,'BOING ','MANGO ','BEBIDA',13,2),(43,'CERVEZA INDIO','CERVEZA','COMIDA',22,1),(44,'GRINGA ','CAMPECHANA ','COMIDA',30,1),(45,'COCA COLA','VIDRIO ','COMIDA',13,1),(46,'MANZANITA','VIDRIO','COMIDA',13,1),(47,'SPRITE','VIDRIO','COMIDA',13,1),(48,'FANTA','VIDRIO','COMIDA',13,1),(49,'BOING ','MANGO','COMIDA',13,1),(50,'BOING','GUAYABA','COMIDA',13,1),(51,'GRINGA','AL PASTOR','COMIDA',30,1),(52,'CERVEZA CORONA ','CERVEZA','COMIDA',22,1),(53,'CERVEZA XX LAGER ','CERVEZA','COMIDA',22,1),(54,'CERVEZA TECATE ','TECATE ROJA','COMIDA',22,1),(55,'CERVEZA TECATE','LIGHT','COMIDA',22,1),(56,'CERVEZA HEINE','HEINEKEN ','COMIDA',22,1),(57,'CERVEZA XX','AMBAR','COMIDA',22,1),(58,'CERVEZA CARTA','BLANCA ','COMIDA',50,1),(59,'ESCARCHADO MED','CORONA ','COMIDA',26,1),(60,'ESCARCHADO MED ','XX LAGER','COMIDA',26,1),(61,'ESCARCHADO MED ','HEINECKEN ','COMIDA',26,1),(62,'ESCARCHADOS MED','TECATE ','COMIDA',26,1),(63,'ESCARCHADO MED','TECATE LIGHT','COMIDA',26,1),(64,'ESCARCHADO MED ','XX AMBAR ','COMIDA',26,1),(65,'ESCARCHADO LITRO ','CARTA BLANCA ','COMIDA',50,1),(66,'ESCARCHADO MED ','BOHEMIA','COMIDA',26,1),(67,'AGUA','NATURAL','COMIDA',13,1),(68,'TORTA','PASTOR','COMIDA',20,1),(69,'TORTA','BISTCK','COMIDA',30,1),(70,'TORTA','CHORIZO','COMIDA',30,1),(71,'TORTA','CHULETA','COMIDA',30,1),(72,'TORTA','POLLO','COMIDA',30,1),(73,'TORTA','CAMPECHANO','COMIDA',30,1),(74,'TORTA','COSTILLA','COMIDA',30,1),(75,'HUARACHE','CHORIZO','COMIDA',50,1),(76,'HUARACHE','CHULETA','COMIDA',50,1),(77,'HUARACHE','PASTOR','COMIDA',50,1),(78,'GRINGA ','CHORIZO','COMIDA',30,1),(79,'GRINGA','POLLO','COMIDA',30,1),(80,'GRINGA','COSTILLA','COMIDA',30,1),(81,'GRINGA','CHULETA','COMIDA',30,1),(82,'SINCRONIZADA ','ENCHILADA','COMIDA',22,1);
+/*!40000 ALTER TABLE `producto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reseta`
+--
+
+DROP TABLE IF EXISTS `reseta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reseta` (
+  `idproducto` int(11) DEFAULT NULL,
+  `idInsumo` int(11) DEFAULT NULL,
+  `cantidadInsumo` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reseta`
+--
+
+LOCK TABLES `reseta` WRITE;
+/*!40000 ALTER TABLE `reseta` DISABLE KEYS */;
+INSERT INTO `reseta` VALUES (1,2,0.05),(1,12,0.07),(2,4,0.05),(2,12,0.07),(3,2,0.07),(3,16,1),(3,9,0.02),(4,4,0.07),(4,16,1),(4,9,0.02),(5,1,0.04),(5,12,0.07),(6,1,0.04),(6,16,1),(6,9,0.02),(7,3,0.05),(7,12,0.07),(8,3,0.07),(8,16,1),(8,9,0.02),(9,5,0.05),(9,12,0.07),(10,5,0.07),(10,16,1),(10,9,0.02),(11,6,0.05),(11,16,0.07),(12,6,0.07),(12,16,1),(12,9,0.02),(13,2,0.025),(13,4,0.025),(13,12,0.07),(14,16,1),(14,2,0.035),(14,4,0.035),(14,9,0.02),(15,6,0.165),(16,6,0.165),(16,9,0.05),(17,6,0.165),(18,2,0.165),(18,9,0.05),(19,2,0.05),(19,4,0.05),(19,9,0.05),(20,2,0.05),(20,8,0.05),(20,11,0.05),(20,15,0.025),(20,9,0.05),(20,3,0.05),(21,4,0.5),(22,11,0.1),(22,12,2),(22,8,0.1),(23,2,0.1),(23,12,2),(23,8,0.1),(24,14,0.025),(24,10,0.025),(24,8,0.02),(24,12,2),(25,2,0.06),(25,14,0.025),(25,10,0.025),(25,8,0.02),(25,12,2),(26,8,0.15),(26,12,1),(27,9,0.2),(27,3,0.15),(28,9,0.2),(28,2,0.15),(29,9,0.2),(29,15,0.15),(30,9,0.4),(31,13,0.15),(31,12,0.095),(31,8,0.1),(32,12,0.13),(32,8,0.1),(33,17,0.11),(33,16,0.13),(33,8,0.1),(34,2,0.1),(34,16,0.13),(34,8,0.1),(35,16,0.13),(35,7,0.11),(35,8,0.1),(36,3,0.055),(36,2,0.055),(36,16,0.1),(36,8,0.1),(43,11,1),(44,2,0.05),(44,4,0.05),(44,16,2),(45,20,1),(46,21,1),(47,22,1),(48,23,1),(49,24,1),(50,25,1),(51,1,0.05),(51,16,2),(52,27,1),(53,28,1),(54,29,1),(55,4,1),(56,26,1),(57,3,1),(58,30,1),(59,27,1),(60,20,1),(61,26,1),(62,28,1),(63,4,1),(64,3,1),(65,30,1),(66,30,1),(67,33,1),(68,17,0.12),(68,18,1),(68,16,0.15),(69,2,0.12),(69,18,1),(69,16,0.15),(70,18,1),(70,32,0.12),(70,16,0.15),(71,18,1),(71,31,0.12),(71,16,0.15),(72,18,1),(72,16,0.15),(72,22,0.12),(73,18,1),(73,2,0.06),(73,32,0.06),(73,16,0.15),(74,18,1),(74,7,0.12),(74,16,0.15),(75,32,0.11),(75,16,0.1),(75,2,0.13),(76,31,0.11),(76,16,0.1),(76,2,0.13),(77,17,0.11),(77,16,0.1),(77,2,0.13),(78,4,0.1),(78,16,2),(78,9,0.1),(79,5,0.1),(79,16,2),(79,9,0.1),(80,6,0.1),(80,16,2),(80,9,0.1),(81,3,0.1),(81,16,2),(81,9,0.1),(82,7,0.025),(82,17,0.025),(82,9,0.02),(82,16,2);
+/*!40000 ALTER TABLE `reseta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ticket`
+--
+
+DROP TABLE IF EXISTS `ticket`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ticket` (
+  `idTicket` int(20) NOT NULL AUTO_INCREMENT,
+  `fecha` date DEFAULT NULL,
+  `total` float DEFAULT NULL,
+  `vendedor` varchar(50) DEFAULT NULL,
+  `mesa` varchar(20) DEFAULT NULL,
+  `STATUS` varchar(20) DEFAULT NULL,
+  `hora` varchar(20) DEFAULT NULL,
+  `efectivo` float DEFAULT NULL,
+  PRIMARY KEY (`idTicket`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ticket`
+--
+
+LOCK TABLES `ticket` WRITE;
+/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+INSERT INTO `ticket` VALUES (1,'2018-11-21',83,'Juan Claudio','M19','1','04:58:22',200);
+/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `trabajadores`
+--
+
+DROP TABLE IF EXISTS `trabajadores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trabajadores` (
+  `idtrabajador` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`idtrabajador`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trabajadores`
+--
+
+LOCK TABLES `trabajadores` WRITE;
+/*!40000 ALTER TABLE `trabajadores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trabajadores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuarios` (
+  `idusuario` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `tipousuario` varchar(50) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idusuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Mayela','Martinez','ADMINISTRADOR','Mayela Martinez'),(2,'Laura','Hernandez','MESERO','Laura Hern+Ìndez'),(3,'Brenda','Vazquez','ADMINISTRADOR','Brenda Vazquez'),(4,'Alejandra','Galindo','MESERO','Alejandra Galindo'),(5,'Lola','Monroy','MESERO','Lola Martinez'),(6,'Juan','Claudio','MESERO','Juan Claudio'),(7,'Pablo','Sanabria','MESERO','Pablo Sanabria'),(8,'Juanito','Monroy','MESERO','Juanito Monroy'),(9,'Pancho','Monroy','MESERO','Pancho Monroy'),(10,'Antonio','Rocha','MESERO','Antonio Rocha'),(11,'Josve','Rocha','MESERO','Josve Rocha'),(12,'Tokio','Gardu+¶o','MESERO','Tokio Gardu+¶o'),(13,'German','German','MESERO','German');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ventas`
+--
+
+DROP TABLE IF EXISTS `ventas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ventas` (
+  `idTicket` int(11) NOT NULL,
+  `id_producto` varchar(20) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `total` double(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ventas`
+--
+
+LOCK TABLES `ventas` WRITE;
+/*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
+INSERT INTO `ventas` VALUES (1,'5',10,70.00),(1,'45',1,13.00);
+/*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ventasp`
+--
+
+DROP TABLE IF EXISTS `ventasp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ventasp` (
+  `mesa` varchar(20) DEFAULT NULL,
+  `idProducto` int(11) DEFAULT NULL,
+  `producto` varchar(50) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `total` float DEFAULT NULL,
+  `mesero` int(11) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ventasp`
+--
+
+LOCK TABLES `ventasp` WRITE;
+/*!40000 ALTER TABLE `ventasp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ventasp` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-11-21 17:02:34
