@@ -43,6 +43,7 @@ public class Principal extends javax.swing.JFrame {
         }
         return cerrado;
     }
+
     /**
      * Creates new form Principal
      */
@@ -369,12 +370,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         if (estacerrado(ventas)) {
-            try {
-                System.out.println("hola  minod");
-                ventas = new Ventas();
-            } catch (SQLException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            System.out.println("hola  minod");
+            ventas = new Ventas();
             int width = escritorio.getWidth();
             int Height = escritorio.getHeight();
             ventas.setSize(width, Height);
@@ -418,7 +415,7 @@ public class Principal extends javax.swing.JFrame {
         wa.msj1.setText("");
         wa.setVisible(true);
 
-        if(WarningAlertSalir.salir){
+        if (WarningAlertSalir.salir) {
             this.dispose();
             new login.Login().setVisible(true);
         }

@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/pvLiteTacos/src/ventas/ModalElegir.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/pvLiteTacos/src/ventas/Tickets.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/pvLiteTacos/src/ventas/Ventas.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/pvLiteTacos/src/ventas/BillPrintable.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/pvLiteTacos/src/principal/PrincipalAdministrador.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/pvLiteTacos/src/ventas/DetallesTicket.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -5,6 +5,7 @@
  */
 package ventas;
 
+import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,74 +21,65 @@ import static ventas.Ventas.conn;
  * @author Alejandro
  */
 public final class DetallesTicket extends java.awt.Dialog {
- DefaultTableModel modelo = new DefaultTableModel() {
+
+    DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
     };
+
     /**
      * Creates new form DetallesTicket
      */
-    public DetallesTicket(java.awt.Frame parent, boolean modal,int ticket) {
+    public DetallesTicket(java.awt.Frame parent, boolean modal, int ticket) {
         super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(parent);
         efectosTabla();
         llenarTabla(ticket);
     }
-public void efectosTabla(){
-   modelo.addColumn("PRODUCTO");
-        modelo.addColumn("PRECIO");
-        modelo.addColumn("CANTIDAD");
-        modelo.addColumn("SUBTOTAL");
-        
-        tabla.setModel(modelo);
 
+    public void efectosTabla() {
+        this.modelo.addColumn("PRODUCTO");
+        this.modelo.addColumn("PRECIO");
+        this.modelo.addColumn("CANTIDAD");
+        this.modelo.addColumn("SUBTOTAL");
 
+        this.tabla.setModel(this.modelo);
 
-      tabla.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
-       tabla.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
-        jScrollPane1.getViewport().setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.getViewport().setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
-        jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
-        
-}
-     public void remove(){
-       int filas = modelo.getRowCount();
-            for (int i = 0; filas > i; i++) {
-                modelo.removeRow(0);
-            }
+        this.tabla.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
+        this.tabla.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
+        this.tabla.setSelectionMode(0);
+        this.jScrollPane1.getViewport().setBackground(new Color(255, 255, 255));
+        this.jScrollPane1.getViewport().setBackground(new Color(255, 255, 255));
+        this.jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
+        this.jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
     }
-public void llenarTabla(int ticket){
-    remove();
-    try {
-            String sql = "select DISTINCT(nombre),fecha,ticket.total,"
-                    + "mesa,precio,cantidad,ventas.total as importe "
-                    + "from ticket INNER JOIN ventas on ventas.idTicket="
-                    + "ticket.idTicket INNER JOIN producto on producto.idproducto"
-                    + "=ventas.id_Producto where ticket.idTicket="+ticket+";";
-//            System.out.println(sql);
-  PreparedStatement pst=conn.prepareStatement(sql);
+
+    public void llenarTabla(int ticket) {
+        try {
+            String sql = "select DISTINCT(nombre),fecha,ticket.total,mesa,precio,cantidad,ventas.total as importe from ticket INNER JOIN ventas on ventas.idTicket=ticket.idTicket INNER JOIN producto on producto.idproducto=ventas.id_Producto where ticket.idTicket=" + ticket + ";";
+
+            PreparedStatement pst = Ventas.conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery(sql);
-            Object datos[] = new Object[4];
+            Object[] datos = new Object[4];
             while (rs.next()) {
-                    
-                    datos[0]= rs.getString("nombre");
-                    datos[1]= rs.getFloat("precio");
-                    datos[2]= rs.getInt("cantidad");
-                    datos[3]= rs.getFloat("importe");
-                   modelo.addRow(datos);
-                   mesa.setText(rs.getString("mesa"));
-                   total.setText("$"+rs.getFloat("total"));
-                   fecha.setText(rs.getString("fecha"));
-            } 
-            } catch (SQLException ex) {
-            System.out.println("tabla descripcion "+ex.getMessage());
+                datos[0] = rs.getString("nombre");
+                datos[1] = Float.valueOf(rs.getFloat("precio"));
+                datos[2] = Integer.valueOf(rs.getInt("cantidad"));
+                datos[3] = Float.valueOf(rs.getFloat("importe"));
+                this.modelo.addRow(datos);
+                this.mesa.setText(rs.getString("mesa"));
+                this.total.setText("$" + rs.getFloat("total"));
+                this.fecha.setText(rs.getString("fecha"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("tabla descripcion " + ex.getMessage());
         }
-}
-/**
+    }
+
+    /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
@@ -136,7 +128,7 @@ public void llenarTabla(int ticket){
         ));
         jScrollPane1.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 540, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 550, 240));
 
         mesa1.setBackground(new java.awt.Color(58, 159, 171));
         mesa1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -173,14 +165,14 @@ public void llenarTabla(int ticket){
         mesa.setText("--");
         jPanel1.add(mesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 200, 40));
 
-        materialButton1.setForeground(new java.awt.Color(0, 204, 153));
+        materialButton1.setForeground(new java.awt.Color(58, 159, 171));
         materialButton1.setText("ACEPTAR");
         materialButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 materialButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(materialButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 180, 40));
+        jPanel1.add(materialButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 230, 40));
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -196,7 +188,7 @@ public void llenarTabla(int ticket){
     }//GEN-LAST:event_closeDialog
 
     private void materialButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materialButton1ActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_materialButton1ActionPerformed
 
     /**
@@ -205,7 +197,7 @@ public void llenarTabla(int ticket){
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DetallesTicket dialog = new DetallesTicket(new java.awt.Frame(), true,4);
+                DetallesTicket dialog = new DetallesTicket(new java.awt.Frame(), true, 4);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);

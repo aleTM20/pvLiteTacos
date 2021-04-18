@@ -224,24 +224,22 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnCaducidad" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="btnCompras" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnInsumos" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnProductos" linkSize="5" alignment="0" pref="244" max="32767" attributes="0"/>
-                                      <Component id="btnGastos" linkSize="5" alignment="0" pref="244" max="32767" attributes="0"/>
-                                      <Component id="btnVentas" linkSize="5" alignment="0" pref="244" max="32767" attributes="0"/>
-                                      <Component id="cerrarSesion" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnUsuarios" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="btnAbout" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="btnCaducidad" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnCompras" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnInsumos" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnProductos" linkSize="5" alignment="0" pref="244" max="32767" attributes="0"/>
+                                  <Component id="btnGastos" linkSize="5" alignment="0" pref="244" max="32767" attributes="0"/>
+                                  <Component id="btnVentas" linkSize="5" alignment="0" pref="244" max="32767" attributes="0"/>
+                                  <Component id="cerrarSesion" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnUsuarios" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnAbout" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                           </Group>
@@ -318,7 +316,7 @@
             <Component class="principal.MaterialButtomRectangle" name="btnGastos">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ff" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -338,7 +336,7 @@
             <Component class="principal.MaterialButtomRectangle" name="btnVentas">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="ff" red="66" type="rgb"/>
+                  <Color blue="0" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>

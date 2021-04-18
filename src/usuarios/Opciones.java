@@ -147,7 +147,6 @@ public class Opciones {
          if (tipo_us.equals("ADMINISTRADOR")) {
            login.dispose();
            new PrincipalAdministrador().setVisible(true);
- 
            PrincipalAdministrador.usuario.setText(nombre);
          }
          else if (tipo_us.equals("MESERO")) {

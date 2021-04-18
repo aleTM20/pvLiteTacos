@@ -37,8 +37,9 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
 
     public Insumos insumo = null;
     public InsumosCompras insumosCompras = null;
-    public InsumosCaducidad InsumosCaducidad=null;
+    public InsumosCaducidad InsumosCaducidad = null;
     public Productos producto = null;
+    public static Ventas ventas1 = null;
     private Salidas salidas = null;
     private Usuarios usuarios = null;
     public static ListaVentas lista = null;
@@ -46,9 +47,8 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
     public static VentasLista1 ventasLista = null;
     public static Compras compras = null;
     public static Detalles detalles = null;
-    
 
-    public static boolean estacerrado(Object obj) {
+    public static boolean estacerrado(JInternalFrame obj) {
         JInternalFrame[] activos = escritorio.getAllFrames();
         boolean cerrado = true;
         int i = 0;
@@ -204,7 +204,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnGastos.setBackground(new java.awt.Color(255, 255, 0));
+        btnGastos.setBackground(new java.awt.Color(0, 102, 255));
         btnGastos.setForeground(new java.awt.Color(255, 255, 255));
         btnGastos.setText("GASTOS");
         btnGastos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -215,7 +215,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnVentas.setBackground(new java.awt.Color(102, 255, 51));
+        btnVentas.setBackground(new java.awt.Color(0, 102, 0));
         btnVentas.setForeground(new java.awt.Color(255, 255, 255));
         btnVentas.setText("VENTAS");
         btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -311,23 +311,22 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCaducidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnInsumos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                                .addComponent(btnGastos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                                .addComponent(btnVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                                .addComponent(cerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnUsuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btnAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnCaducidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnInsumos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                            .addComponent(btnGastos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                            .addComponent(btnVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                            .addComponent(cerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnUsuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAbout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,7 +414,15 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
 
-        new ventas.ModalElegir(this, true).setVisible(true);
+        //new ventas.ModalElegir(this, true).setVisible(true);
+        if (estacerrado(ventas1)) {
+            ventas1 = new Ventas();
+            int width = escritorio.getWidth();
+            int Height = escritorio.getHeight();
+            ventas1.setSize(width, Height);
+            escritorio.add(ventas1);
+            ventas1.show();
+        }
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
@@ -488,7 +495,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
 
     private void btnInsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsumosActionPerformed
         if (estacerrado(insumo)) {
-            
+
             insumo = new Insumos();
             int width = escritorio.getWidth();
             int Height = escritorio.getHeight();
@@ -499,8 +506,8 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsumosActionPerformed
 
     private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
-         if (estacerrado(insumosCompras)) {
-            
+        if (estacerrado(insumosCompras)) {
+
             insumosCompras = new InsumosCompras();
             int width = escritorio.getWidth();
             int Height = escritorio.getHeight();
@@ -512,16 +519,17 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
 
     private void btnCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaducidadActionPerformed
 
-              if (estacerrado(InsumosCaducidad)) {
-            
+        if (estacerrado(InsumosCaducidad)) {
+
             InsumosCaducidad = new InsumosCaducidad();
             int width = escritorio.getWidth();
             int Height = escritorio.getHeight();
             InsumosCaducidad.setSize(width, Height);
             escritorio.add(InsumosCaducidad);
             InsumosCaducidad.show();
-        }else{  
-                  InsumosCaducidad.show();}
+        } else {
+            InsumosCaducidad.show();
+        }
     }//GEN-LAST:event_btnCaducidadActionPerformed
 
     /**

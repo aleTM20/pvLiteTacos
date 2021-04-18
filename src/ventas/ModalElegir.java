@@ -153,13 +153,11 @@ public class ModalElegir extends javax.swing.JDialog {
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
 //      
-   this.dispose();
+        this.dispose();
         if (PrincipalAdministrador.estacerrado(PrincipalAdministrador.ventas)) {
-            try {
-                PrincipalAdministrador.ventas = new Ventas();
-            } catch (SQLException ex) {
-                Logger.getLogger(ModalElegir.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+            PrincipalAdministrador.ventas = new Ventas();
+
             int width = PrincipalAdministrador.escritorio.getWidth();
             int Height = PrincipalAdministrador.escritorio.getHeight();
             PrincipalAdministrador.ventas.setSize(width, Height);
