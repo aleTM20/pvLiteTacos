@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package principal;
+package view.waiter;
 
+import principal.*;
 import alertas.principal.ErrorAlert;
 import alertas.principal.FadeEffect;
 import alertas.principal.WarningAlertCerrar;
 import alertas.principal.WarningAlertSalir;
 import conexion.ConexionBD;
+import contract.waiter.HomeContract;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,35 +19,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import login.Login;
-import static principal.PrincipalAdministrador.cerra;
+import model.Product;
+import presenter.waiter.HomePresenter;
 import tabla.EstiloTablaHeader;
 import tabla.EstiloTablaRenderer;
 import tabla.MyScrollbarUI;
 import ventas.Detalles;
-import ventas.Ventas;
 import ventas.objectI;
 
 /**
  *
- * @author Rojeru San
+ * @author pv_lite_team
  */
-public class PrincipalMesero extends javax.swing.JFrame {
+public class WaiterHome extends javax.swing.JFrame implements HomeContract.View {
 
     static DecimalFormat df = new DecimalFormat("#.00");
     public static String NO_MESA = "";
     public static int MESERO = -1;
     static ConexionBD cc = new ConexionBD();
     public static Connection conn = cc.conexion();
-
+    private HomePresenter homePresenter;
     boolean b = true;
     private boolean minimiza = false;
 
@@ -67,36 +67,47 @@ public class PrincipalMesero extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public PrincipalMesero() {
+    public WaiterHome() {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/logo-icono.png")).getImage());
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         FadeEffect.fadeInFrame(this, 50, 0.1f);
+        homePresenter = new HomePresenter(this);
         tableStyle();
-        mesasExistentes();
-        llenarTabla("");
+        //mesasExistentes();
+        homePresenter.onLoadProducts("");
     }
 
-    public void llenarTabla(String dato) {
+    @Override
+    public void onError(String error) {
+        ErrorAlert errorAlert = new ErrorAlert(this, true);
+        errorAlert.titulo.setText("Error");
+        errorAlert.msj.setText(error);
+        errorAlert.msj1.setText("");
+        errorAlert.setVisible(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        WarningAlertCerrar wa = new WarningAlertCerrar(this, true);
+        wa.titulo.setText("¿ESTAS SEGURO?");
+        wa.msj.setText("SE CERRARA LA APLICACIÓN");
+        wa.msj1.setText("");
+        wa.setVisible(true);
+    }
+
+    @Override
+    public void onLoadProducts(List<Product> products) {
         cleanTable(this.productModel);
-        try {
-            String sql = "select idProducto as id,descripcion,tipoproducto,precio,nombre from producto where status=1 and (descripcion LIKE '%" + dato + "%' OR nombre like '%" + dato + "%');";
-
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery(sql);
-            Object[] datos = new Object[5];
-            while (rs.next()) {
-                datos[0] = Integer.valueOf(rs.getInt("id"));
-                datos[1] = rs.getString("nombre");
-                datos[2] = rs.getString("descripcion");
-                datos[3] = rs.getString("tipoproducto");
-                datos[4] = Float.valueOf(rs.getFloat("precio"));
-
-                this.productModel.addRow(datos);
-            }
-        } catch (SQLException ex) {
-            System.out.println("tabla productos: " + ex.getMessage());
-        }
+        Object[] rowData = new Object[5];
+        products.forEach((product) -> {
+            rowData[0] = product.getId();
+            rowData[1] = product.getName();
+            rowData[2] = product.getDescription();
+            rowData[3] = product.getType();
+            rowData[4] = product.getPrice();
+            this.productModel.addRow(rowData);
+        });
     }
 
     public static void llenarMesa(String numero, int mesero) {
@@ -334,7 +345,7 @@ public class PrincipalMesero extends javax.swing.JFrame {
             agregar(fila);
         }
         mesasExistentes();
-        llenarTabla("");
+//        llenarTabla("");
         this.txtQuantity.setText("1");
     }
 
@@ -934,16 +945,12 @@ public class PrincipalMesero extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizarActionPerformed
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
-        WarningAlertCerrar wa = new WarningAlertCerrar(this, true);
-        wa.titulo.setText("¿ESTAS SEGURO?");
-        wa.msj.setText("SE CERRARA LA APLICACIÓN");
-        wa.msj1.setText("");
-        wa.setVisible(true);
+        this.onDestroy();
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         mesasExistentes();
-        llenarTabla("");
+//        llenarTabla("");
         NO_MESA = "";
         this.msp.setText(NO_MESA);
         MESERO = -1;
@@ -973,7 +980,7 @@ public class PrincipalMesero extends javax.swing.JFrame {
     }//GEN-LAST:event_tblTicketDescriptionMouseClicked
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        llenarTabla(txtSearch.getText());
+//        llenarTabla(txtSearch.getText());
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
@@ -1065,14 +1072,22 @@ public class PrincipalMesero extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalMesero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WaiterHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalMesero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WaiterHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalMesero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WaiterHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalMesero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WaiterHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1085,7 +1100,7 @@ public class PrincipalMesero extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrincipalMesero().setVisible(true);
+                new WaiterHome().setVisible(true);
             }
         });
     }
@@ -1117,4 +1132,5 @@ public class PrincipalMesero extends javax.swing.JFrame {
     public static app.bolivia.swing.JCTextField txtSearch;
     public static javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
+
 }

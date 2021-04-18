@@ -80,15 +80,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="minimizar2" min="-2" pref="146" max="-2" attributes="0"/>
+                      <Component id="btnAddTable" min="-2" pref="146" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="minimizar1" min="-2" pref="139" max="-2" attributes="0"/>
+                      <Component id="btnRefresh" min="-2" pref="139" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="usuario" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="201" max="32767" attributes="0"/>
-                      <Component id="minimizar3" min="-2" pref="170" max="-2" attributes="0"/>
+                      <Component id="btnExit" min="-2" pref="170" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="minimizar" linkSize="3" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -103,9 +103,9 @@
                       <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
                       <Component id="usuario" alignment="3" max="32767" attributes="0"/>
                       <Component id="minimizar" linkSize="4" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="minimizar1" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="minimizar2" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="minimizar3" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="btnRefresh" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="btnAddTable" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="btnExit" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -189,7 +189,7 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
-            <Component class="principal.MaterialButton" name="minimizar1">
+            <Component class="principal.MaterialButton" name="btnRefresh">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -207,10 +207,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minimizar1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshActionPerformed"/>
               </Events>
             </Component>
-            <Component class="principal.MaterialButton" name="minimizar2">
+            <Component class="principal.MaterialButton" name="btnAddTable">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -228,10 +228,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minimizar2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddTableActionPerformed"/>
               </Events>
             </Component>
-            <Component class="principal.MaterialButton" name="minimizar3">
+            <Component class="principal.MaterialButton" name="btnExit">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -249,7 +249,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minimizar3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -536,7 +536,7 @@
                 <Property name="placeholder" type="java.lang.String" value="Cantidad"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQuantityActionPerformed"/>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtQuantityFocusGained"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtQuantityKeyReleased"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtQuantityKeyTyped"/>
               </Events>
@@ -570,7 +570,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ab" green="9f" red="3a" type="rgb"/>
                 </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
@@ -584,7 +584,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ab" green="9f" red="3a" type="rgb"/>
                 </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
                 <Property name="text" type="java.lang.String" value="M/B/P:"/>
               </Properties>
             </Component>
