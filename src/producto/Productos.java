@@ -8,8 +8,10 @@ package producto;
 import alertas.principal.ErrorAlert;
 import alertas.principal.WarningAlertP;
 import alertas.principal.WarningAlertP1;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import tabla.EstiloTablaHeader;
 import tabla.EstiloTablaRenderer;
 import tabla.MyScrollbarUI;
@@ -25,19 +27,18 @@ public class Productos extends javax.swing.JInternalFrame {
      */
     public Productos() {
         initComponents();
-        this.tabla.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
-        this.tabla.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
-        this.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.getViewport().setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
-        jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
-        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        tabla.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
+        tabla.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
+        tabla.setSelectionMode(0);
+        this.jScrollPane1.getViewport().setBackground(new Color(255, 255, 255));
+        this.jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
+        this.jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
+        ((BasicInternalFrameUI) getUI()).setNorthPane(null);
 
         Opciones.listar("");
     }
 
     public static void seleccionaFila(String id) {
-        
         for (int i = 0; i < tabla.getRowCount(); i++) {
             if (id.equals(tabla.getValueAt(i, 0).toString())) {
                 tabla.setRowSelectionInterval(i, i);
@@ -320,85 +321,77 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void eliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarTodoActionPerformed
-        if (this.tabla.getRowCount() < 1) {
+        if (tabla.getRowCount() < 1) {
             ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("LA TABLA ESTA VACÍA");
-            er.msj1.setText("");
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("LA TABLA ESTA VACÍA");
+            ErrorAlert.msj1.setText("");
             er.setVisible(true);
         } else {
             WarningAlertP1 wa = new WarningAlertP1(new JFrame(), true);
-            wa.titulo.setText("¿ESTAS SEGURO?");
-            wa.msj.setText("SE BORRARAN TODOS LOS");
-            wa.msj1.setText("REGISTROS PERMANENTEMENTE");
+            WarningAlertP1.titulo.setText("¿ESTAS SEGURO?");
+            WarningAlertP1.msj.setText("SE BORRARAN TODOS LOS");
+            WarningAlertP1.msj1.setText("REGISTROS PERMANENTEMENTE");
             wa.setVisible(true);
         }
     }//GEN-LAST:event_eliminarTodoActionPerformed
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
-        ModalProductoM mp = new ModalProductoM(new JFrame(), true);
-        mp.titulo.setText("REGISTRAR");
-        mp.registrar.setText("REGISTRAR");
-        mp.setVisible(true);
+        new ModalProductoM(new JFrame(), true).setVisible(true);
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        if (this.tabla.getRowCount() < 1) {
+        if (tabla.getRowCount() < 1) {
             ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("LA TABLA ESTA VACÍA");
-            er.msj1.setText("");
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("LA TABLA ESTA VACÍA");
+            ErrorAlert.msj1.setText("");
+            er.setVisible(true);
+        } else if (tabla.getSelectedRowCount() < 1) {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("SELECCIONA UN");
+            ErrorAlert.msj1.setText("REGISTRO");
             er.setVisible(true);
         } else {
-            if (this.tabla.getSelectedRowCount() < 1) {
-                ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                er.titulo.setText("OOPS...");
-                er.msj.setText("SELECCIONA UN");
-                er.msj1.setText("REGISTRO");
-                er.setVisible(true);
-            } else {
+            int fila = tabla.getSelectedRow();
 
-                int fila = this.tabla.getSelectedRow();
-
-                ModalProductoM mp = new ModalProductoM(new JFrame(), true);
-                mp.id.setText(this.tabla.getValueAt(fila, 0).toString());
-                mp.id2.setText(this.tabla.getValueAt(fila, 0).toString());
-                mp.nombre.setText(this.tabla.getValueAt(fila, 1).toString());
-                mp.descripcion.setText(this.tabla.getValueAt(fila, 2).toString());
-                mp.tipo.setSelectedItem(this.tabla.getValueAt(fila, 3).toString());
-                mp.precio.setText(this.tabla.getValueAt(fila, 4).toString());
-                mp.stock.setText(this.tabla.getValueAt(fila, 5).toString());
-                mp.titulo.setText("MODIFICAR");
-                mp.registrar.setText("GUARDAR");
-                mp.setVisible(true);
-            }
+            ModalProductoM mp = new ModalProductoM(new JFrame(), true);
+            mp.id = ((Integer) tabla.getValueAt(fila, 0)).intValue();
+            ModalProductoM.nombre.setText(tabla.getValueAt(fila, 1).toString());
+            ModalProductoM.descripcion.setText(tabla.getValueAt(fila, 2).toString());
+            ModalProductoM.tipo.setSelectedItem(tabla.getValueAt(fila, 3).toString());
+            ModalProductoM.precio.setText(tabla.getValueAt(fila, 4).toString());
+            ModalProductoM.stock.setText(tabla.getValueAt(fila, 5).toString());
+            ModalProductoM.tipo.setEnabled(false);
+            ModalProductoM.titulo.setText("MODIFICAR");
+            ModalProductoM.registrar.setText("GUARDAR");
+            mp.setVisible(true);
         }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        if (this.tabla.getRowCount() < 1) {
+        if (tabla.getRowCount() < 1) {
             ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("LA TABLA ESTA VACÍA");
-            er.msj1.setText("");
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("LA TABLA ESTA VACÍA");
+            ErrorAlert.msj1.setText("");
+            er.setVisible(true);
+        } else if (tabla.getSelectedRowCount() < 1) {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("SELECCIONA UN");
+            ErrorAlert.msj1.setText("REGISTRO");
             er.setVisible(true);
         } else {
-            if (this.tabla.getSelectedRowCount() < 1) {
-                ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                er.titulo.setText("OOPS...");
-                er.msj.setText("SELECCIONA UN");
-                er.msj1.setText("REGISTRO");
-                er.setVisible(true);
-            } else {
-                int fila = this.tabla.getSelectedRow();
-                WarningAlertP wa = new WarningAlertP(new JFrame(), true);
-                wa.id.setText(this.tabla.getValueAt(fila, 0).toString());
-                System.out.println(".................................."+wa.id.getText());
-                wa.titulo.setText("¿ESTAS SEGURO?");
-                wa.msj.setText("SE BORRARA PERMANENTEMENTE");
-                wa.msj1.setText("");
-                wa.setVisible(true);
-            }
+            int fila = tabla.getSelectedRow();
+            WarningAlertP wa = new WarningAlertP(new JFrame(), true);
+            WarningAlertP.id.setText(((Integer) tabla.getValueAt(fila, 0)).intValue() + "");
+            System.out.println(".................................." + WarningAlertP.id.getText());
+            WarningAlertP.titulo.setText("¿ESTAS SEGURO?");
+            WarningAlertP.msj.setText("SE BORRARA PERMANENTEMENTE");
+            WarningAlertP.msj1.setText("");
+            wa.setVisible(true);
         }
     }//GEN-LAST:event_eliminarActionPerformed
 

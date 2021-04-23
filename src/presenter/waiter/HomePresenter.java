@@ -7,13 +7,18 @@ package presenter.waiter;
 
 import java.sql.PreparedStatement;
 import contract.waiter.HomeContract;
+import exception.ExceptionPvLite;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Product;
 import model.connection.DBConnection;
+import model.queries.product.Query;
+import sun.rmi.server.Dispatcher;
 
 /**
  *
@@ -22,38 +27,23 @@ import model.connection.DBConnection;
 public class HomePresenter implements HomeContract.Presenter {
 
     private HomeContract.View view;
-    private Connection connection;
 
     public HomePresenter(HomeContract.View view) {
         this.view = view;
-        connection = new DBConnection().openConnection();
+
     }
 
     @Override
-    public void onError(String error) {
-        view.onError(error);
+    public void onError(ExceptionPvLite exceptionPvLite){
+        view.onError(exceptionPvLite);
     }
 
     @Override
     public void onLoadProducts(String textToSearch) {
         try {
-            String sql = "select idProducto as id,descripcion,tipoproducto,precio,nombre from producto where status=1 and (descripcion LIKE '%" + textToSearch + "%' OR nombre like '%" + textToSearch + "%');";
-
-            PreparedStatement pst = connection.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery(sql);
-            List<Product> products = new ArrayList<Product>();
-            while (rs.next()) {
-                products.add(new Product(
-                        rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getString("descripcion"),
-                        rs.getString("tipoproducto"),
-                        rs.getFloat("precio")));
-            }
-            view.onLoadProducts(products);
-        } catch (SQLException ex) {
-            view.onError(ex.toString());
-        }   
+            view.onLoadProducts(Query.listProducts(textToSearch));
+        } catch (ExceptionPvLite exceptionPvLite) {
+            this.onError(exceptionPvLite);
+        }
     }
-
 }

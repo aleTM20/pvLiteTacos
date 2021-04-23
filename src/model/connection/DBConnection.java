@@ -9,10 +9,10 @@ import javax.swing.*;
  */
 public class DBConnection {
 
-    private String dataBase = "taquitos";
-    private String user = "root";
-    private String password = "";
-    private String url = "jdbc:mysql://127.0.0.1:3306/" + dataBase;
+    private final String dataBase = "taquitos";
+    private final String user = "root";
+    private final String password = "";
+    private final String url = "jdbc:mysql://127.0.0.1:3306/" + dataBase;
     private Connection connection = null;
 
     public Connection openConnection() {

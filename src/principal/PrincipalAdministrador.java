@@ -89,6 +89,8 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         usuario = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        cambio_caja = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnProductos = new principal.MaterialButtomRectangle();
         btnGastos = new principal.MaterialButtomRectangle();
@@ -150,6 +152,22 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         usuario.setForeground(new java.awt.Color(255, 255, 255));
         usuario.setText("USUARIO");
 
+        jButton1.setBackground(new java.awt.Color(0, 153, 255));
+        jButton1.setText("Corte Caja");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        cambio_caja.setBackground(new java.awt.Color(0, 153, 255));
+        cambio_caja.setText("Cambio Caja");
+        cambio_caja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambio_cajaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -158,8 +176,12 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(cambio_caja)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(usuario)
@@ -181,7 +203,12 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(cambio_caja))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -193,7 +220,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         dropShadowBorder1.setShowTopShadow(true);
         jPanel3.setBorder(dropShadowBorder1);
 
-        btnProductos.setBackground(new java.awt.Color(255, 0, 0));
+        btnProductos.setBackground(new java.awt.Color(0, 153, 0));
         btnProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnProductos.setText("PRODUCTOS");
         btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -229,12 +256,12 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(58, 159, 171));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("VERSION 1.0");
+        jLabel3.setText("VERSION 1.15");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(58, 159, 171));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("© DERECHOS RESERVADOS 2018");
+        jLabel4.setText("© DERECHOS RESERVADOS 2021-2025");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(58, 159, 171));
@@ -252,7 +279,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnAbout.setBackground(new java.awt.Color(153, 255, 51));
+        btnAbout.setBackground(new java.awt.Color(0, 204, 204));
         btnAbout.setForeground(new java.awt.Color(255, 255, 255));
         btnAbout.setText("ACERCA DE");
         btnAbout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -274,7 +301,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnInsumos.setBackground(new java.awt.Color(255, 102, 0));
+        btnInsumos.setBackground(new java.awt.Color(0, 102, 102));
         btnInsumos.setForeground(new java.awt.Color(255, 255, 255));
         btnInsumos.setText("INSUMOS");
         btnInsumos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -285,7 +312,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnCompras.setBackground(new java.awt.Color(0, 204, 204));
+        btnCompras.setBackground(new java.awt.Color(0, 153, 153));
         btnCompras.setForeground(new java.awt.Color(255, 255, 255));
         btnCompras.setText("COMPRAS");
         btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -532,6 +559,14 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCaducidadActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cambio_cajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambio_cajaActionPerformed
+        new ModalCambioCaja(new JFrame(), true).setVisible(true);
+    }//GEN-LAST:event_cambio_cajaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -577,9 +612,11 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
     private principal.MaterialButtomRectangle btnProductos;
     private principal.MaterialButtomRectangle btnUsuarios;
     private principal.MaterialButtomRectangle btnVentas;
+    private javax.swing.JButton cambio_caja;
     private principal.MaterialButton cerrar;
     private principal.MaterialButtomRectangle cerrarSesion;
     public static principal.Escritorio escritorio;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

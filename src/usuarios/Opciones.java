@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import login.Login;
 import principal.PrincipalAdministrador;
+import principal.PrincipalMesero;
 
 /**
  *
@@ -151,7 +152,7 @@ public class Opciones {
          }
          else if (tipo_us.equals("MESERO")) {
            login.dispose();
-//           new PrincipalMesero().setVisible(true);
+           new PrincipalMesero().setVisible(true);
          }
        }
        else

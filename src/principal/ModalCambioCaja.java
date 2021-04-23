@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package producto;
+package principal;
 
+import producto.*;
 import alertas.principal.AWTUtilities;
 import alertas.principal.ErrorAlert;
 import alertas.principal.SuccessAlert;
@@ -18,7 +19,7 @@ import javax.swing.JFrame;
  *
  * @author Rojeru San
  */
-public class ModalProductoM extends javax.swing.JDialog {
+public class ModalCambioCaja extends javax.swing.JDialog {
 
     Timer timer = null;
     TimerTask task;
@@ -29,7 +30,7 @@ public class ModalProductoM extends javax.swing.JDialog {
     /**
      * Creates new form ModalProducto
      */
-    public ModalProductoM(java.awt.Frame parent, boolean modal) {
+    public ModalCambioCaja(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         AWTUtilities.setOpaque(this, false);
@@ -80,12 +81,12 @@ public class ModalProductoM extends javax.swing.JDialog {
 
             this.task = new TimerTask() {
                 public void run() {
-                    if (ModalProductoM.this.i == 0) {
-                        ModalProductoM.this.Cerrar();
+                    if (ModalCambioCaja.this.i == 0) {
+                        ModalCambioCaja.this.Cerrar();
                     } else {
-                        ModalProductoM.this.Ubicar(ModalProductoM.this.i);
-                        ModalProductoM.this.i -= 32;
-                        ModalProductoM.this.Trasparencia(ModalProductoM.this.i / 352.0F);
+                        ModalCambioCaja.this.Ubicar(ModalCambioCaja.this.i);
+                        ModalCambioCaja.this.i -= 32;
+                        ModalCambioCaja.this.Trasparencia(ModalCambioCaja.this.i / 352.0F);
                     }
                 }
             };
@@ -102,53 +103,7 @@ public class ModalProductoM extends javax.swing.JDialog {
     }
 
     public void actualizar() {
-        if ((!nombre.getText().equals("")) && (!descripcion.getText().equals(""))
-                && (tipo
-                        .getSelectedIndex() != 0) && (!precio.getText().equals(""))) {
-            Sentencias s = new Sentencias();
-            if (tipo.getSelectedIndex() == 2) {
-                int validaStock = 0;
-                if (!stock.getText().equals("")) {
-                    validaStock = Integer.parseInt(stock.getText());
-                }
-
-                s.setidProducto(this.id);
-                s.setNombre(nombre.getText());
-                s.setDescripcion(descripcion.getText());
-                s.setTipo(tipo.getSelectedItem().toString());
-                s.setPrecio(Double.valueOf(Double.parseDouble(precio.getText())));
-                Opciones.actualizar(s);
-                Opciones.actualizarInvetario(this.id, validaStock);
-            } else {
-                s.setidProducto(this.id);
-                s.setNombre(nombre.getText());
-                s.setDescripcion(descripcion.getText());
-                s.setTipo(tipo.getSelectedItem().toString());
-                s.setPrecio(Double.valueOf(Double.parseDouble(precio.getText())));
-                Opciones.actualizar(s);
-            }
-
-            this.task = new TimerTask() {
-                public void run() {
-                    if (ModalProductoM.this.i == 0) {
-                        ModalProductoM.this.Cerrar();
-                    } else {
-                        ModalProductoM.this.Ubicar(ModalProductoM.this.i);
-                        ModalProductoM.this.i -= 32;
-                        ModalProductoM.this.Trasparencia(ModalProductoM.this.i / 352.0F);
-                    }
-                }
-            };
-            this.timer = new Timer();
-            this.timer.schedule(this.task, 0L, 2L);
-            Opciones.listar("");
-        } else {
-            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            ErrorAlert.titulo.setText("OOPS...");
-            ErrorAlert.msj.setText("FALTAN CAMPOS DE LLENAR");
-            ErrorAlert.msj1.setText("");
-            er.setVisible(true);
-        }
+        
     }
 
     /**
@@ -368,12 +323,12 @@ public class ModalProductoM extends javax.swing.JDialog {
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
         this.task = new TimerTask() {
             public void run() {
-                if (ModalProductoM.this.i == 0) {
-                    ModalProductoM.this.Cerrar();
+                if (ModalCambioCaja.this.i == 0) {
+                    ModalCambioCaja.this.Cerrar();
                 } else {
-                    ModalProductoM.this.Ubicar(ModalProductoM.this.i);
-                    ModalProductoM.this.i -= 32;
-                    ModalProductoM.this.Trasparencia(ModalProductoM.this.i / 352.0F);
+                    ModalCambioCaja.this.Ubicar(ModalCambioCaja.this.i);
+                    ModalCambioCaja.this.i -= 32;
+                    ModalCambioCaja.this.Trasparencia(ModalCambioCaja.this.i / 352.0F);
                 }
             }
         };
@@ -490,21 +445,25 @@ public class ModalProductoM extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModalProductoM.class
+            java.util.logging.Logger.getLogger(ModalCambioCaja.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModalProductoM.class
+            java.util.logging.Logger.getLogger(ModalCambioCaja.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModalProductoM.class
+            java.util.logging.Logger.getLogger(ModalCambioCaja.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModalProductoM.class
+            java.util.logging.Logger.getLogger(ModalCambioCaja.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -513,7 +472,7 @@ public class ModalProductoM extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ModalProductoM dialog = new ModalProductoM(new javax.swing.JFrame(), true);
+                ModalCambioCaja dialog = new ModalCambioCaja(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
