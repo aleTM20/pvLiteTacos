@@ -18,6 +18,7 @@ public class ConexionBD {
     String base = "taquitos";      //Nombre de La Base De Datos
     String usuario = "root";        //Usuario Para Acceder Al Servidor Mysql
     String password = "";
+    String ipAddress = "192.168.0.1";
     String url = "";
     Connection conect = null;
 
@@ -32,20 +33,36 @@ public class ConexionBD {
             if (file.exists()) {
                 fr = new FileReader(file);
                 br = new BufferedReader(fr);
-                // Lectura del fichero
+                // Lectura del fichero                
                 String line;
-                if ((line = br.readLine()) != null) {
-                    this.url = "jdbc:mysql://" + line + ":3306/" + base;
+                int i = 1;
+                while ((line = br.readLine()) != null) {
+                    //System.out.println(line);
+                    switch (i) {
+                        case 1:
+                            this.ipAddress = line;
+                            break;
+                        case 2:
+                            this.usuario = line;
+                            break;
+                        case 3:
+                            this.password = line;
+                            break;
+                        case 4:
+                            this.base = line;
+                            break;
+                    }
+                    i++;
                 }
+                this.url = "jdbc:mysql://" + this.ipAddress + ":3306/" + this.base;
 
             } else {
                 file.createNewFile();
-                String ipAddress = "192.168.0.1";
                 fichero = new FileWriter(file);
                 pw = new PrintWriter(fichero);
-                pw.println(ipAddress);
+                pw.println(this.ipAddress);
                 fichero.close();
-                this.url = "jdbc:mysql://" + ipAddress + ":3306/" + base;
+                this.url = "jdbc:mysql://" + this.ipAddress + ":3306/" + base;
             }
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -66,8 +83,8 @@ public class ConexionBD {
     public Connection conexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("conectando a: " + url);
-            conect = DriverManager.getConnection(url, usuario, password);
+            //System.out.println("conectando a: " + this.url);
+            conect = DriverManager.getConnection(this.url, this.usuario, this.password);
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error en la conexión" + e);
             System.exit(0);
