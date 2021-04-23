@@ -50,15 +50,30 @@ public class Settings extends javax.swing.JDialog {
             if (file.exists()) {
                 fr = new FileReader(file);
                 br = new BufferedReader(fr);
-
                 // Lectura del fichero
                 String line;
-                if ((line = br.readLine()) != null) {
-                    String[] octets = line.split("\\.");
-                    firstOctet.setText(octets[0]);
-                    secondOctet.setText(octets[1]);
-                    thirdOctet.setText(octets[2]);
-                    fourthOctet.setText(octets[3]);
+                int i = 1;
+                while ((line = br.readLine()) != null) {
+                    //System.out.println(line);
+                    switch (i) {
+                        case 1:
+                            String[] octets = line.split("\\.");
+                            firstOctet.setText(octets[0]);
+                            secondOctet.setText(octets[1]);
+                            thirdOctet.setText(octets[2]);
+                            fourthOctet.setText(octets[3]);
+                            break;
+                        case 2:
+                            txtUserServer.setText(line);
+                            break;
+                        case 3:
+                            //txtPasswordServer.setText(line);
+                            break;
+                        case 4:
+                            txtDataBase.setText(line);
+                            break;
+                    }
+                    i++;
                 }
 
             } else {
@@ -89,7 +104,7 @@ public class Settings extends javax.swing.JDialog {
         }
     }
 
-    private void writeSettings(String ipAddress) {
+    private void writeSettings(String ipAddress, String user, String password, String dataBase) {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
@@ -102,6 +117,9 @@ public class Settings extends javax.swing.JDialog {
             pw = new PrintWriter(fichero);
 
             pw.println(ipAddress);
+            pw.println(user);
+            pw.println(password);
+            pw.println(dataBase);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,14 +142,18 @@ public class Settings extends javax.swing.JDialog {
         String secondOctetText = secondOctet.getText();
         String thirdOctetText = thirdOctet.getText();
         String fourthOctetText = fourthOctet.getText();
-        if (!(firstOctetText.equals("") || secondOctetText.equals("") || thirdOctetText.equals("") || fourthOctetText.equals(""))) {
+        String userText = txtUserServer.getText();
+        String passwordText = txtPasswordServer.getText();
+        String dataBaseText = txtDataBase.getText();
+        if (!(firstOctetText.equals("") || secondOctetText.equals("") || thirdOctetText.equals("")
+                || fourthOctetText.equals("") || userText.equals("") || passwordText.equals("") || dataBaseText.equals(""))) {
             String ipAddress = firstOctetText + "." + secondOctetText + "." + thirdOctetText + "." + fourthOctetText;
             String regular = "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
             Pattern pat = Pattern.compile(regular);
             Matcher mat = pat.matcher(ipAddress);
             if (mat.matches()) {
                 //System.out.println(ipAddress);
-                writeSettings(ipAddress);
+                writeSettings(ipAddress, userText, passwordText, dataBaseText);
                 dispose();
             } else {
                 lblError.setText("IP Address invalida!!!");
@@ -164,7 +186,7 @@ public class Settings extends javax.swing.JDialog {
         panel3 = new org.edisoncor.gui.panel.Panel();
         btnSettings = new principal.MaterialButton();
         secondOctet = new app.bolivia.swing.JCTextField();
-        firstOctet = new app.bolivia.swing.JCTextField();
+        txtUserServer = new app.bolivia.swing.JCTextField();
         fourthOctet = new app.bolivia.swing.JCTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -173,6 +195,13 @@ public class Settings extends javax.swing.JDialog {
         cerrar = new principal.MaterialButton();
         lblError = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        firstOctet = new app.bolivia.swing.JCTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtDataBase = new app.bolivia.swing.JCTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtPasswordServer = new jpass.JRPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -199,7 +228,7 @@ public class Settings extends javax.swing.JDialog {
                 btnSettingsActionPerformed(evt);
             }
         });
-        panel3.add(btnSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 130, 160, 53));
+        panel3.add(btnSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 370, 320, 53));
 
         secondOctet.setBackground(new java.awt.Color(255, 255, 255));
         secondOctet.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(58, 159, 171), 2, true));
@@ -226,33 +255,32 @@ public class Settings extends javax.swing.JDialog {
                 secondOctetKeyTyped(evt);
             }
         });
-        panel3.add(secondOctet, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 70, 53));
+        panel3.add(secondOctet, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 70, 40));
 
-        firstOctet.setBackground(new java.awt.Color(255, 255, 255));
-        firstOctet.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(58, 159, 171), 2, true));
-        firstOctet.setForeground(new java.awt.Color(58, 159, 171));
-        firstOctet.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        firstOctet.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
-        firstOctet.setPhColor(new java.awt.Color(58, 159, 171));
-        firstOctet.setPlaceholder("  192");
-        firstOctet.setSelectionColor(new java.awt.Color(58, 159, 171));
-        firstOctet.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtUserServer.setBackground(new java.awt.Color(255, 255, 255));
+        txtUserServer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(58, 159, 171), 2, true));
+        txtUserServer.setForeground(new java.awt.Color(58, 159, 171));
+        txtUserServer.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
+        txtUserServer.setPhColor(new java.awt.Color(58, 159, 171));
+        txtUserServer.setPlaceholder(" Usuario...");
+        txtUserServer.setSelectionColor(new java.awt.Color(58, 159, 171));
+        txtUserServer.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                firstOctetFocusGained(evt);
+                txtUserServerFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                firstOctetFocusLost(evt);
+                txtUserServerFocusLost(evt);
             }
         });
-        firstOctet.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtUserServer.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                firstOctetKeyReleased(evt);
+                txtUserServerKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                firstOctetKeyTyped(evt);
+                txtUserServerKeyTyped(evt);
             }
         });
-        panel3.add(firstOctet, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 70, 53));
+        panel3.add(txtUserServer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 310, 40));
 
         fourthOctet.setBackground(new java.awt.Color(255, 255, 255));
         fourthOctet.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(58, 159, 171), 2, true));
@@ -278,7 +306,7 @@ public class Settings extends javax.swing.JDialog {
                 fourthOctetKeyTyped(evt);
             }
         });
-        panel3.add(fourthOctet, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 70, 53));
+        panel3.add(fourthOctet, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 70, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(58, 159, 171));
@@ -322,7 +350,7 @@ public class Settings extends javax.swing.JDialog {
                 thirdOctetKeyTyped(evt);
             }
         });
-        panel3.add(thirdOctet, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 70, 53));
+        panel3.add(thirdOctet, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 70, 40));
 
         cerrar.setBackground(new java.awt.Color(58, 159, 171));
         cerrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -335,29 +363,112 @@ public class Settings extends javax.swing.JDialog {
                 cerrarActionPerformed(evt);
             }
         });
-        panel3.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 45, 40));
+        panel3.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 45, 40));
 
         lblError.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblError.setForeground(new java.awt.Color(255, 51, 51));
         lblError.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        panel3.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 310, 20));
+        panel3.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 310, 30));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel6.setText(" IP Adderess Server");
-        panel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 193, 40));
+        jLabel6.setText("Usuario:");
+        panel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 310, 20));
+
+        firstOctet.setBackground(new java.awt.Color(255, 255, 255));
+        firstOctet.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(58, 159, 171), 2, true));
+        firstOctet.setForeground(new java.awt.Color(58, 159, 171));
+        firstOctet.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        firstOctet.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
+        firstOctet.setPhColor(new java.awt.Color(58, 159, 171));
+        firstOctet.setPlaceholder("  192");
+        firstOctet.setSelectionColor(new java.awt.Color(58, 159, 171));
+        firstOctet.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                firstOctetFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                firstOctetFocusLost(evt);
+            }
+        });
+        firstOctet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                firstOctetKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                firstOctetKeyTyped(evt);
+            }
+        });
+        panel3.add(firstOctet, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 70, 40));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(58, 159, 171));
+        jLabel7.setText("Configuración del servidor");
+        panel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 270, 40));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(58, 159, 171));
+        jLabel8.setText("Ip Address:");
+        panel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 310, 20));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(58, 159, 171));
+        jLabel9.setText("Contraseña:");
+        panel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 310, 20));
+
+        txtDataBase.setBackground(new java.awt.Color(255, 255, 255));
+        txtDataBase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(58, 159, 171), 2, true));
+        txtDataBase.setForeground(new java.awt.Color(58, 159, 171));
+        txtDataBase.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
+        txtDataBase.setPhColor(new java.awt.Color(58, 159, 171));
+        txtDataBase.setPlaceholder("Base de datos...");
+        txtDataBase.setSelectionColor(new java.awt.Color(58, 159, 171));
+        txtDataBase.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDataBaseFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDataBaseFocusLost(evt);
+            }
+        });
+        txtDataBase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDataBaseKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataBaseKeyTyped(evt);
+            }
+        });
+        panel3.add(txtDataBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 310, 40));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(58, 159, 171));
+        jLabel10.setText("Base de datos:");
+        panel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 310, 20));
+
+        txtPasswordServer.setBackground(new java.awt.Color(255, 255, 255));
+        txtPasswordServer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(58, 159, 171), 2, true));
+        txtPasswordServer.setForeground(new java.awt.Color(58, 159, 171));
+        txtPasswordServer.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
+        txtPasswordServer.setPhColor(new java.awt.Color(58, 159, 171));
+        txtPasswordServer.setPlaceholder("Contraseña...");
+        txtPasswordServer.setSelectionColor(new java.awt.Color(58, 159, 171));
+        txtPasswordServer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordServerKeyReleased(evt);
+            }
+        });
+        panel3.add(txtPasswordServer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 222, 310, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+            .addComponent(panel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -406,15 +517,9 @@ public class Settings extends javax.swing.JDialog {
         timer.schedule(task, 0, 2);
     }//GEN-LAST:event_cerrarActionPerformed
 
-    private void firstOctetKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstOctetKeyTyped
-        char charInput = evt.getKeyChar();
-        if (charInput == '.') {
-            secondOctet.requestFocus();
-        }
-        if (checkNumber(charInput)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_firstOctetKeyTyped
+    private void txtUserServerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserServerKeyTyped
+
+    }//GEN-LAST:event_txtUserServerKeyTyped
 
     private void secondOctetKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_secondOctetKeyTyped
         char charInput = evt.getKeyChar();
@@ -426,11 +531,9 @@ public class Settings extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_secondOctetKeyTyped
 
-    private void firstOctetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstOctetFocusLost
-        if (!checkOctet(firstOctet.getText())) {
-            firstOctet.setText("");
-        }
-    }//GEN-LAST:event_firstOctetFocusLost
+    private void txtUserServerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserServerFocusLost
+
+    }//GEN-LAST:event_txtUserServerFocusLost
 
     private void secondOctetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_secondOctetFocusLost
         if (!checkOctet(secondOctet.getText())) {
@@ -467,9 +570,9 @@ public class Settings extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_fourthOctetKeyTyped
 
-    private void firstOctetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstOctetFocusGained
-        firstOctet.selectAll();
-    }//GEN-LAST:event_firstOctetFocusGained
+    private void txtUserServerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserServerFocusGained
+        txtUserServer.selectAll();
+    }//GEN-LAST:event_txtUserServerFocusGained
 
     private void secondOctetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_secondOctetFocusGained
         secondOctet.selectAll();
@@ -483,11 +586,11 @@ public class Settings extends javax.swing.JDialog {
         fourthOctet.selectAll();
     }//GEN-LAST:event_fourthOctetFocusGained
 
-    private void firstOctetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstOctetKeyReleased
+    private void txtUserServerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserServerKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             saveIpAddress();
         }
-    }//GEN-LAST:event_firstOctetKeyReleased
+    }//GEN-LAST:event_txtUserServerKeyReleased
 
     private void secondOctetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_secondOctetKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -506,6 +609,56 @@ public class Settings extends javax.swing.JDialog {
             saveIpAddress();
         }
     }//GEN-LAST:event_fourthOctetKeyReleased
+
+    private void firstOctetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstOctetFocusGained
+        firstOctet.selectAll();
+    }//GEN-LAST:event_firstOctetFocusGained
+
+    private void firstOctetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstOctetFocusLost
+        if (!checkOctet(firstOctet.getText())) {
+            firstOctet.setText("");
+        }
+    }//GEN-LAST:event_firstOctetFocusLost
+
+    private void firstOctetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstOctetKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            saveIpAddress();
+        }
+    }//GEN-LAST:event_firstOctetKeyReleased
+
+    private void firstOctetKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstOctetKeyTyped
+        char charInput = evt.getKeyChar();
+        if (charInput == '.') {
+            secondOctet.requestFocus();
+        }
+        if (checkNumber(charInput)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_firstOctetKeyTyped
+
+    private void txtDataBaseFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataBaseFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataBaseFocusGained
+
+    private void txtDataBaseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataBaseFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataBaseFocusLost
+
+    private void txtDataBaseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataBaseKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            saveIpAddress();
+        }
+    }//GEN-LAST:event_txtDataBaseKeyReleased
+
+    private void txtDataBaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataBaseKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataBaseKeyTyped
+
+    private void txtPasswordServerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordServerKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            saveIpAddress();
+        }
+    }//GEN-LAST:event_txtPasswordServerKeyReleased
 
     /**
      * @param args the command line arguments
@@ -557,14 +710,21 @@ public class Settings extends javax.swing.JDialog {
     private principal.MaterialButton cerrar;
     private app.bolivia.swing.JCTextField firstOctet;
     private app.bolivia.swing.JCTextField fourthOctet;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblError;
     private org.edisoncor.gui.panel.Panel panel3;
     private app.bolivia.swing.JCTextField secondOctet;
     private app.bolivia.swing.JCTextField thirdOctet;
+    private app.bolivia.swing.JCTextField txtDataBase;
+    public static jpass.JRPasswordField txtPasswordServer;
+    private app.bolivia.swing.JCTextField txtUserServer;
     // End of variables declaration//GEN-END:variables
 
     private void Cerrar() {
