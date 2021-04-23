@@ -193,7 +193,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         dropShadowBorder1.setShowTopShadow(true);
         jPanel3.setBorder(dropShadowBorder1);
 
-        btnProductos.setBackground(new java.awt.Color(255, 0, 0));
+        btnProductos.setBackground(new java.awt.Color(0, 153, 0));
         btnProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnProductos.setText("PRODUCTOS");
         btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -229,12 +229,12 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(58, 159, 171));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("VERSION 1.0");
+        jLabel3.setText("VERSION 1.15");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(58, 159, 171));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("© DERECHOS RESERVADOS 2018");
+        jLabel4.setText("© DERECHOS RESERVADOS 2021-2025");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(58, 159, 171));
@@ -252,7 +252,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnAbout.setBackground(new java.awt.Color(153, 255, 51));
+        btnAbout.setBackground(new java.awt.Color(0, 204, 204));
         btnAbout.setForeground(new java.awt.Color(255, 255, 255));
         btnAbout.setText("ACERCA DE");
         btnAbout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -274,7 +274,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnInsumos.setBackground(new java.awt.Color(255, 102, 0));
+        btnInsumos.setBackground(new java.awt.Color(0, 102, 102));
         btnInsumos.setForeground(new java.awt.Color(255, 255, 255));
         btnInsumos.setText("INSUMOS");
         btnInsumos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -285,7 +285,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnCompras.setBackground(new java.awt.Color(0, 204, 204));
+        btnCompras.setBackground(new java.awt.Color(0, 153, 153));
         btnCompras.setForeground(new java.awt.Color(255, 255, 255));
         btnCompras.setText("COMPRAS");
         btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

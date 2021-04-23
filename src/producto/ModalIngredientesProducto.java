@@ -8,6 +8,7 @@ package producto;
 import alertas.principal.AWTUtilities;
 import alertas.principal.ErrorAlert;
 import alertas.principal.SuccessAlert;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -17,6 +18,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import tabla.EstiloTablaHeader;
+import tabla.EstiloTablaRenderer;
+import tabla.MyScrollbarUI;
 
 /**
  *
@@ -28,73 +34,49 @@ public class ModalIngredientesProducto extends javax.swing.JDialog {
     TimerTask task;
     int i = 32;
     Opciones op = new Opciones();
-    ArrayList insumos = new ArrayList();
+    public static ArrayList<Integer> idInsumo = new ArrayList();
+    Sentencias producto;
 
     /**
      * Creates new form ModalProducto
      */
-    public ModalIngredientesProducto(java.awt.Frame parent, boolean modal) {
+    public ModalIngredientesProducto(java.awt.Frame parent, boolean modal, Sentencias producto) {
         super(parent, modal);
         initComponents();
+
+        this.producto = producto;
+
         AWTUtilities.setOpaque(this, false);
-        this.tipo.setCursor(new Cursor(12));
-        this.id.setVisible(false);
         Ubicar(0);
-        this.Text_insumo1.requestFocus();
+        inicializar();
+        nombre.setText(producto.getNombre() + "--" + producto.getDescripcion());
+
+    }
+
+    public void inicializar() {
         llenarComboBox();
-        Text_insumo2.setEditable(false);
-        Text_insumo3.setEditable(false);
-        Text_insumo4.setEditable(false);
-        Text_insumo5.setEditable(false);
-        Text_insumo6.setEditable(false);
-        Text_insumo7.setEditable(false);
-        Text_insumo8.setEditable(false);
-        Text_insumo9.setEditable(false);
-        Text_insumo10.setEditable(false);
-        Text_insumo11.setEditable(false);
-        Text_insumo1.setEditable(false);
-        tipo.setEditable(true);
-        tipo1.setEditable(false);
-        tipo2.setEditable(false);
-        tipo3.setEditable(false);
-        tipo4.setEditable(false);
-        tipo5.setEditable(false);
-        tipo6.setEditable(false);
-        tipo7.setEditable(false);
-        tipo8.setEditable(false);
-        tipo9.setEditable(false);
-        tipo10.setEditable(false);
-        tipo11.setEditable(false);
-        
+        TableColumn columna2 = this.tabla.getColumn("idInsumo");
+        columna2.setResizable(false);
+        columna2.setPreferredWidth(20);
+        TableColumn columna = this.tabla.getColumn("Insumo");
+        columna.setResizable(false);
+        columna.setPreferredWidth(100);
+        TableColumn columnaP = this.tabla.getColumn("Cantidad");
+        columnaP.setResizable(false);
+        columnaP.setPreferredWidth(30);
+
+        this.tabla.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
+        this.tabla.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
+        this.tabla.setSelectionMode(0);
+        this.jScrollPane1.getViewport().setBackground(new Color(255, 255, 255));
+        this.jScrollPane1.getViewport().setBackground(new Color(255, 255, 255));
+        this.jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
+        this.jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
     }
-    private void llenarComboBox(){
-    insumos = op.obtenerInsumos();
-        System.out.println(insumos.toString());
-        for (int i = 0; i < insumos.size(); i++) {
-            tipo.addItem(insumos.get(i));
-            tipo1.addItem(insumos.get(i));
-            tipo2.addItem(insumos.get(i));
-            tipo3.addItem(insumos.get(i));
-            tipo4.addItem(insumos.get(i));
-            tipo5.addItem(insumos.get(i));
-            tipo6.addItem(insumos.get(i));
-            tipo7.addItem(insumos.get(i));
-            tipo8.addItem(insumos.get(i));
-            tipo9.addItem(insumos.get(i));
-            tipo10.addItem(insumos.get(i));
-            tipo11.addItem(insumos.get(i));
-        }
-    }
-    private void limpiarCampos() {
-//
-//        this.nombre.requestFocus();
-//
-//        this.nombre.setText("");
-//        this.descripcion.setText("");
-//        this.tipo.setSelectedIndex(0);
-//        this.precio.setText("");
-//
-//        Opciones.listar("");
+
+    private void llenarComboBox() {
+        this.op.obtenerInsumos();
+        System.out.println("tamaño: "+ idInsumo.size());
     }
 
     /**
@@ -111,48 +93,17 @@ public class ModalIngredientesProducto extends javax.swing.JDialog {
         cerrar = new principal.MaterialButton();
         titulo1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        titulo = new javax.swing.JLabel();
         tipo = new componentes.org1.bolivia.combo.SComboBox();
         jLabel1 = new javax.swing.JLabel();
+        Text_insumo2 = new app.bolivia.swing.JCTextField();
         jLabel2 = new javax.swing.JLabel();
-        tipo1 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        tipo2 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        tipo3 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel5 = new javax.swing.JLabel();
-        tipo4 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel6 = new javax.swing.JLabel();
-        tipo5 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel7 = new javax.swing.JLabel();
-        tipo6 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel8 = new javax.swing.JLabel();
-        tipo7 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel9 = new javax.swing.JLabel();
-        tipo8 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel10 = new javax.swing.JLabel();
-        tipo9 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel11 = new javax.swing.JLabel();
-        tipo10 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel12 = new javax.swing.JLabel();
-        tipo11 = new componentes.org1.bolivia.combo.SComboBox();
-        jLabel13 = new javax.swing.JLabel();
-        Text_insumo1 = new javax.swing.JTextField();
-        Text_insumo2 = new javax.swing.JTextField();
-        Text_insumo3 = new javax.swing.JTextField();
-        Text_insumo4 = new javax.swing.JTextField();
-        Text_insumo5 = new javax.swing.JTextField();
-        Text_insumo6 = new javax.swing.JTextField();
-        Text_insumo7 = new javax.swing.JTextField();
-        Text_insumo8 = new javax.swing.JTextField();
-        Text_insumo9 = new javax.swing.JTextField();
-        Text_insumo10 = new javax.swing.JTextField();
-        Text_insumo11 = new javax.swing.JTextField();
-        Text_insumo12 = new javax.swing.JTextField();
-        titulo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        nombre = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        limpiar = new principal.MaterialButton();
         registrar = new principal.MaterialButton();
-        id = new javax.swing.JLabel();
+        terminar = new principal.MaterialButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -183,7 +134,7 @@ public class ModalIngredientesProducto extends javax.swing.JDialog {
         titulo1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         titulo1.setForeground(new java.awt.Color(255, 255, 255));
         titulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo1.setText("Insumos");
+        titulo1.setText("INSUMO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -217,591 +168,184 @@ public class ModalIngredientesProducto extends javax.swing.JDialog {
         jPanel4.setBorder(dropShadowBorder1);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO"}));
-        tipo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipoItemStateChanged(evt);
-            }
-        });
+        titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        titulo.setForeground(new java.awt.Color(58, 159, 171));
+        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo.setText("Ingrese la cantidad en KG, PZA o LTS");
+        jPanel4.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 400, 31));
+
+        tipo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoActionPerformed(evt);
             }
         });
-        jPanel4.add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 230, 20));
+        jPanel4.add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 240, 30));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel1.setText("Cantidad");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("INSUMO:");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 240, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel2.setText("Insumo:");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-
-        tipo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO" }));
-        tipo1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo1ItemStateChanged(evt);
-            }
-        });
-        tipo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 230, 20));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel3.setText("Insumo:");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
-
-        tipo2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO" }));
-        tipo2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo2ItemStateChanged(evt);
-            }
-        });
-        tipo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo2ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 230, 20));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel4.setText("Insumo:");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-
-        tipo3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO" }));
-        tipo3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo3.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo3ItemStateChanged(evt);
-            }
-        });
-        tipo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo3ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 230, 20));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel5.setText("Insumo:");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
-
-        tipo4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO"}));
-        tipo4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo4.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo4ItemStateChanged(evt);
-            }
-        });
-        tipo4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo4ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 230, 20));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel6.setText("Insumo:");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
-
-        tipo5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO"}));
-        tipo5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo5.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo5ItemStateChanged(evt);
-            }
-        });
-        tipo5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo5ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 230, 20));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel7.setText("Insumo:");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
-
-        tipo6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO"}));
-        tipo6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo6.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo6ItemStateChanged(evt);
-            }
-        });
-        tipo6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo6ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 230, 20));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel8.setText("Insumo:");
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
-
-        tipo7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO"}));
-        tipo7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo7.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo7ItemStateChanged(evt);
-            }
-        });
-        tipo7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo7ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 230, 20));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel9.setText("Insumo:");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
-
-        tipo8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO"}));
-        tipo8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo8.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo8ItemStateChanged(evt);
-            }
-        });
-        tipo8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo8ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 230, 20));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel10.setText("Insumo:");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
-
-        tipo9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO"}));
-        tipo9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo9.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo9ItemStateChanged(evt);
-            }
-        });
-        tipo9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo9ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 230, 20));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel11.setText("Insumo:");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
-
-        tipo10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO"}));
-        tipo10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo10.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo10ItemStateChanged(evt);
-            }
-        });
-        tipo10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo10ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 230, 20));
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel12.setText("Insumo:");
-        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
-
-        tipo11.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR INSUMO"}));
-        tipo11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tipo11.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tipo11ItemStateChanged(evt);
-            }
-        });
-        tipo11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo11ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(tipo11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 230, 20));
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel13.setText("Insumo:");
-        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
-
-        Text_insumo1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Text_insumo1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(Text_insumo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 70, 20));
-
-        Text_insumo2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        Text_insumo2.setBackground(new java.awt.Color(255, 255, 255));
+        Text_insumo2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(58, 159, 171)));
+        Text_insumo2.setForeground(new java.awt.Color(58, 159, 171));
+        Text_insumo2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Text_insumo2.setText("1");
+        Text_insumo2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Text_insumo2.setPlaceholder("Cantidad");
         Text_insumo2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo2KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 70, 20));
-
-        Text_insumo3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo3KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 70, 20));
-
-        Text_insumo4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo4KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 70, 20));
-
-        Text_insumo5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo5KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 70, 20));
-
-        Text_insumo6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Text_insumo6ActionPerformed(evt);
-            }
-        });
-        Text_insumo6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo6KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 70, 20));
-
-        Text_insumo7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo7.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo7KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 70, 20));
-
-        Text_insumo8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo8.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo8KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 70, 20));
-
-        Text_insumo9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Text_insumo9ActionPerformed(evt);
-            }
-        });
-        Text_insumo9.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo9KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 70, 20));
-
-        Text_insumo10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo10.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo10KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 70, 20));
-
-        Text_insumo11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo11.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo11KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 70, 20));
-
-        Text_insumo12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        Text_insumo12.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Text_insumo12KeyReleased(evt);
-            }
-        });
-        jPanel4.add(Text_insumo12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 70, 20));
-
-        titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        titulo.setForeground(new java.awt.Color(58, 159, 171));
-        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Ingrese la cantidad en KG, PZA o LTS");
-        jPanel4.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 341, 31));
-
-        panel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 420, 400));
-
-        jPanel3.setBackground(new java.awt.Color(58, 159, 171));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        limpiar.setBackground(new java.awt.Color(255, 255, 255));
-        limpiar.setForeground(new java.awt.Color(58, 159, 171));
-        limpiar.setText("LIMPIAR CAMPOS");
-        limpiar.setToolTipText("<html> <head> <style> #contenedor{background:#3A9FAB;color:white; padding-left:10px;padding-right:10px;margin:0; padding-top:5px;padding-bottom:5px;} </style> </head> <body> <h4 id=\"contenedor\">Limpiar campos</h4> </body> </html>");
-        limpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        limpiar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        limpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limpiarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 160, 50));
-
-        registrar.setBackground(new java.awt.Color(255, 255, 255));
-        registrar.setForeground(new java.awt.Color(58, 159, 171));
-        registrar.setText("REGISTRAR");
-        registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registrar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
-            }
-        });
-        registrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                registrarKeyTyped(evt);
+                Text_insumo2KeyTyped(evt);
             }
         });
-        jPanel3.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 170, 50));
+        jPanel4.add(Text_insumo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 110, -1));
 
-        id.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        id.setForeground(new java.awt.Color(255, 255, 255));
-        id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        id.setText("id");
-        jPanel3.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 30, -1));
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(58, 159, 171));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("CANTIDAD:");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 330, 110, -1));
 
-        panel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 340, 459, 200));
+        tabla.setModel(new DefaultTableModel(new Object[0][], new String[] { "idInsumo", "Cantidad", "Insumo" })
+            {
+                boolean[] canEdit = { false, false, false };
 
-        getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 476, 550));
+                public boolean isCellEditable(int rowIndex, int columnIndex)
+                {
+                    return this.canEdit[columnIndex];
+                }
+            });
+            tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    tablaMouseClicked(evt);
+                }
+            });
+            jScrollPane1.setViewportView(tabla);
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+            jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 400, 250));
+
+            nombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+            nombre.setForeground(new java.awt.Color(58, 159, 171));
+            nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jPanel4.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 400, 31));
+
+            panel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 420, 410));
+
+            jPanel3.setBackground(new java.awt.Color(58, 159, 171));
+            jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+            registrar.setBackground(new java.awt.Color(255, 255, 255));
+            registrar.setForeground(new java.awt.Color(58, 159, 171));
+            registrar.setText("AGREGAR");
+            registrar.setToolTipText("<html> <head> <style> #contenedor{background:#3A9FAB;color:white; padding-left:10px;padding-right:10px;margin:0; padding-top:5px;padding-bottom:5px;} </style> </head> <body> <h4 id=\"contenedor\">Limpiar campos</h4> </body> </html>");
+            registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            registrar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+            registrar.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    registrarActionPerformed(evt);
+                }
+            });
+            jPanel3.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 160, 50));
+
+            terminar.setBackground(new java.awt.Color(255, 255, 255));
+            terminar.setForeground(new java.awt.Color(58, 159, 171));
+            terminar.setText("TERMINAR");
+            terminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            terminar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+            terminar.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    terminarActionPerformed(evt);
+                }
+            });
+            terminar.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    terminarKeyTyped(evt);
+                }
+            });
+            jPanel3.add(terminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 170, 50));
+
+            panel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 340, 459, 200));
+
+            getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 476, 550));
+
+            pack();
+        }// </editor-fold>//GEN-END:initComponents
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
-        task = new TimerTask() {
-            @Override
+        this.task = new TimerTask() {
             public void run() {
-                if (i == 0) {
-                    Cerrar();
+                if (ModalIngredientesProducto.this.i == 0) {
+                    ModalIngredientesProducto.this.Cerrar();
                 } else {
-                    Ubicar(i);
-                    i -= 32;
-                    Trasparencia((float) i / 352);
+                    ModalIngredientesProducto.this.Ubicar(ModalIngredientesProducto.this.i);
+                    ModalIngredientesProducto.this.i -= 32;
+                    ModalIngredientesProducto.this.Trasparencia(ModalIngredientesProducto.this.i / 352.0F);
                 }
             }
         };
-        timer = new Timer();
-        timer.schedule(task, 0, 2);
-        JOptionPane.showMessageDialog(null, "Debe tener al menos un insumo el producto."
-                + " No se registrará el producto hasta llenar un insumo.","",JOptionPane.WARNING_MESSAGE);
-        ModalProductoM.opcion = false;
+        this.timer = new Timer();
+        this.timer.schedule(this.task, 0L, 2L);
+        ErrorAlert er = new ErrorAlert(new JFrame(), true);
+        ErrorAlert.titulo.setText("OOPS...");
+        ErrorAlert.msj.setText("NO CONTIENE INSUMOS");
+        ErrorAlert.msj1.setText("EL PRODUCTO NO SE REGISTRARA");
+        er.setVisible(true);
     }//GEN-LAST:event_cerrarActionPerformed
 
-    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
-        limpiarCampos();
-    }//GEN-LAST:event_limpiarActionPerformed
-
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        if (Text_insumo2.getText().equals("") || tipo.getSelectedIndex() == 0)
-        {
+        int index = tipo.getSelectedIndex();
+        System.out.println("id: " + idInsumo.get(index) + " insumo: " + tipo.getItemAt(index));
+        if ((index != 0) || (!this.Text_insumo2.getText().equals(""))) {
+            Object[] datos = new Object[3];
+            String ingrediente = (String) tipo.getItemAt(index);
+            float cantidad = Float.parseFloat(this.Text_insumo2.getText());
 
-            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("DEBE DE LLENAR AL MENOS UN INSUMO");
-            er.msj1.setText("");
-            er.setVisible(true);
-
+            datos[0] = idInsumo.get(index);
+            datos[1] = Float.valueOf(cantidad);
+            datos[2] = ingrediente;
+            DefaultTableModel modelo = (DefaultTableModel) this.tabla.getModel();
+            modelo.addRow(datos);
+            tipo.setSelectedIndex(0);
+            this.Text_insumo2.setText("");
         } else {
-                  String insumo1 = tipo.getSelectedItem().toString();
-                  String insumo2 = tipo1.getSelectedItem().toString();
-                  String insumo3 = tipo2.getSelectedItem().toString();
-                  String insumo4 = tipo3.getSelectedItem().toString();
-                  String insumo5 = tipo4.getSelectedItem().toString();
-                  String insumo6 = tipo5.getSelectedItem().toString();
-                  String insumo7 = tipo6.getSelectedItem().toString();
-                  String insumo8 = tipo7.getSelectedItem().toString();
-                  String insumo9 = tipo8.getSelectedItem().toString();
-                  String insumo10 = tipo9.getSelectedItem().toString();
-                  String insumo11 = tipo10.getSelectedItem().toString();
-                  String insumo12 = tipo11.getSelectedItem().toString();
-                  
-                  int idInsumo1 = tipo.getSelectedIndex();
-                  int idInsumo2 = tipo.getSelectedIndex();
-                  int idInsumo3 = tipo.getSelectedIndex();
-                  int idInsumo4 = tipo.getSelectedIndex();
-                  int idInsumo5 = tipo.getSelectedIndex();
-                  int idInsumo6 = tipo.getSelectedIndex();
-                  int idInsumo7 = tipo.getSelectedIndex();
-                  int idInsumo8= tipo.getSelectedIndex();
-                  int idInsumo9 = tipo.getSelectedIndex();
-                  int idInsumo10 = tipo.getSelectedIndex();
-                  int idInsumo11 = tipo.getSelectedIndex();
-                  int idInsumo12 = tipo.getSelectedIndex();
-                  
-                  String [] ins = new String[12];
-                  String [] cantidades = new String[12];
-                  cantidades[0] = Text_insumo2.getText();
-                  cantidades[1] = Text_insumo3.getText();
-                  cantidades[2] = Text_insumo4.getText();
-                  cantidades[3] = Text_insumo5.getText();
-                  cantidades[4] = Text_insumo6.getText();
-                  cantidades[5] = Text_insumo7.getText();
-                  cantidades[6] = Text_insumo8.getText();
-                  cantidades[7] = Text_insumo9.getText();
-                  cantidades[8] = Text_insumo10.getText();
-                  cantidades[9] = Text_insumo11.getText();
-                  cantidades[10] = Text_insumo12.getText();
-                  cantidades[11] = Text_insumo1.getText();
-                  int cont = 0;
-                  int cont2 = 0;
-                  ins[0] = insumo1;
-                  ins[1] = insumo2;
-                  ins[2] = insumo3;
-                  ins[3] = insumo4;
-                  ins[4] = insumo5;
-                  ins[5] = insumo6;
-                  ins[6] = insumo7;
-                  ins[7] = insumo8;
-                  ins[8] = insumo9;
-                  ins[9] = insumo10;
-                  ins[10] = insumo11;
-                  ins[11] = insumo12;
-                  for (int j = 0; j < ins.length; j++) {
-                      if (!ins[j].equals("ELEGIR INSUMO")) {
-                          cont++;
-                      }
-            }
-                  for (int j = 0; j < cantidades.length; j++) {
-                      if (!cantidades[j].equals("")) {
-                          cont2++;
-                      }
-            }
-                  String [] newIns = new String[cont];
-                  String [] newCantidades = new String[cont2];
-                
-                  for (int i = 0; i < ins.length; i++) {
-                      if (!ins[i].equals("ELEGIR INSUMO")) {
-                          newIns[i] = ins[i];
-                      }
-            }
-                  for (int i = 0; i < cantidades.length; i++) {
-                      if (!cantidades[i].equals("")) {
-                          newCantidades[i] = cantidades[i];
-                      }
-            }
-                  System.out.println(Arrays.toString(newIns));
-                  System.out.println(Arrays.toString(newCantidades));
-                  producto.Sentencias s = new Sentencias();
-                  int opcion = 0;
-            for (int j = 0; j < newIns.length; j++) {
-                
-                s.setNombre(producto.ModalProductoM.nombre.getText());
-                s.setDescripcion(producto.ModalProductoM.descripcion.getText());
-                s.setTipo(producto.ModalProductoM.tipo.getSelectedItem().toString());
-                s.setPrecio(Double.parseDouble(producto.ModalProductoM.precio.getText()));
-                s.setId(producto.ModalProductoM.id.getText());
-                s.setIdInsumo(producto.Opciones.obtenerIdInsumo(newIns[j]));
-                System.out.println("------------------------"+producto.Opciones.obtenerIdInsumo(newIns[j])+" "+newIns[j]);
-                s.setCantidadInsumo(Float.parseFloat(newCantidades[j]));
-                int validaStock = 0;
-                if (!producto.ModalProductoM.stock.getText().equals("")) {
-                    validaStock = Integer.parseInt(producto.ModalProductoM.stock.getText());
-                }
-
-                if (producto.ModalProductoM.tipo.getSelectedIndex() == 2) {
-                    s.setStock(String.valueOf(validaStock));
-                } else {
-                    s.setStock("");
-                }
-                 opcion = producto.Opciones.registrar(s);
-            }
-                 
-                if (opcion != 0) {
-                    String fila = Opciones.extraerID();
-                    limpiarCampos();
-                    Productos.seleccionaFila(fila);
-                    SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                    sa.titulo.setText("¡HECHO!");
-                    sa.msj.setText("SE HA REGISTRADO UN");
-                    sa.msj1.setText("NUEVO PRODUCTO");
-                    sa.setVisible(true);
-                     task = new TimerTask() {
-            @Override
-            public void run() {
-                if (i == 0) {
-                    Cerrar();
-                } else {
-                    Ubicar(i);
-                    i -= 32;
-                    Trasparencia((float) i / 352);
-                }
-            }
-        };
-        timer = new Timer();
-        timer.schedule(task, 0, 2);
-                }
-                
-                
-//                producto.Sentencias s = new Sentencias();
-//                s.setNombre(this.nombre.getText());
-//                s.setDescripcion(this.descripcion.getText());
-//                s.setTipo(this.tipo.getSelectedItem().toString());
-//                s.setPrecio(Double.parseDouble(this.precio.getText()));
-//                int validaStock = 0;
-//                if (!this.stock.getText().equals("")) {
-//                    validaStock = Integer.parseInt(this.stock.getText());
-//                }
-//                if (this.tipo.getSelectedIndex() == 2) {
-//                    s.setStock(String.valueOf(validaStock));
-//                } else {
-//                    s.setStock("");
-//                }
-//                int opcion = producto.Opciones.registrar(s);
-//                if (opcion != 0) {
-//                    String fila = String.valueOf(Opciones.extraerID());
-//                    limpiarCampos();
-//                    Productos.seleccionaFila(fila);
-//                    SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-//                    sa.titulo.setText("¡HECHO!");
-//                    sa.msj.setText("SE HA REGISTRADO UN");
-//                    sa.msj1.setText("NUEVO PRODUCTO");
-//                    sa.setVisible(true);
-//                }
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("DEBE DE SELECCIONAR UN INSUMO ");
+            ErrorAlert.msj1.setText("E INGRESAR LA CANTIDAD");
+            er.setVisible(true);
         }
     }//GEN-LAST:event_registrarActionPerformed
+
+    private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
+        if (this.tabla.getRowCount() > 0) {
+            Opciones.registrar(this.producto);
+
+            for (int j = 0; j < this.tabla.getRowCount(); j++) {
+                this.op.insertarReceta(this.producto.getidProducto(), ((Integer) this.tabla.getValueAt(j, 0)).intValue(), ((Float) this.tabla.getValueAt(j, 1)).floatValue());
+            }
+            this.task = new TimerTask() {
+                public void run() {
+                    if (ModalIngredientesProducto.this.i == 0) {
+                        ModalIngredientesProducto.this.Cerrar();
+                    } else {
+                        ModalIngredientesProducto.this.Ubicar(ModalIngredientesProducto.this.i);
+                        ModalIngredientesProducto.this.i -= 32;
+                        ModalIngredientesProducto.this.Trasparencia(ModalIngredientesProducto.this.i / 352.0F);
+                    }
+                }
+            };
+            this.timer = new Timer();
+            this.timer.schedule(this.task, 0L, 2L);
+        } else {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("DEBE DE CONTENER UN ");
+            ErrorAlert.msj1.setText("INSUMO COMO MINIMO");
+            er.setVisible(true);
+        }
+    }//GEN-LAST:event_terminarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         task = new TimerTask() {
@@ -820,7 +364,7 @@ public class ModalIngredientesProducto extends javax.swing.JDialog {
         timer.schedule(task, 0, 2);
     }//GEN-LAST:event_formWindowOpened
 
-    private void registrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_registrarKeyTyped
+    private void terminarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_terminarKeyTyped
 //        if ((evt.getKeyChar() == KeyEvent.VK_ENTER)) {
 //            if (this.nombre.getText().equals("") || this.descripcion.getText().equals("")
 //                    || this.tipo.getSelectedIndex() == 0 || this.precio.getText().equals("")) {
@@ -901,231 +445,33 @@ public class ModalIngredientesProducto extends javax.swing.JDialog {
 //                }
 //            }
 //        }
-    }//GEN-LAST:event_registrarKeyTyped
-
-    private void tipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipoItemStateChanged
-        if (this.tipo.getSelectedIndex() == 0) {
-            this.Text_insumo2.setEditable(false);
-            this.Text_insumo2.setText("");
-            
-        } else {
-            this.Text_insumo2.setEditable(true);
-        }
-    }//GEN-LAST:event_tipoItemStateChanged
+    }//GEN-LAST:event_terminarKeyTyped
 
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoActionPerformed
 
-    private void tipo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo1ItemStateChanged
-            if (this.tipo1.getSelectedIndex() == 0) {
-            this.Text_insumo3.setEditable(false);
-            this.Text_insumo3.setText("");
-            
-        } else {
-            this.Text_insumo3.setEditable(true);
+    private void Text_insumo2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo2KeyTyped
+        char num = evt.getKeyChar();
+        String pre = this.Text_insumo2.getText();
+        boolean hay = false;
+        for (int i = 0; i < pre.length(); i++) {
+            if (pre.charAt(i) == '.') {
+                hay = true;
+            }
         }
-    }//GEN-LAST:event_tipo1ItemStateChanged
-
-    private void tipo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo1ActionPerformed
-        
-    }//GEN-LAST:event_tipo1ActionPerformed
-
-    private void tipo2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo2ItemStateChanged
-         if (this.tipo2.getSelectedIndex() == 0) {
-            this.Text_insumo4.setEditable(false);
-            this.Text_insumo4.setText("");
-            
-        } else {
-            this.Text_insumo4.setEditable(true);
+        if (((num < '0') || (num > '9')) && ((num != '.') || (hay))) {
+            evt.consume();
         }
-    }//GEN-LAST:event_tipo2ItemStateChanged
+    }//GEN-LAST:event_Text_insumo2KeyTyped
 
-    private void tipo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo2ActionPerformed
-
-    private void tipo3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo3ItemStateChanged
-         if (this.tipo3.getSelectedIndex() == 0) {
-            this.Text_insumo5.setEditable(false);
-            this.Text_insumo5.setText("");
-            
-        } else {
-            this.Text_insumo5.setEditable(true);
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        if (evt.getClickCount() == 2) {
+            int fila = this.tabla.getSelectedRow();
+            DefaultTableModel modelo = (DefaultTableModel) this.tabla.getModel();
+            modelo.removeRow(fila);
         }
-    }//GEN-LAST:event_tipo3ItemStateChanged
-
-    private void tipo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo3ActionPerformed
-
-    private void tipo4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo4ItemStateChanged
-         if (this.tipo4.getSelectedIndex() == 0) {
-            this.Text_insumo6.setEditable(false);
-            this.Text_insumo6.setText("");
-            
-        } else {
-            this.Text_insumo6.setEditable(true);
-        }
-    }//GEN-LAST:event_tipo4ItemStateChanged
-
-    private void tipo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo4ActionPerformed
-
-    private void tipo5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo5ItemStateChanged
-         if (this.tipo5.getSelectedIndex() == 0) {
-            this.Text_insumo7.setEditable(false);
-            this.Text_insumo7.setText("");
-            
-        } else {
-            this.Text_insumo7.setEditable(true);
-        }
-    }//GEN-LAST:event_tipo5ItemStateChanged
-
-    private void tipo5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo5ActionPerformed
-
-    private void tipo6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo6ItemStateChanged
-           if (this.tipo7.getSelectedIndex() == 0) {
-            this.Text_insumo8.setEditable(false);
-            this.Text_insumo8.setText("");
-            
-        } else {
-            this.Text_insumo8.setEditable(true);
-        }
-    }//GEN-LAST:event_tipo6ItemStateChanged
-
-    private void tipo6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo6ActionPerformed
-
-    private void tipo7ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo7ItemStateChanged
-         if (this.tipo7.getSelectedIndex() == 0) {
-            this.Text_insumo9.setEditable(false);
-            this.Text_insumo9.setText("");
-            
-        } else {
-            this.Text_insumo9.setEditable(true);
-        }
-    }//GEN-LAST:event_tipo7ItemStateChanged
-
-    private void tipo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo7ActionPerformed
-
-    private void tipo8ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo8ItemStateChanged
-         if (this.tipo8.getSelectedIndex() == 0) {
-            this.Text_insumo10.setEditable(false);
-            this.Text_insumo10.setText("");
-            
-        } else {
-            this.Text_insumo10.setEditable(true);
-        }
-    }//GEN-LAST:event_tipo8ItemStateChanged
-
-    private void tipo8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo8ActionPerformed
-
-    private void tipo9ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo9ItemStateChanged
-         if (this.tipo9.getSelectedIndex() == 0) {
-            this.Text_insumo11.setEditable(false);
-            this.Text_insumo11.setText("");
-            
-        } else {
-            this.Text_insumo11.setEditable(true);
-        }
-    }//GEN-LAST:event_tipo9ItemStateChanged
-
-    private void tipo9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo9ActionPerformed
-
-    private void tipo10ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo10ItemStateChanged
-         if (this.tipo10.getSelectedIndex() == 0) {
-            this.Text_insumo12.setEditable(false);
-            this.Text_insumo12.setText("");
-            
-        } else {
-            this.Text_insumo12.setEditable(true);
-        }
-    }//GEN-LAST:event_tipo10ItemStateChanged
-
-    private void tipo10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo10ActionPerformed
-
-    private void tipo11ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo11ItemStateChanged
-         if (this.tipo11.getSelectedIndex() == 0) {
-            this.Text_insumo1.setEditable(false);
-            this.Text_insumo1.setText("");
-            
-        } else {
-            this.Text_insumo1.setEditable(true);
-        }
-    }//GEN-LAST:event_tipo11ItemStateChanged
-
-    private void tipo11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo11ActionPerformed
-
-    private void Text_insumo9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Text_insumo9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Text_insumo9ActionPerformed
-
-    private void Text_insumo6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Text_insumo6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Text_insumo6ActionPerformed
-
-    private void Text_insumo2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo2KeyReleased
-        tipo.setEditable(true);
-    }//GEN-LAST:event_Text_insumo2KeyReleased
-
-    private void Text_insumo3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo3KeyReleased
-        tipo2.setEditable(true);
-    }//GEN-LAST:event_Text_insumo3KeyReleased
-
-    private void Text_insumo4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo4KeyReleased
-        tipo3.setEditable(true);
-    }//GEN-LAST:event_Text_insumo4KeyReleased
-
-    private void Text_insumo5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo5KeyReleased
-        tipo4.setEditable(true);
-    }//GEN-LAST:event_Text_insumo5KeyReleased
-
-    private void Text_insumo6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo6KeyReleased
-        tipo5.setEditable(true);
-    }//GEN-LAST:event_Text_insumo6KeyReleased
-
-    private void Text_insumo7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo7KeyReleased
-        tipo6.setEditable(true);
-    }//GEN-LAST:event_Text_insumo7KeyReleased
-
-    private void Text_insumo8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo8KeyReleased
-        tipo7.setEditable(true);
-    }//GEN-LAST:event_Text_insumo8KeyReleased
-
-    private void Text_insumo9KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo9KeyReleased
-        tipo8.setEditable(true);
-    }//GEN-LAST:event_Text_insumo9KeyReleased
-
-    private void Text_insumo10KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo10KeyReleased
-        tipo9.setEditable(true);
-    }//GEN-LAST:event_Text_insumo10KeyReleased
-
-    private void Text_insumo11KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo11KeyReleased
-        tipo10.setEditable(true);
-    }//GEN-LAST:event_Text_insumo11KeyReleased
-
-    private void Text_insumo12KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Text_insumo12KeyReleased
-        tipo11.setEditable(true);
-    }//GEN-LAST:event_Text_insumo12KeyReleased
-
-    private void Text_insumo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Text_insumo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Text_insumo1ActionPerformed
+    }//GEN-LAST:event_tablaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1172,7 +518,7 @@ public class ModalIngredientesProducto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ModalIngredientesProducto dialog = new ModalIngredientesProducto(new javax.swing.JFrame(), true);
+                ModalIngredientesProducto dialog = new ModalIngredientesProducto(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1185,51 +531,20 @@ public class ModalIngredientesProducto extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Text_insumo1;
-    private javax.swing.JTextField Text_insumo10;
-    private javax.swing.JTextField Text_insumo11;
-    private javax.swing.JTextField Text_insumo12;
-    private javax.swing.JTextField Text_insumo2;
-    private javax.swing.JTextField Text_insumo3;
-    private javax.swing.JTextField Text_insumo4;
-    private javax.swing.JTextField Text_insumo5;
-    private javax.swing.JTextField Text_insumo6;
-    private javax.swing.JTextField Text_insumo7;
-    private javax.swing.JTextField Text_insumo8;
-    private javax.swing.JTextField Text_insumo9;
+    public static app.bolivia.swing.JCTextField Text_insumo2;
     private principal.MaterialButton cerrar;
-    public static javax.swing.JLabel id;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private principal.MaterialButton limpiar;
+    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JLabel nombre;
     private org.edisoncor.gui.panel.Panel panel1;
-    public static principal.MaterialButton registrar;
+    private principal.MaterialButton registrar;
+    private javax.swing.JTable tabla;
+    public static principal.MaterialButton terminar;
     public static componentes.org1.bolivia.combo.SComboBox tipo;
-    public static componentes.org1.bolivia.combo.SComboBox tipo1;
-    public static componentes.org1.bolivia.combo.SComboBox tipo10;
-    public static componentes.org1.bolivia.combo.SComboBox tipo11;
-    public static componentes.org1.bolivia.combo.SComboBox tipo2;
-    public static componentes.org1.bolivia.combo.SComboBox tipo3;
-    public static componentes.org1.bolivia.combo.SComboBox tipo4;
-    public static componentes.org1.bolivia.combo.SComboBox tipo5;
-    public static componentes.org1.bolivia.combo.SComboBox tipo6;
-    public static componentes.org1.bolivia.combo.SComboBox tipo7;
-    public static componentes.org1.bolivia.combo.SComboBox tipo8;
-    public static componentes.org1.bolivia.combo.SComboBox tipo9;
     public static javax.swing.JLabel titulo;
     public static javax.swing.JLabel titulo1;
     // End of variables declaration//GEN-END:variables

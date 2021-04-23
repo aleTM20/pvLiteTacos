@@ -24,6 +24,7 @@ public class ModalProductoM extends javax.swing.JDialog {
     TimerTask task;
     int i = 32;
     static boolean opcion = true;
+    int id;
 
     /**
      * Creates new form ModalProducto
@@ -32,22 +33,122 @@ public class ModalProductoM extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         AWTUtilities.setOpaque(this, false);
-        this.tipo.setCursor(new Cursor(12));
-        this.id2.setVisible(false);
         Ubicar(0);
-        this.nombre.requestFocus();
+        nombre.requestFocus();
+        stock.setEnabled(false);
     }
 
     private void limpiarCampos() {
+        nombre.requestFocus();
 
-        this.nombre.requestFocus();
-
-        this.nombre.setText("");
-        this.descripcion.setText("");
-        this.tipo.setSelectedIndex(0);
-        this.precio.setText("");
+        nombre.setText("");
+        descripcion.setText("");
+        tipo.setSelectedIndex(0);
+        precio.setText("");
 
         Opciones.listar("");
+    }
+
+    public void insertar() {
+        if ((!nombre.getText().equals("")) && (!descripcion.getText().equals(""))
+                && (tipo
+                        .getSelectedIndex() != 0) && (!precio.getText().equals(""))) {
+            Sentencias s = new Sentencias();
+            int idProducto = 1 + Integer.parseInt(Opciones.extraerID());
+            if (tipo.getSelectedIndex() == 2) {
+                int validaStock = 0;
+                if (!stock.getText().equals("")) {
+                    validaStock = Integer.parseInt(stock.getText());
+                }
+
+                s.setidProducto(idProducto);
+                s.setNombre(nombre.getText());
+                s.setDescripcion(descripcion.getText());
+                s.setTipo(tipo.getSelectedItem().toString());
+                s.setPrecio(Double.valueOf(Double.parseDouble(precio.getText())));
+                Opciones.registrar(s);
+                Opciones.registrarInventario(idProducto, validaStock);
+            } else {
+                s.setidProducto(idProducto);
+                s.setNombre(nombre.getText());
+                s.setDescripcion(descripcion.getText());
+                s.setTipo(tipo.getSelectedItem().toString());
+                s.setPrecio(Double.valueOf(Double.parseDouble(precio.getText())));
+                ModalIngredientesProducto m = new ModalIngredientesProducto(null, true, s);
+                m.setVisible(true);
+            }
+
+            this.task = new TimerTask() {
+                public void run() {
+                    if (ModalProductoM.this.i == 0) {
+                        ModalProductoM.this.Cerrar();
+                    } else {
+                        ModalProductoM.this.Ubicar(ModalProductoM.this.i);
+                        ModalProductoM.this.i -= 32;
+                        ModalProductoM.this.Trasparencia(ModalProductoM.this.i / 352.0F);
+                    }
+                }
+            };
+            this.timer = new Timer();
+            this.timer.schedule(this.task, 0L, 2L);
+            Opciones.listar("");
+        } else {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("FALTAN CAMPOS DE LLENAR");
+            ErrorAlert.msj1.setText("");
+            er.setVisible(true);
+        }
+    }
+
+    public void actualizar() {
+        if ((!nombre.getText().equals("")) && (!descripcion.getText().equals(""))
+                && (tipo
+                        .getSelectedIndex() != 0) && (!precio.getText().equals(""))) {
+            Sentencias s = new Sentencias();
+            if (tipo.getSelectedIndex() == 2) {
+                int validaStock = 0;
+                if (!stock.getText().equals("")) {
+                    validaStock = Integer.parseInt(stock.getText());
+                }
+
+                s.setidProducto(this.id);
+                s.setNombre(nombre.getText());
+                s.setDescripcion(descripcion.getText());
+                s.setTipo(tipo.getSelectedItem().toString());
+                s.setPrecio(Double.valueOf(Double.parseDouble(precio.getText())));
+                Opciones.actualizar(s);
+                Opciones.actualizarInvetario(this.id, validaStock);
+            } else {
+                s.setidProducto(this.id);
+                s.setNombre(nombre.getText());
+                s.setDescripcion(descripcion.getText());
+                s.setTipo(tipo.getSelectedItem().toString());
+                s.setPrecio(Double.valueOf(Double.parseDouble(precio.getText())));
+                Opciones.actualizar(s);
+            }
+
+            this.task = new TimerTask() {
+                public void run() {
+                    if (ModalProductoM.this.i == 0) {
+                        ModalProductoM.this.Cerrar();
+                    } else {
+                        ModalProductoM.this.Ubicar(ModalProductoM.this.i);
+                        ModalProductoM.this.i -= 32;
+                        ModalProductoM.this.Trasparencia(ModalProductoM.this.i / 352.0F);
+                    }
+                }
+            };
+            this.timer = new Timer();
+            this.timer.schedule(this.task, 0L, 2L);
+            Opciones.listar("");
+        } else {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("FALTAN CAMPOS DE LLENAR");
+            ErrorAlert.msj1.setText("");
+            er.setVisible(true);
+        }
     }
 
     /**
@@ -76,12 +177,9 @@ public class ModalProductoM extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         nombre1 = new app.bolivia.swing.JCTextField();
-        id = new app.bolivia.swing.JCTextField();
-        jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         limpiar = new principal.MaterialButton();
         registrar = new principal.MaterialButton();
-        id2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -165,10 +263,10 @@ public class ModalProductoM extends javax.swing.JDialog {
                 descripcionKeyTyped(evt);
             }
         });
-        jPanel4.add(descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 240, 30));
+        jPanel4.add(descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 240, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/productos/campo-tipo.png"))); // NOI18N
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
         tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ELEGIR TIPO PRODUCTO", "COMIDA", "BEBIDA" }));
         tipo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -182,10 +280,10 @@ public class ModalProductoM extends javax.swing.JDialog {
                 tipoActionPerformed(evt);
             }
         });
-        jPanel4.add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 240, 30));
+        jPanel4.add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 240, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/productos/campo-nombre.png"))); // NOI18N
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
         precio.setBorder(null);
         precio.setForeground(new java.awt.Color(58, 159, 171));
@@ -196,10 +294,10 @@ public class ModalProductoM extends javax.swing.JDialog {
                 precioKeyTyped(evt);
             }
         });
-        jPanel4.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 240, 30));
+        jPanel4.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 240, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ventas/campo-precio.png"))); // NOI18N
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         stock.setEditable(false);
         stock.setBorder(null);
@@ -211,10 +309,10 @@ public class ModalProductoM extends javax.swing.JDialog {
                 stockKeyTyped(evt);
             }
         });
-        jPanel4.add(stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 240, 30));
+        jPanel4.add(stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 240, 30));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/productos/campo_stock.png"))); // NOI18N
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/productos/campo-nombre.png"))); // NOI18N
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
@@ -230,21 +328,7 @@ public class ModalProductoM extends javax.swing.JDialog {
         });
         jPanel4.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 240, 30));
 
-        id.setBorder(null);
-        id.setForeground(new java.awt.Color(58, 159, 171));
-        id.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        id.setPlaceholder("ID");
-        id.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                idKeyTyped(evt);
-            }
-        });
-        jPanel4.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 240, 30));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/productos/campo-nombre.png"))); // NOI18N
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
-
-        panel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 420, 410));
+        panel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 420, 380));
 
         jPanel3.setBackground(new java.awt.Color(58, 159, 171));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -260,7 +344,7 @@ public class ModalProductoM extends javax.swing.JDialog {
                 limpiarActionPerformed(evt);
             }
         });
-        jPanel3.add(limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 160, 50));
+        jPanel3.add(limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 160, 50));
 
         registrar.setBackground(new java.awt.Color(255, 255, 255));
         registrar.setForeground(new java.awt.Color(58, 159, 171));
@@ -272,18 +356,7 @@ public class ModalProductoM extends javax.swing.JDialog {
                 registrarActionPerformed(evt);
             }
         });
-        registrar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                registrarKeyTyped(evt);
-            }
-        });
-        jPanel3.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 170, 50));
-
-        id2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        id2.setForeground(new java.awt.Color(255, 255, 255));
-        id2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        id2.setText("id");
-        jPanel3.add(id2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 30, -1));
+        jPanel3.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 170, 50));
 
         panel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 340, 459, 200));
 
@@ -293,20 +366,19 @@ public class ModalProductoM extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
-        task = new TimerTask() {
-            @Override
+        this.task = new TimerTask() {
             public void run() {
-                if (i == 0) {
-                    Cerrar();
+                if (ModalProductoM.this.i == 0) {
+                    ModalProductoM.this.Cerrar();
                 } else {
-                    Ubicar(i);
-                    i -= 32;
-                    Trasparencia((float) i / 352);
+                    ModalProductoM.this.Ubicar(ModalProductoM.this.i);
+                    ModalProductoM.this.i -= 32;
+                    ModalProductoM.this.Trasparencia(ModalProductoM.this.i / 352.0F);
                 }
             }
         };
-        timer = new Timer();
-        timer.schedule(task, 0, 2);
+        this.timer = new Timer();
+        this.timer.schedule(this.task, 0L, 2L);
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
@@ -351,113 +423,10 @@ public class ModalProductoM extends javax.swing.JDialog {
     }//GEN-LAST:event_precioKeyTyped
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        
-        if (this.nombre.getText().equals("") || this.descripcion.getText().equals("")
-                || this.tipo.getSelectedIndex() == 0 || this.precio.getText().equals("")
-                || this.id.getText().equals("")) {
-
-            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("FALTAN CAMPOS DE LLENAR");
-            er.msj1.setText("");
-            er.setVisible(true);
-
+        if (registrar.getText().equals("REGISTRAR")) {
+            insertar();
         } else {
-
-            if (this.registrar.getText().equals("GUARDAR")) {
-                this.id.setEditable(false);
-                producto.Sentencias s = new Sentencias();
-
-                s.setNombre(this.nombre.getText());
-                s.setDescripcion(this.descripcion.getText());
-                s.setTipo(this.tipo.getSelectedItem().toString());
-                s.setPrecio(Double.parseDouble(this.precio.getText()));
-                s.setId(this.id.getText());
-
-                int validaStock = 0;
-                if (!this.stock.getText().equals("")) {
-                    validaStock = Integer.parseInt(this.stock.getText());
-                    s.setStock(String.valueOf(validaStock));
-                } else {
-
-//                if (this.tipo.getSelectedIndex() == 2) {
-//                    s.setStock(String.valueOf(validaStock));
-//                } else {
-                    s.setStock("");
-//                }
-                }
-                int opcion = producto.Opciones.actualizar(s);
-                if (opcion != 0) {
-                    String fila = this.id.getText();
-                    Opciones.listar("");
-                    Productos.seleccionaFila(fila);
-                    SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                    sa.titulo.setText("¡HECHO!");
-                    sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-                    sa.msj1.setText("");
-                    sa.setVisible(true);
-                }
-
-            } else {
-
-                producto.Sentencias s = new Sentencias();
-
-                s.setNombre(this.nombre.getText());
-                s.setDescripcion(this.descripcion.getText());
-                s.setTipo(this.tipo.getSelectedItem().toString());
-                s.setPrecio(Double.parseDouble(this.precio.getText()));
-                s.setId(this.id.getText());
-
-                int validaStock = 0;
-                if (!this.stock.getText().equals("")) {
-                    validaStock = Integer.parseInt(this.stock.getText());
-                }
-
-                if (this.tipo.getSelectedIndex() == 2) {
-                    s.setStock(String.valueOf(validaStock));
-                } else {
-                    s.setStock("");
-                }
-                if (tipo.getSelectedItem().toString().equals("COMIDA")) {
-                ModalIngredientesProducto mp = new ModalIngredientesProducto(new JFrame(), true);
-                mp.setVisible(true);
-                    
-                }else{
-                
-                int opcion = producto.Opciones.registrar(s);
-                producto.Opciones.registrarInventario(Integer.parseInt(id.getText()),Integer.parseInt(stock.getText()));
-                
-                 if (this.opcion == true || opcion != 0) {
-//                if (opcion != 0) {
-                    String fila = Opciones.extraerID();
-                    limpiarCampos();
-                    Productos.seleccionaFila(fila);
-                    Opciones.listar("");
-                    SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                    sa.titulo.setText("¡HECHO!");
-                    sa.msj.setText("SE HA REGISTRADO UN");
-                    sa.msj1.setText("NUEVO PRODUCTO");
-                    sa.setVisible(true);
-task = new TimerTask() {
-            @Override
-            public void run() {
-                if (i == 0) {
-                    Cerrar();
-                } else {
-                    Ubicar(i);
-                    i -= 32;
-                    Trasparencia((float) i / 352);
-                }
-            }
-        };
-        timer = new Timer();
-        timer.schedule(task, 0, 2);
-        Opciones.listar("");
-//                }
-                }
-                this.opcion = true;
-            }
-        }
+            actualizar();
         }
     }//GEN-LAST:event_registrarActionPerformed
 
@@ -478,89 +447,6 @@ task = new TimerTask() {
         timer.schedule(task, 0, 2);
     }//GEN-LAST:event_formWindowOpened
 
-    private void registrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_registrarKeyTyped
-        if ((evt.getKeyChar() == KeyEvent.VK_ENTER)) {
-            if (this.nombre.getText().equals("") || this.descripcion.getText().equals("")
-                    || this.tipo.getSelectedIndex() == 0 || this.precio.getText().equals("")) {
-
-                ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                er.titulo.setText("OOPS...");
-                er.msj.setText("FALTAN CAMPOS DE LLENAR");
-                er.msj1.setText("");
-                er.setVisible(true);
-
-            } else {
-
-                if (this.registrar.getText().equals("GUARDAR")) {
-
-                    producto.Sentencias s = new Sentencias();
-
-                    s.setNombre(this.nombre.getText());
-                    s.setDescripcion(this.descripcion.getText());
-                    s.setTipo(this.tipo.getSelectedItem().toString());
-                    s.setPrecio(Double.parseDouble(this.precio.getText()));
-                    s.setId(this.id2.getText());
-
-                    int validaStock = 0;
-                    if (!this.stock.getText().equals("")) {
-                        validaStock = Integer.parseInt(this.stock.getText());
-                        s.setStock(String.valueOf(validaStock));
-                    } else {
-
-//                if (this.tipo.getSelectedIndex() == 2) {
-//                    s.setStock(String.valueOf(validaStock));
-//                } else {
-                        s.setStock("");
-//                }
-                    }
-
-                    int opcion = producto.Opciones.actualizar(s);
-                    if (opcion != 0) {
-                        String fila = this.id2.getText();
-                        Opciones.listar("");
-                        Productos.seleccionaFila(fila);
-                        SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                        sa.titulo.setText("¡HECHO!");
-                        sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-                        sa.msj1.setText("");
-                        sa.setVisible(true);
-                    }
-
-                } else {
-
-                    producto.Sentencias s = new Sentencias();
-
-                    s.setNombre(this.nombre.getText());
-                    s.setDescripcion(this.descripcion.getText());
-                    s.setTipo(this.tipo.getSelectedItem().toString());
-                    s.setPrecio(Double.parseDouble(this.precio.getText()));
-
-                    int validaStock = 0;
-                    if (!this.stock.getText().equals("")) {
-                        validaStock = Integer.parseInt(this.stock.getText());
-                    }
-
-                    if (this.tipo.getSelectedIndex() == 2) {
-                        s.setStock(String.valueOf(validaStock));
-                    } else {
-                        s.setStock("");
-                    }
-                    int opcion = producto.Opciones.registrar(s);
-                    if (opcion != 0) {
-                        String fila = String.valueOf(Opciones.extraerID());
-                        limpiarCampos();
-                        Productos.seleccionaFila(fila);
-                        SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                        sa.titulo.setText("¡HECHO!");
-                        sa.msj.setText("SE HA REGISTRADO UN");
-                        sa.msj1.setText("NUEVO PRODUCTO");
-                        sa.setVisible(true);
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_registrarKeyTyped
-
     private void stockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stockKeyTyped
         char num = evt.getKeyChar();
         if ((num < '0' || num > '9')) {
@@ -569,12 +455,12 @@ task = new TimerTask() {
     }//GEN-LAST:event_stockKeyTyped
 
     private void tipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipoItemStateChanged
-        if (this.tipo.getSelectedIndex() == 0 || this.tipo.getSelectedIndex() == 1) {
-            this.stock.setEditable(false);
-            this.stock.setText("");
+        if ((tipo.getSelectedIndex() == 0) || (tipo.getSelectedIndex() == 1)) {
+            stock.setEditable(false);
+            stock.setText("");
         } else {
-            this.stock.setEditable(true);
-            this.stock.setText("0");
+            stock.setEditable(true);
+            stock.setText("0");
         }
     }//GEN-LAST:event_tipoItemStateChanged
 
@@ -585,10 +471,6 @@ task = new TimerTask() {
     private void nombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre1KeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre1KeyTyped
-
-    private void idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idKeyTyped
 
     /**
      * @param args the command line arguments
@@ -646,15 +528,12 @@ task = new TimerTask() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButton cerrar;
     public static app.bolivia.swing.JCTextField descripcion;
-    public static app.bolivia.swing.JCTextField id;
-    public static javax.swing.JLabel id2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

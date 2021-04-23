@@ -5,6 +5,7 @@
  */
 package contract.waiter;
 
+import exception.ExceptionPvLite;
 import java.util.List;
 import model.Product;
 
@@ -15,13 +16,13 @@ import model.Product;
 public interface HomeContract {
 
     public interface View {
-        void onError(String error);
+        void onError(ExceptionPvLite exceptionPvLite);
         void onDestroy();
         void onLoadProducts(List<Product> products);
     }
 
     public interface Presenter {
-        void onError(String error);
+        void onError(ExceptionPvLite exceptionPvLite);
         void onLoadProducts(String textToSearch);
     }
 }

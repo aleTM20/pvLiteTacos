@@ -12,6 +12,7 @@ import alertas.principal.WarningAlertCerrar;
 import alertas.principal.WarningAlertSalir;
 import conexion.ConexionBD;
 import contract.waiter.HomeContract;
+import exception.ExceptionPvLite;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -79,11 +80,11 @@ public class WaiterHome extends javax.swing.JFrame implements HomeContract.View 
     }
 
     @Override
-    public void onError(String error) {
+    public void onError(ExceptionPvLite exceptionPvLite) {
         ErrorAlert errorAlert = new ErrorAlert(this, true);
         errorAlert.titulo.setText("Error");
-        errorAlert.msj.setText(error);
-        errorAlert.msj1.setText("");
+        errorAlert.msj.setText(exceptionPvLite.getMessage());
+        errorAlert.msj1.setText("<html>" + exceptionPvLite.getCauseMessage() + "</html>");
         errorAlert.setVisible(true);
     }
 
