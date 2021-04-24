@@ -93,7 +93,7 @@ public class FadeEffect {
                 if (opacity <= 0) {                   
                     timer.stop();
                     frame.dispose();
-                    new login.Login().setVisible(true);
+                    new view.login.LoginView().setVisible(true);
                 }
             }
         });

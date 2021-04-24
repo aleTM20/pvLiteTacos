@@ -143,43 +143,5 @@ public class Opciones {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         return existe;
-    }
-
-    public static void verifica(String usuario, String pas, JFrame login) {
-        String user = "";
-        String pass = "";
-        String tipo_us = "";
-        String nombre = "";
-        try {
-            String sql = "SELECT * FROM usuarios WHERE usuario = '" + usuario + "'";
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-
-            while (rs.next()) {
-                user = rs.getString(2);
-                pass = rs.getString(3);
-                tipo_us = rs.getString(4);
-                nombre = rs.getString("nombre");
-            }
-
-            if ((user.equals(usuario)) && (pass.equals(pass))) {
-                if (tipo_us.equals("ADMINISTRADOR")) {
-                    login.dispose();
-                    new PrincipalAdministrador().setVisible(true);
-                    PrincipalAdministrador.usuario.setText(nombre);
-                } else if (tipo_us.equals("MESERO")) {
-                    login.dispose();
-                    new PrincipalMesero().setVisible(true);
-                }
-            } else {
-                Login.info.setText("¡ USUARIO O CONTRASEÑA INCORRECTOS !");
-                Login.txtUsuario.setText("");
-                Login.txtPassword.setText("");
-                Login.txtUsuario.requestFocus();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+    } 
 }
