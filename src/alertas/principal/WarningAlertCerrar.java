@@ -30,6 +30,7 @@ public class WarningAlertCerrar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         AWTUtilities.setOpaque(this, false);
+        setLocationRelativeTo(null);
         Ubicar(0);
     }
 

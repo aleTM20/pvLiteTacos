@@ -32,7 +32,7 @@ public class Settings extends javax.swing.JDialog {
     public Settings(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(null);
         AWTUtilities.setOpaque(this, false);
         Ubicar(0);
         firstOctet.requestFocus();
@@ -237,6 +237,7 @@ public class Settings extends javax.swing.JDialog {
         secondOctet.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
         secondOctet.setPhColor(new java.awt.Color(58, 159, 171));
         secondOctet.setPlaceholder("  168");
+        secondOctet.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         secondOctet.setSelectionColor(new java.awt.Color(58, 159, 171));
         secondOctet.setVerifyInputWhenFocusTarget(false);
         secondOctet.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -263,6 +264,7 @@ public class Settings extends javax.swing.JDialog {
         txtUserServer.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
         txtUserServer.setPhColor(new java.awt.Color(58, 159, 171));
         txtUserServer.setPlaceholder(" Usuario...");
+        txtUserServer.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         txtUserServer.setSelectionColor(new java.awt.Color(58, 159, 171));
         txtUserServer.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -289,6 +291,7 @@ public class Settings extends javax.swing.JDialog {
         fourthOctet.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
         fourthOctet.setPhColor(new java.awt.Color(58, 159, 171));
         fourthOctet.setPlaceholder("   10");
+        fourthOctet.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         fourthOctet.setSelectionColor(new java.awt.Color(58, 159, 171));
         fourthOctet.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -333,6 +336,7 @@ public class Settings extends javax.swing.JDialog {
         thirdOctet.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
         thirdOctet.setPhColor(new java.awt.Color(58, 159, 171));
         thirdOctet.setPlaceholder("    0");
+        thirdOctet.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         thirdOctet.setSelectionColor(new java.awt.Color(58, 159, 171));
         thirdOctet.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -382,6 +386,7 @@ public class Settings extends javax.swing.JDialog {
         firstOctet.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
         firstOctet.setPhColor(new java.awt.Color(58, 159, 171));
         firstOctet.setPlaceholder("  192");
+        firstOctet.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         firstOctet.setSelectionColor(new java.awt.Color(58, 159, 171));
         firstOctet.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -422,6 +427,7 @@ public class Settings extends javax.swing.JDialog {
         txtDataBase.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
         txtDataBase.setPhColor(new java.awt.Color(58, 159, 171));
         txtDataBase.setPlaceholder("Base de datos...");
+        txtDataBase.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         txtDataBase.setSelectionColor(new java.awt.Color(58, 159, 171));
         txtDataBase.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -452,6 +458,7 @@ public class Settings extends javax.swing.JDialog {
         txtPasswordServer.setFont(new java.awt.Font("Britannic Bold", 1, 18)); // NOI18N
         txtPasswordServer.setPhColor(new java.awt.Color(58, 159, 171));
         txtPasswordServer.setPlaceholder("Contraseña...");
+        txtPasswordServer.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         txtPasswordServer.setSelectionColor(new java.awt.Color(58, 159, 171));
         txtPasswordServer.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {

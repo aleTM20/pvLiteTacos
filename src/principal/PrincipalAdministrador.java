@@ -16,6 +16,7 @@ import insumo.InsumosCompras;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import model.User;
 import static principal.Principal.escritorio;
 import salidas.Salidas;
 import usuarios.Usuarios;
@@ -65,11 +66,12 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public PrincipalAdministrador() {
+    public PrincipalAdministrador(User user) {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/logo-icono.png")).getImage());
         this.setExtendedState(MAXIMIZED_BOTH);
         FadeEffect.fadeInFrame(this, 50, 0.1f);
+        this.usuario.setText(user.getName());
     }
 
     /**
@@ -498,7 +500,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
 
         if (WarningAlertSalir.salir) {
             this.dispose();
-            new login.Login().setVisible(true);
+            new view.login.LoginView().setVisible(true);
         }
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
@@ -567,41 +569,6 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         new ModalCambioCaja(new JFrame(), true).setVisible(true);
     }//GEN-LAST:event_cambio_cajaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PrincipalAdministrador().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButtomRectangle btnAbout;

@@ -104,6 +104,9 @@
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
             <Property name="placeholder" type="java.lang.String" value="  168"/>
+            <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
@@ -143,6 +146,9 @@
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
             <Property name="placeholder" type="java.lang.String" value=" Usuario..."/>
+            <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
@@ -182,6 +188,9 @@
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
             <Property name="placeholder" type="java.lang.String" value="   10"/>
+            <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
@@ -272,6 +281,9 @@
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
             <Property name="placeholder" type="java.lang.String" value="    0"/>
+            <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
@@ -369,6 +381,9 @@
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
             <Property name="placeholder" type="java.lang.String" value="  192"/>
+            <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
@@ -455,6 +470,9 @@
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
             <Property name="placeholder" type="java.lang.String" value="Base de datos..."/>
+            <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
@@ -509,6 +527,9 @@
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>
             <Property name="placeholder" type="java.lang.String" value="Contrase&#xf1;a..."/>
+            <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
             </Property>

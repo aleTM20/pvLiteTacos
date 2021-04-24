@@ -417,7 +417,7 @@ public class Principal extends javax.swing.JFrame {
 
         if (WarningAlertSalir.salir) {
             this.dispose();
-            new login.Login().setVisible(true);
+            new view.login.LoginView().setVisible(true);
         }
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
