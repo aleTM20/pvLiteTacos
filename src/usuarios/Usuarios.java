@@ -218,7 +218,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CÓDIGO", "USUARIO", "CONTRASEÑA", "TIPO USUARIO"
+                "CÓDIGO", "NOMBRE", "USUARIO", "TIPO USUARIO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -307,10 +307,10 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
                 ModalUsuarios mp = new ModalUsuarios(new JFrame(), true);
                 mp.id.setText(this.tabla.getValueAt(fila, 0).toString());
-                mp.txtUsuario.setText(this.tabla.getValueAt(fila, 1).toString());
-                mp.txtPassword.setText(this.tabla.getValueAt(fila, 2).toString());
+                mp.txtUsuario.setText(this.tabla.getValueAt(fila, 2).toString());
+                mp.txtPassword.setText("");
                 mp.tipo.setSelectedItem(this.tabla.getValueAt(fila, 3).toString());
-                mp.nombreUs.setText(this.tabla.getValueAt(fila, 1).toString());
+                mp.nombreUs.setText(this.tabla.getValueAt(fila, 2).toString());
                 mp.titulo.setText("MODIFICAR");
                 mp.registrar.setText("GUARDAR");
                 mp.setVisible(true);

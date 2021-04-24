@@ -232,78 +232,87 @@ public class ModalUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        if (this.txtUsuario.getText().equals("") || this.txtPassword.getText().equals("")
-                || this.tipo.getSelectedIndex() == 0) {
 
+        if (this.registrar.getText().equals("GUARDAR")) {
+            if (this.txtUsuario.getText().equals("") || this.tipo.getSelectedIndex() == 0) {
+                ErrorAlert er = new ErrorAlert(new JFrame(), true);
+                er.titulo.setText("OOPS...");
+                er.msj.setText("FALTAN CAMPOS DE LLENAR");
+                er.msj1.setText("");
+                er.setVisible(true);
+            }
+            if (!this.txtPassword.getText().equals("")) {
+                if (this.txtPassword.getText().length() <= 7) {
+                    ErrorAlert er = new ErrorAlert(new JFrame(), true);
+                    er.titulo.setText("OOPS...");
+                    er.msj.setText("LA CONTRASEÑA DEBE CONTENER");
+                    er.msj1.setText("MINIMO 8 CARACTERES");
+                    er.setVisible(true);
+                }
+            }
+            if (Opciones.verificaUsuario(this.txtUsuario.getText())
+                    && !this.txtUsuario.getText().equals(this.nombreUs.getText())) {
+                ErrorAlert er = new ErrorAlert(new JFrame(), true);
+                er.titulo.setText("OOPS...");
+                er.msj.setText("EL NOMBRE DE USUARIO");
+                er.msj1.setText("YA ÉXISTE");
+                er.setVisible(true);
+            } else {
+                Sentencias s = new Sentencias();
+
+                s.setUsuario(this.txtUsuario.getText());
+                s.setPassword(this.txtPassword.getText());
+                s.setTipo(this.tipo.getSelectedItem().toString());
+                s.setId(Integer.parseInt(this.id.getText()));
+
+                int opcion = Opciones.actualizar(s);
+                if (opcion != 0) {
+                    Opciones.listar("");
+                    SuccessAlert sa = new SuccessAlert(new JFrame(), true);
+                    sa.titulo.setText("¡HECHO!");
+                    sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
+                    sa.msj1.setText("");
+                    sa.setVisible(true);
+                }
+            }
+        }else{
+            if (this.txtUsuario.getText().equals("") || this.tipo.getSelectedIndex() == 0 || this.txtPassword.getText().equals(""))  {
             ErrorAlert er = new ErrorAlert(new JFrame(), true);
             er.titulo.setText("OOPS...");
             er.msj.setText("FALTAN CAMPOS DE LLENAR");
             er.msj1.setText("");
             er.setVisible(true);
-
-        } else {
-            if (this.txtPassword.getText().length() <= 7) {
-                ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                er.titulo.setText("OOPS...");
-                er.msj.setText("LA CONTRASEÑA DEBE CONTENER");
-                er.msj1.setText("MINIMO 8 CARACTERES");
-                er.setVisible(true);
+            } else if (Opciones.verificaUsuario(this.txtUsuario.getText())) {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            er.titulo.setText("OOPS...");
+            er.msj.setText("EL NOMBRE DE USUARIO");
+            er.msj1.setText("YA ÉXISTE");
+            er.setVisible(true);
+            } else if (this.txtPassword.getText().length() <= 7) {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            er.titulo.setText("OOPS...");
+            er.msj.setText("LA CONTRASEÑA DEBE CONTENER");
+            er.msj1.setText("MINIMO 8 CARACTERES");
+            er.setVisible(true);
             } else {
+            Sentencias s = new Sentencias();
 
-                if (this.registrar.getText().equals("GUARDAR")) {
+            s.setUsuario(this.txtUsuario.getText());
+            s.setPassword(this.txtPassword.getText());
+            s.setTipo(this.tipo.getSelectedItem().toString());
 
-                    if (Opciones.verificaUsuario(this.txtUsuario.getText())
-                            && !this.txtUsuario.getText().equals(this.nombreUs.getText())) {
-                        ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                        er.titulo.setText("OOPS...");
-                        er.msj.setText("EL NOMBRE DE USUARIO");
-                        er.msj1.setText("YA ÉXISTE");
-                        er.setVisible(true);
-                    } else {
-                        Sentencias s = new Sentencias();
-
-                        s.setUsuario(this.txtUsuario.getText());
-                        s.setPassword(this.txtPassword.getText());
-                        s.setTipo(this.tipo.getSelectedItem().toString());
-                        s.setId(Integer.parseInt(this.id.getText()));
-
-                        int opcion = Opciones.actualizar(s);
-                        if (opcion != 0) {
-                            Opciones.listar("");
-                            SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                            sa.titulo.setText("¡HECHO!");
-                            sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-                            sa.msj1.setText("");
-                            sa.setVisible(true);
-                        }
-                    }
-                } else {
-                    if (Opciones.verificaUsuario(this.txtUsuario.getText())) {
-                        ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                        er.titulo.setText("OOPS...");
-                        er.msj.setText("EL NOMBRE DE USUARIO");
-                        er.msj1.setText("YA ÉXISTE");
-                        er.setVisible(true);
-                    } else {
-                        Sentencias s = new Sentencias();
-
-                        s.setUsuario(this.txtUsuario.getText());
-                        s.setPassword(this.txtPassword.getText());
-                        s.setTipo(this.tipo.getSelectedItem().toString());
-
-                        int opcion = Opciones.registrar(s);
-                        if (opcion != 0) {
-                            limpiarCampos();
-                            SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                            sa.titulo.setText("¡HECHO!");
-                            sa.msj.setText("SE HA REGISTRADO UN");
-                            sa.msj1.setText("NUEVO USUARIO");
-                            sa.setVisible(true);
-                        }
-                    }
-                }
+            int opcion = Opciones.registrar(s);
+            if (opcion != 0) {
+                limpiarCampos();
+                SuccessAlert sa = new SuccessAlert(new JFrame(), true);
+                sa.titulo.setText("¡HECHO!");
+                sa.msj.setText("SE HA REGISTRADO UN");
+                sa.msj1.setText("NUEVO USUARIO");
+                sa.setVisible(true);
             }
         }
+        }
+        
     }//GEN-LAST:event_registrarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -334,67 +343,60 @@ public class ModalUsuarios extends javax.swing.JDialog {
                 er.msj1.setText("");
                 er.setVisible(true);
 
-            } else {
-                if (this.txtPassword.getText().length() <= 7) {
+            } else if (this.txtPassword.getText().length() <= 7) {
+                ErrorAlert er = new ErrorAlert(new JFrame(), true);
+                er.titulo.setText("OOPS...");
+                er.msj.setText("LA CONTRASEÑA DEBE CONTENER");
+                er.msj1.setText("MINIMO 8 CARACTERES");
+                er.setVisible(true);
+            } else if (this.registrar.getText().equals("GUARDAR")) {
+
+                if (Opciones.verificaUsuario(this.txtUsuario.getText())
+                        && !this.txtUsuario.getText().equals(this.nombreUs.getText())) {
                     ErrorAlert er = new ErrorAlert(new JFrame(), true);
                     er.titulo.setText("OOPS...");
-                    er.msj.setText("LA CONTRASEÑA DEBE CONTENER");
-                    er.msj1.setText("MINIMO 8 CARACTERES");
+                    er.msj.setText("EL NOMBRE DE USUARIO");
+                    er.msj1.setText("YA ÉXISTE");
                     er.setVisible(true);
                 } else {
+                    Sentencias s = new Sentencias();
 
-                    if (this.registrar.getText().equals("GUARDAR")) {
+                    s.setUsuario(this.txtUsuario.getText());
+                    s.setPassword(this.txtPassword.getText());
+                    s.setTipo(this.tipo.getSelectedItem().toString());
+                    s.setId(Integer.parseInt(this.id.getText()));
 
-                        if (Opciones.verificaUsuario(this.txtUsuario.getText())
-                                && !this.txtUsuario.getText().equals(this.nombreUs.getText())) {
-                            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                            er.titulo.setText("OOPS...");
-                            er.msj.setText("EL NOMBRE DE USUARIO");
-                            er.msj1.setText("YA ÉXISTE");
-                            er.setVisible(true);
-                        } else {
-                            Sentencias s = new Sentencias();
-
-                            s.setUsuario(this.txtUsuario.getText());
-                            s.setPassword(this.txtPassword.getText());
-                            s.setTipo(this.tipo.getSelectedItem().toString());
-                            s.setId(Integer.parseInt(this.id.getText()));
-
-                            int opcion = Opciones.actualizar(s);
-                            if (opcion != 0) {
-                                Opciones.listar("");
-                                SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                                sa.titulo.setText("¡HECHO!");
-                                sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-                                sa.msj1.setText("");
-                                sa.setVisible(true);
-                            }
-                        }
-                    } else {
-                        if (Opciones.verificaUsuario(this.txtUsuario.getText())) {
-                            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                            er.titulo.setText("OOPS...");
-                            er.msj.setText("EL NOMBRE DE USUARIO");
-                            er.msj1.setText("YA ÉXISTE");
-                            er.setVisible(true);
-                        } else {
-                            Sentencias s = new Sentencias();
-
-                            s.setUsuario(this.txtUsuario.getText());
-                            s.setPassword(this.txtPassword.getText());
-                            s.setTipo(this.tipo.getSelectedItem().toString());
-
-                            int opcion = Opciones.registrar(s);
-                            if (opcion != 0) {
-                                limpiarCampos();
-                                SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                                sa.titulo.setText("¡HECHO!");
-                                sa.msj.setText("SE HA REGISTRADO UN");
-                                sa.msj1.setText("NUEVO USUARIO");
-                                sa.setVisible(true);
-                            }
-                        }
+                    int opcion = Opciones.actualizar(s);
+                    if (opcion != 0) {
+                        Opciones.listar("");
+                        SuccessAlert sa = new SuccessAlert(new JFrame(), true);
+                        sa.titulo.setText("¡HECHO!");
+                        sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
+                        sa.msj1.setText("");
+                        sa.setVisible(true);
                     }
+                }
+            } else if (Opciones.verificaUsuario(this.txtUsuario.getText())) {
+                ErrorAlert er = new ErrorAlert(new JFrame(), true);
+                er.titulo.setText("OOPS...");
+                er.msj.setText("EL NOMBRE DE USUARIO");
+                er.msj1.setText("YA ÉXISTE");
+                er.setVisible(true);
+            } else {
+                Sentencias s = new Sentencias();
+
+                s.setUsuario(this.txtUsuario.getText());
+                s.setPassword(this.txtPassword.getText());
+                s.setTipo(this.tipo.getSelectedItem().toString());
+
+                int opcion = Opciones.registrar(s);
+                if (opcion != 0) {
+                    limpiarCampos();
+                    SuccessAlert sa = new SuccessAlert(new JFrame(), true);
+                    sa.titulo.setText("¡HECHO!");
+                    sa.msj.setText("SE HA REGISTRADO UN");
+                    sa.msj1.setText("NUEVO USUARIO");
+                    sa.setVisible(true);
                 }
             }
         }

@@ -6,6 +6,9 @@
 package usuarios;
 
 import conexion.ConexionBD;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +38,7 @@ public class Opciones {
         try {
             ps = cn.prepareStatement(sql);
             ps.setString(1, uc.getUsuario());
-            ps.setString(2, uc.getPassword());
+            ps.setString(2, Encrypting.getMD5(uc.getPassword()));
             ps.setString(3, uc.getTipo());
             rsu = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -47,17 +50,30 @@ public class Opciones {
 
     public static int actualizar(Sentencias uc) {
         int rsu = 0;
-        String sql = Sentencias.ACTUALIZAR;
-        try {
-            ps = cn.prepareStatement(sql);
-            ps.setString(1, uc.getUsuario());
-            ps.setString(2, uc.getPassword());
-            ps.setString(3, uc.getTipo());
-            ps.setInt(4, uc.getId());
-            rsu = ps.executeUpdate();
-        } catch (SQLException ex) {
+        if (uc.getPassword() != "") {
+            String sql = Sentencias.ACTUALIZAR;
+            try {
+                ps = cn.prepareStatement(sql);
+                ps.setString(1, uc.getUsuario());
+                ps.setString(2, Encrypting.getMD5(uc.getPassword()));
+                ps.setString(3, uc.getTipo());
+                ps.setInt(4, uc.getId());
+                rsu = ps.executeUpdate();
+            } catch (SQLException ex) {
+            }
+            System.out.println(sql);
+        }else{
+            String sql = Sentencias.ACTUALIZARUSUARIO;
+            try {
+                ps = cn.prepareStatement(sql);
+                ps.setString(1, uc.getUsuario());
+                ps.setString(3, uc.getTipo());
+                ps.setInt(4, uc.getId());
+                rsu = ps.executeUpdate();
+            } catch (SQLException ex) {
+            }
+            System.out.println(sql);
         }
-        System.out.println(sql);
         return rsu;
     }
 
@@ -87,7 +103,7 @@ public class Opciones {
             sql = Sentencias.LISTAR;
         } else {
             sql = "SELECT * FROM usuarios WHERE (idusuario LIKE'" + busca + "%' OR "
-                    + "usuario LIKE'" + busca + "%' OR password LIKE'" + busca + "%' OR "
+                    + "usuario LIKE'" + busca + "%' OR nombre LIKE'" + busca + "%' OR "
                     + "tipousuario LIKE'" + busca + "%') AND idusuario!=1 "
                     + "ORDER BY idusuario";
         }
@@ -96,16 +112,16 @@ public class Opciones {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                datos[0] = rs.getString("idusuario");
-                datos[1] = rs.getString("usuario");
-                datos[2] = rs.getString("password");
+                datos[0] = rs.getString("idusuario");              
+                datos[1] = rs.getString("nombre");
+                datos[2] = rs.getString("usuario");
                 datos[3] = rs.getString("tipousuario");
                 modelo.addRow(datos);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Opciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+    }
 
     public static boolean verificaUsuario(String usuario) {
         boolean existe = false;
@@ -130,41 +146,40 @@ public class Opciones {
     }
 
     public static void verifica(String usuario, String pas, JFrame login) {
-     String user = ""; String pass = ""; String tipo_us = ""; String nombre = "";
-     try
-     {
-       String sql = "SELECT * FROM usuarios WHERE usuario = '" + usuario + "'";
-       Statement st = cn.createStatement();
-       ResultSet rs = st.executeQuery(sql);
- 
-       while (rs.next()) {
-         user = rs.getString(2);
-         pass = rs.getString(3);
-         tipo_us = rs.getString(4);
-         nombre = rs.getString("nombre");
-       }
- 
-       if ((user.equals(usuario)) && (pass.equals(pas))) {
-         if (tipo_us.equals("ADMINISTRADOR")) {
-           login.dispose();
-           new PrincipalAdministrador().setVisible(true);
-           PrincipalAdministrador.usuario.setText(nombre);
-         }
-         else if (tipo_us.equals("MESERO")) {
-           login.dispose();
-           new PrincipalMesero().setVisible(true);
-         }
-       }
-       else
-       {
-         Login.info.setText("¡ USUARIO O CONTRASEÑA INCORRECTOS !");
-         Login.txtUsuario.setText("");
-         Login.txtPassword.setText("");
-         Login.txtUsuario.requestFocus();
-       }
-     }
-     catch (SQLException ex) {
-       Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-     }
-   }
+        String user = "";
+        String pass = "";
+        String tipo_us = "";
+        String nombre = "";
+        try {
+            String sql = "SELECT * FROM usuarios WHERE usuario = '" + usuario + "'";
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                user = rs.getString(2);
+                pass = rs.getString(3);
+                tipo_us = rs.getString(4);
+                nombre = rs.getString("nombre");
+            }
+
+            if ((user.equals(usuario)) && (pass.equals(pass))) {
+                if (tipo_us.equals("ADMINISTRADOR")) {
+                    login.dispose();
+                    new PrincipalAdministrador().setVisible(true);
+                    PrincipalAdministrador.usuario.setText(nombre);
+                } else if (tipo_us.equals("MESERO")) {
+                    login.dispose();
+                    new PrincipalMesero().setVisible(true);
+                }
+            } else {
+                Login.info.setText("¡ USUARIO O CONTRASEÑA INCORRECTOS !");
+                Login.txtUsuario.setText("");
+                Login.txtPassword.setText("");
+                Login.txtUsuario.requestFocus();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

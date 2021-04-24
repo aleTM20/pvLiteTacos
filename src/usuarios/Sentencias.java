@@ -21,6 +21,11 @@ public class Sentencias {
             + "password=?, "
             + "tipousuario=? "
             + "WHERE idusuario=?";
+    
+    public static String ACTUALIZARUSUARIO = "UPDATE usuarios SET "
+            + "usuario=?, "
+            + "tipousuario=? "
+            + "WHERE idusuario=?";
 
     public static String ELIMINAR = "DELETE FROM usuarios WHERE idusuario = ?";
 
