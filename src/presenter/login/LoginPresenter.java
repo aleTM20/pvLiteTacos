@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import model.User;
 import model.login.LoginModel;
+import usuarios.Encrypting;
 
 /**
  *
@@ -34,7 +35,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void login(String user, String password) {
-        model.login(user, password);
+        model.login(user, Encrypting.getMD5(password));
     }
 
     @Override

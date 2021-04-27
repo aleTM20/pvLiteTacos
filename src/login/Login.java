@@ -210,9 +210,6 @@ public class Login extends javax.swing.JFrame {
         if(this.txtUsuario.getText().equals("") || this.txtPassword.getText().equals("")){
             this.info.setText("¡ USUARIO Y CONTRASEÑA REQUERIDOS !");
             this.txtUsuario.requestFocus();
-        }else{
-            Opciones.verifica(this.txtUsuario.getText(), this.txtPassword.getText(), this);
-           
         }
     }//GEN-LAST:event_btnVentasActionPerformed
 
@@ -231,8 +228,6 @@ public class Login extends javax.swing.JFrame {
             if ((txtUsuario.getText().equals("")) || (txtPassword.getText().equals(""))) {
             info.setText("¡ USUARIO Y CONTRASEÑA REQUERIDOS !");
             txtUsuario.requestFocus();
-        } else {
-             Opciones.verifica(txtUsuario.getText(), txtPassword.getText(), this);
         }
     }//GEN-LAST:event_txtPasswordKeyReleased
 

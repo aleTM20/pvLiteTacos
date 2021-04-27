@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  *
- * @author Dell
+ * @author pv_lite_team
  */
 public class Encrypting {
 

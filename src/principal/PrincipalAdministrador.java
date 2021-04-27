@@ -25,6 +25,7 @@ import ventas.ListaVentas;
 import ventas.Ventas;
 import static ventas.Ventas.NO_MESA;
 import ventas.VentasLista1;
+import view.administrator.CashCourtView;
 
 /**
  *
@@ -48,6 +49,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
     public static VentasLista1 ventasLista = null;
     public static Compras compras = null;
     public static Detalles detalles = null;
+    private static CashCourtView cashCourtView = null;
 
     public static boolean estacerrado(JInternalFrame obj) {
         JInternalFrame[] activos = escritorio.getAllFrames();
@@ -91,8 +93,6 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         usuario = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        cambio_caja = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnProductos = new principal.MaterialButtomRectangle();
         btnGastos = new principal.MaterialButtomRectangle();
@@ -105,7 +105,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         cerrarSesion = new principal.MaterialButtomRectangle();
         btnInsumos = new principal.MaterialButtomRectangle();
         btnCompras = new principal.MaterialButtomRectangle();
-        btnCaducidad = new principal.MaterialButtomRectangle();
+        btnCashCourt = new principal.MaterialButtomRectangle();
         escritorio = new principal.Escritorio();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -154,22 +154,6 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         usuario.setForeground(new java.awt.Color(255, 255, 255));
         usuario.setText("USUARIO");
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
-        jButton1.setText("Corte Caja");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        cambio_caja.setBackground(new java.awt.Color(0, 153, 255));
-        cambio_caja.setText("Cambio Caja");
-        cambio_caja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambio_cajaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -179,11 +163,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(cambio_caja)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(usuario)
@@ -205,13 +185,8 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(cambio_caja))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cerrar, minimizar});
@@ -325,14 +300,14 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnCaducidad.setBackground(new java.awt.Color(0, 204, 204));
-        btnCaducidad.setForeground(new java.awt.Color(255, 255, 255));
-        btnCaducidad.setText("VER MERMA");
-        btnCaducidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCaducidad.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
-        btnCaducidad.addActionListener(new java.awt.event.ActionListener() {
+        btnCashCourt.setBackground(new java.awt.Color(0, 204, 204));
+        btnCashCourt.setForeground(new java.awt.Color(255, 255, 255));
+        btnCashCourt.setText("CORTE CAJA");
+        btnCashCourt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCashCourt.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        btnCashCourt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCaducidadActionPerformed(evt);
+                btnCashCourtActionPerformed(evt);
             }
         });
 
@@ -347,7 +322,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnCaducidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCashCourt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnInsumos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
@@ -383,8 +358,8 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(btnCashCourt, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(btnAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -546,9 +521,9 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnComprasActionPerformed
 
-    private void btnCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaducidadActionPerformed
-
-        if (estacerrado(InsumosCaducidad)) {
+    private void btnCashCourtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCashCourtActionPerformed
+        
+        /*if (estacerrado(InsumosCaducidad)) {
 
             InsumosCaducidad = new InsumosCaducidad();
             int width = escritorio.getWidth();
@@ -558,32 +533,33 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             InsumosCaducidad.show();
         } else {
             InsumosCaducidad.show();
+        }*/
+        
+        if (estacerrado(cashCourtView)) {
+            cashCourtView = new CashCourtView(this);
+            int width = escritorio.getWidth();
+            int Height = escritorio.getHeight();
+            cashCourtView.setSize(width, Height);
+            escritorio.add(cashCourtView);
+            cashCourtView.show();
+        } else {
+            cashCourtView.show();
         }
-    }//GEN-LAST:event_btnCaducidadActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void cambio_cajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambio_cajaActionPerformed
-        new ModalCambioCaja(new JFrame(), true).setVisible(true);
-    }//GEN-LAST:event_cambio_cajaActionPerformed
+    }//GEN-LAST:event_btnCashCourtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButtomRectangle btnAbout;
-    private principal.MaterialButtomRectangle btnCaducidad;
+    private principal.MaterialButtomRectangle btnCashCourt;
     private principal.MaterialButtomRectangle btnCompras;
     private principal.MaterialButtomRectangle btnGastos;
     private principal.MaterialButtomRectangle btnInsumos;
     private principal.MaterialButtomRectangle btnProductos;
     private principal.MaterialButtomRectangle btnUsuarios;
     private principal.MaterialButtomRectangle btnVentas;
-    private javax.swing.JButton cambio_caja;
     private principal.MaterialButton cerrar;
     private principal.MaterialButtomRectangle cerrarSesion;
     public static principal.Escritorio escritorio;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
