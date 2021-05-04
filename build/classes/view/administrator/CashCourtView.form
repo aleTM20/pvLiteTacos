@@ -227,6 +227,12 @@
           </Properties>
         </Component>
         <Component class="datechooser.beans.DateChooserCombo" name="dateChooserCombo1">
+          <Events>
+            <EventHandler event="onCommit" listener="datechooser.events.CommitListener" parameters="datechooser.events.CommitEvent" handler="dateChooserCombo1OnCommit"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="CashCourtView_dateChooserCombo1"/>
+          </AuxValues>
         </Component>
         <Component class="datechooser.beans.DateChooserCombo" name="dateChooserCombo2">
         </Component>

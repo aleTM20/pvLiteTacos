@@ -172,6 +172,12 @@ public class CashCourtView extends javax.swing.JInternalFrame implements CashCou
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel18.setText("De");
 
+        dateChooserCombo1.addCommitListener(new datechooser.events.CommitListener() {
+            public void onCommit(datechooser.events.CommitEvent evt) {
+                dateChooserCombo1OnCommit(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -278,7 +284,7 @@ public class CashCourtView extends javax.swing.JInternalFrame implements CashCou
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-
+        
     }//GEN-LAST:event_formKeyReleased
 
     private void tlbTicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tlbTicketsMouseClicked
@@ -288,6 +294,10 @@ public class CashCourtView extends javax.swing.JInternalFrame implements CashCou
     private void btnCashCourtTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCashCourtTodayActionPerformed
 
     }//GEN-LAST:event_btnCashCourtTodayActionPerformed
+
+    private void dateChooserCombo1OnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_dateChooserCombo1OnCommit
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateChooserCombo1OnCommit
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -303,7 +313,7 @@ public class CashCourtView extends javax.swing.JInternalFrame implements CashCou
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tlbTickets;
+    public static javax.swing.JTable tlbTickets;
     // End of variables declaration//GEN-END:variables
 
     @Override
