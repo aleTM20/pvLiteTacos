@@ -20,7 +20,7 @@ import principal.PrincipalAdministrador;
 import tabla.EstiloTablaHeader;
 import tabla.EstiloTablaRenderer;
 import tabla.MyScrollbarUI;
-import view.administrator.detailsCashCourt;
+import view.administrator.DetailsCashCourt;
 
 /**
  *
@@ -32,7 +32,7 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
     private final DefaultTableModel modeloSpent;
     private final PrincipalAdministrador desktop;
     private final CashCourtPresenter1 presenter;
-    public detailsCashCourt info;
+    public DetailsCashCourt info;
 
     /**
      * Creates new form NewJInternalFrame
@@ -54,7 +54,7 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
                 return false;
             }
         };
-        detailsCashCourt info = null;
+        DetailsCashCourt info = null;
         this.info = info;
         tableStyles();
         this.desktop = desktop;
@@ -84,6 +84,10 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
         columnaTo.setPreferredWidth(20);
         tlbMoneyGenerated.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
         tlbMoneyGenerated.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
+        this.jScrollPane2.getViewport().setBackground(new Color(255, 255, 255));
+        this.jScrollPane2.getVerticalScrollBar().setUI(new MyScrollbarUI());
+        this.jScrollPane2.getHorizontalScrollBar().setUI(new MyScrollbarUI());
+        
             
         modeloSpent.addColumn("Producto");
         modeloSpent.addColumn("Cantidad");
@@ -105,7 +109,6 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
         tlbMoneySpend.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
         tlbMoneySpend.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
         
-        this.jScrollPane1.getViewport().setBackground(new Color(255, 255, 255));
         this.jScrollPane1.getViewport().setBackground(new Color(255, 255, 255));
         this.jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
         this.jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
@@ -133,11 +136,11 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
         jLabel20 = new javax.swing.JLabel();
         moneyGenerated = new javax.swing.JLabel();
         spentMoney = new javax.swing.JLabel();
-        btnShowCashCourt = new principal.MaterialButton();
         jPanel2 = new javax.swing.JPanel();
         cerrar = new principal.MaterialButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        btnShowCashCourt = new principal.MaterialButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder1 = new org.jdesktop.swingx.border.DropShadowBorder();
@@ -176,7 +179,7 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
         jScrollPane1.setViewportView(tlbMoneySpend);
 
         jLabel17.setBackground(new java.awt.Color(58, 159, 171));
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(58, 159, 171));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("SALIDAS");
@@ -205,106 +208,78 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
         jScrollPane2.setViewportView(tlbMoneyGenerated);
 
         jLabel18.setBackground(new java.awt.Color(58, 159, 171));
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(58, 159, 171));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Total salidas:");
 
         jLabel19.setBackground(new java.awt.Color(58, 159, 171));
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(58, 159, 171));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("ENTRADAS");
 
         jLabel20.setBackground(new java.awt.Color(58, 159, 171));
-        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(58, 159, 171));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Total entradas:");
 
         moneyGenerated.setBackground(new java.awt.Color(58, 159, 171));
-        moneyGenerated.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        moneyGenerated.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         moneyGenerated.setForeground(new java.awt.Color(58, 159, 171));
-        moneyGenerated.setText("jLabel1");
+        moneyGenerated.setText("$0.00");
 
         spentMoney.setBackground(new java.awt.Color(58, 159, 171));
-        spentMoney.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        spentMoney.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         spentMoney.setForeground(new java.awt.Color(58, 159, 171));
-        spentMoney.setText("jLabel1");
-
-        btnShowCashCourt.setBackground(new java.awt.Color(58, 159, 171));
-        btnShowCashCourt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btnShowCashCourt.setForeground(new java.awt.Color(255, 255, 255));
-        btnShowCashCourt.setText("CORTE CAJA");
-        btnShowCashCourt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnShowCashCourt.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        btnShowCashCourt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowCashCourtActionPerformed(evt);
-            }
-        });
+        spentMoney.setText("$0.00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moneyGenerated, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnShowCashCourt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(moneyGenerated, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(166, 166, 166)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spentMoney, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(195, 195, 195))))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(561, Short.MAX_VALUE)))
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spentMoney, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addComponent(btnShowCashCourt, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(2, 2, 2)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spentMoney)
-                    .addComponent(moneyGenerated))
-                .addGap(30, 30, 30))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(63, 63, 63)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(84, Short.MAX_VALUE)))
+                    .addComponent(moneyGenerated, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spentMoney, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(58, 159, 171));
@@ -327,6 +302,18 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("CORTE CAJA");
 
+        btnShowCashCourt.setBackground(new java.awt.Color(255, 255, 255));
+        btnShowCashCourt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        btnShowCashCourt.setForeground(new java.awt.Color(58, 159, 171));
+        btnShowCashCourt.setText("CORTE CAJA");
+        btnShowCashCourt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnShowCashCourt.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnShowCashCourt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowCashCourtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -337,14 +324,22 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
                 .addGap(10, 10, 10)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnShowCashCourt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel10)
-            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnShowCashCourt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -357,7 +352,7 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -401,8 +396,8 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel moneyGenerated;
     private javax.swing.JLabel spentMoney;
-    private javax.swing.JTable tlbMoneyGenerated;
-    private javax.swing.JTable tlbMoneySpend;
+    public static javax.swing.JTable tlbMoneyGenerated;
+    public static javax.swing.JTable tlbMoneySpend;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -447,7 +442,7 @@ public class CashCourtView1 extends javax.swing.JInternalFrame implements CashCo
     public void onShowResumeMoney(String moneyGenerated, String expenseMoney, String initialBalance, String total) {
         this.moneyGenerated.setText(moneyGenerated);
         this.spentMoney.setText(expenseMoney);
-        this.info = new detailsCashCourt(desktop, true,moneyGenerated,expenseMoney, initialBalance,total);
+        this.info = new DetailsCashCourt(desktop, true,moneyGenerated,expenseMoney, initialBalance,total);
     }
 
     @Override

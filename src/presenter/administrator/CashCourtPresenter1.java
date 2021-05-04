@@ -60,7 +60,10 @@ public class CashCourtPresenter1 implements CashCourtContract1.Presenter {
         float expenseMoney = this.model.onLoadExpenseMoneyToday(dateToday);
         float initialBalance = this.model.onLoadInitialBalanceToday(dateToday);
         float total = (moneyGenerated + initialBalance) - expenseMoney;
-        this.view.onShowResumeMoney(decimalFormat.format(moneyGenerated), decimalFormat.format(expenseMoney), decimalFormat.format(initialBalance), decimalFormat.format(total));
+        this.view.onShowResumeMoney(moneyGenerated > 0 ? "$" + decimalFormat.format(moneyGenerated) : "$0.00", 
+                expenseMoney > 0 ? "$" + decimalFormat.format(expenseMoney) : "$0.00",
+                initialBalance > 0 ? "$" + decimalFormat.format(initialBalance) : "$0.00",
+                total > 0 ? "$" + decimalFormat.format(total) : "$0.00");
     }
 
     @Override
