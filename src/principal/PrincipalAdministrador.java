@@ -107,7 +107,6 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         cerrarSesion = new principal.MaterialButtomRectangle();
         btnInsumos = new principal.MaterialButtomRectangle();
         btnCompras = new principal.MaterialButtomRectangle();
-        btnCashCourt = new principal.MaterialButtomRectangle();
         btnCashCourt1 = new principal.MaterialButtomRectangle();
         escritorio = new principal.Escritorio();
 
@@ -303,17 +302,6 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnCashCourt.setBackground(new java.awt.Color(0, 204, 204));
-        btnCashCourt.setForeground(new java.awt.Color(255, 255, 255));
-        btnCashCourt.setText("TICKETS");
-        btnCashCourt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCashCourt.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
-        btnCashCourt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCashCourtActionPerformed(evt);
-            }
-        });
-
         btnCashCourt1.setBackground(new java.awt.Color(0, 204, 204));
         btnCashCourt1.setForeground(new java.awt.Color(255, 255, 255));
         btnCashCourt1.setText("CORTE CAJA");
@@ -337,7 +325,6 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnCashCourt1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCashCourt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnInsumos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
@@ -374,9 +361,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
                 .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCashCourt1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCashCourt, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(btnAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -538,32 +523,6 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnComprasActionPerformed
 
-    private void btnCashCourtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCashCourtActionPerformed
-        
-        /*if (estacerrado(InsumosCaducidad)) {
-
-            InsumosCaducidad = new InsumosCaducidad();
-            int width = escritorio.getWidth();
-            int Height = escritorio.getHeight();
-            InsumosCaducidad.setSize(width, Height);
-            escritorio.add(InsumosCaducidad);
-            InsumosCaducidad.show();
-        } else {
-            InsumosCaducidad.show();
-        }*/
-        
-        if (estacerrado(cashCourtView)) {
-            cashCourtView = new CashCourtView(this);
-            int width = escritorio.getWidth();
-            int Height = escritorio.getHeight();
-            cashCourtView.setSize(width, Height);
-            escritorio.add(cashCourtView);
-            cashCourtView.show();
-        } else {
-            cashCourtView.show();
-        }
-    }//GEN-LAST:event_btnCashCourtActionPerformed
-
     private void btnCashCourt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCashCourt1ActionPerformed
         if (estacerrado(cashCourtView1)) {
             cashCourtView1 = new CashCourtView1(this);
@@ -580,7 +539,6 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButtomRectangle btnAbout;
-    private principal.MaterialButtomRectangle btnCashCourt;
     private principal.MaterialButtomRectangle btnCashCourt1;
     private principal.MaterialButtomRectangle btnCompras;
     private principal.MaterialButtomRectangle btnGastos;

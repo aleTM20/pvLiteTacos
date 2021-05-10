@@ -5,15 +5,13 @@
  */
 package insumo;
 
-import com.sun.xml.internal.ws.wsdl.parser.InaccessibleWSDLException;
-import producto.*;
+
 import conexion.ConexionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
