@@ -5,7 +5,10 @@
  */
 package ventas;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import principal.PrincipalMesero;
+import usuarios.Encrypting;
 
 /**
  *
@@ -18,8 +21,18 @@ public class Detalles extends javax.swing.JDialog {
      */
     public Detalles(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.setLocationRelativeTo(parent);
+        this.setLocationRelativeTo(null);
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+
+        // Determine the new location of the window
+        int w = this.getSize().width;
+        int h = this.getSize().height;
+        int x = (dim.width-w)/2;
+        int y = (dim.height-h)/2;
+
+        // Move the window
+        this.setLocation(x, y);
      //   this.getRootPane().setOpaque(false);
     }
 
@@ -44,7 +57,7 @@ public class Detalles extends javax.swing.JDialog {
 
                 if (repetido(mesaV)) {
                     if (PrincipalMesero.meseroExiste(idWaiter)) {
-                        if (PrincipalMesero.meseroPassword(idWaiter, txtPassword.getText())) {
+                        if (PrincipalMesero.meseroPassword(idWaiter, Encrypting.getMD5(txtPassword.getText()))) {
                             PrincipalMesero.llenarMesa(mesaV, idWaiter);
                             dispose();
                         } else {

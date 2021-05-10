@@ -28,14 +28,14 @@ import static insumo.Opciones.cc;
  * @author Rojeru Sanz
  */
 public class Compras extends javax.swing.JInternalFrame {
-static Connection cn = cc.conexion();
-public static String usuario = "";
-public static insumo.Sentencias s = null;
+
+    static Connection cn = cc.conexion();
+    public static String usuario = "";
+    public static insumo.Sentencias s = null;
 
     public static void setS(insumo.Sentencias s) {
         Compras.s = s;
     }
-
 
     /**
      * Creates new form NewJInternalFrame
@@ -50,7 +50,6 @@ public static insumo.Sentencias s = null;
         jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
         jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
         limpiaCampos();
-        System.err.println("Usuarioooooooooooooo::::::::::::::"+usuario);
         cn.setAutoCommit(false);
 
     }
@@ -407,10 +406,10 @@ public static insumo.Sentencias s = null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
-        
+
         producto.Opciones.cancelarTransaccion();
         this.dispose();
-        
+
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void btnVender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVender1ActionPerformed
@@ -423,78 +422,70 @@ public static insumo.Sentencias s = null;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        if (this.tablaCompras.getRowCount() < 1) {
+        if (tablaCompras.getRowCount() < 1) {
             ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("IMPOSIBLE REALIZAR");
-            er.msj1.setText("LA VENTA");
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("IMPOSIBLE REALIZAR");
+            ErrorAlert.msj1.setText("LA VENTA");
             er.setVisible(true);
         } else {
             salidas.Sentencias s = new salidas.Sentencias();
             int contador = 0;
-            for (int i = 0; i < this.tablaCompras.getRowCount(); i++) {
-                  String idProducto = this.tablaCompras.getValueAt(i, 0).toString();
-            float existencias = ventas.Opciones.existencias(idProducto,0);
-            float ex=Float.parseFloat((String) tablaCompras.getValueAt(i, 3));
-          float existe=existencias+ex;
-                   
-                    String id=(String) tablaCompras.getValueAt(i, 0);
-          
-                s.setDescripcion(this.tablaCompras.getValueAt(i, 1).toString());
-                s.setGastado(Double.parseDouble(this.tablaCompras.getValueAt(i, 5).toString()));
+            for (int i = 0; i < tablaCompras.getRowCount(); i++) {
+                System.out.println("ESTA INSERTANDO");
+                String id = (String) tablaCompras.getValueAt(i, 0);
+                String idProducto = tablaCompras.getValueAt(i, 0).toString();
+                float existencias = ventas.Opciones.existencias(idProducto, 0);
+                float ex = Float.parseFloat((String) tablaCompras.getValueAt(i, 3));
+                float existe = existencias + ex;
+
+                Opciones.sumarInsumo(Integer.parseInt(id), existe);
+
+                s.setDescripcion(tablaCompras.getValueAt(i, 1).toString());
+                s.setGastado(Double.parseDouble(tablaCompras.getValueAt(i, 5).toString()));
                 s.setFecha(this.txtFecha.getText());
-                
+                s.setCantidad(ex);
+                s.setInsumo(Integer.parseInt(idProducto));
                 try {
-                     
-                int opcion = salidas.Opciones.registrar(s);
-//                    System.out.println(opcion);
-                //ojo aqui es donde se inserta la compra
-                Opciones.insertCompra(Integer.parseInt(numCompra.getText()),opcion);
-                if (opcion != 0) {
-                    contador++;
-                }
-                
-          
-//                           String sql= "UPDATE insumos SET existen fechaCaducidad='"+fecha+"' where idInsumo=1";
-                    
-//                        System.out.println(sql);
-                           ventas.Opciones.actualizarExistencias(existe,id);
-            
-            
-            if (contador == this.tablaCompras.getRowCount()) {
-                limpiaCampos();
-                Opciones.finalizarTransaccion();
-//                int op = insumo.Opciones.actualizarStock(this.s);
-                SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                sa.titulo.setText("¡HECHO!");
-                sa.msj.setText("COMPRA REALIZADA CON");
-                sa.msj1.setText("ÉXITO");
-                sa.setVisible(true);
-            }
+                    int opcion = salidas.Opciones.registrar(s);
+
+                    Opciones.insertCompra(Integer.parseInt(numCompra.getText()), opcion);
+                    if (opcion != 0) {
+                        contador++;
+                    }
+
+                    if (contador == tablaCompras.getRowCount()) {
+                        limpiaCampos();
+                        Opciones.finalizarTransaccion();
+
+                        SuccessAlert sa = new SuccessAlert(new JFrame(), true);
+                        SuccessAlert.titulo.setText("¡HECHO!");
+                        SuccessAlert.msj.setText("COMPRA REALIZADA CON");
+                        SuccessAlert.msj1.setText("ÉXITO");
+                        sa.setVisible(true);
+                    }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-               
-        }
+            }
         }
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) this.tablaCompras.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tablaCompras.getModel();
         if (modelo.getRowCount() > 0) {
-
-            int fila = this.tablaCompras.getSelectedRow();
-            if (this.tablaCompras.getSelectedRowCount() < 1) {
+            int fila = tablaCompras.getSelectedRow();
+            if (tablaCompras.getSelectedRowCount() < 1) {
                 ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                er.titulo.setText("OOPS...");
-                er.msj.setText("SELECCIONA UN");
-                er.msj1.setText("REGISTRO");
+                ErrorAlert.titulo.setText("OOPS...");
+                ErrorAlert.msj.setText("SELECCIONA UN");
+                ErrorAlert.msj1.setText("REGISTRO");
                 er.setVisible(true);
             } else {
-            float existe=Opciones.enExistencia((String)tablaCompras.getValueAt(fila, 0));
-            int mover=Integer.parseInt((String)tablaCompras.getValueAt(fila, 3));
-            float nuevo=existe-mover;
-            Opciones.actualizarStockQuitar(Integer.parseInt((String)tablaCompras.getValueAt(fila, 0)),nuevo);
+                float existe = Opciones.enExistencia((String) tablaCompras.getValueAt(fila, 0));
+                int mover = Integer.parseInt((String) tablaCompras.getValueAt(fila, 3));
+                float nuevo = existe - mover;
+                Opciones.actualizarStockQuitar(Integer.parseInt((String) tablaCompras.getValueAt(fila, 0)), nuevo);
                 modelo.removeRow(fila);
                 Opciones.calcular();
             }
@@ -531,9 +522,7 @@ public static insumo.Sentencias s = null;
     // End of variables declaration//GEN-END:variables
 
     public static String fechaactual() {
-        Date fecha = new Date();
-        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
-        return formatofecha.format(fecha);
+        return new SimpleDateFormat("YYYY-MM-dd").format(new Date());
     }
 
     void limpiaCampos() {
@@ -542,9 +531,9 @@ public static insumo.Sentencias s = null;
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
-      
+
         lblTotal.setText("0.0");
-        txtFecha.setText(fechaactual());
+        this.txtFecha.setText(fechaactual());
         Opciones.numerosCompra();
     }
 }

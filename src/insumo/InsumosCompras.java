@@ -7,6 +7,7 @@ package insumo;
 
 import producto.*;
 import alertas.principal.ErrorAlert;
+import alertas.principal.SuccessAlert;
 import alertas.principal.WarningAlertI;
 import alertas.principal.WarningAlertP;
 import alertas.principal.WarningAlertP1;
@@ -35,6 +36,7 @@ public class InsumosCompras extends javax.swing.JInternalFrame {
      */
     public InsumosCompras() {
         initComponents();
+        initComponents();
         this.jTable1.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
         this.jTable1.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
         this.jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -42,9 +44,9 @@ public class InsumosCompras extends javax.swing.JInternalFrame {
         jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
         jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        
+
         Opciones.listarCompras("");
-       
+
     }
 
     public static void seleccionaFila(String id) {
@@ -67,6 +69,8 @@ public class InsumosCompras extends javax.swing.JInternalFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         cerrar = new principal.MaterialButton();
@@ -87,6 +91,15 @@ public class InsumosCompras extends javax.swing.JInternalFrame {
             }
         });
         jPopupMenu1.add(jMenuItem1);
+        jPopupMenu1.add(jSeparator1);
+
+        jMenuItem2.setText("CANCELAR");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem2);
 
         setBackground(new java.awt.Color(255, 255, 255));
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder1 = new org.jdesktop.swingx.border.DropShadowBorder();
@@ -209,37 +222,37 @@ public class InsumosCompras extends javax.swing.JInternalFrame {
 
         dateChooserCombo1.setCurrentView(new datechooser.view.appearance.AppearancesList("Contrast",
             new datechooser.view.appearance.ViewAppearance("custom",
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                     new java.awt.Color(187, 187, 187),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                     new java.awt.Color(187, 187, 187),
                     new java.awt.Color(0, 0, 255),
                     true,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                     new java.awt.Color(0, 0, 255),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                     new java.awt.Color(128, 128, 128),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                     new java.awt.Color(187, 187, 187),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                     new java.awt.Color(187, 187, 187),
                     new java.awt.Color(255, 0, 0),
                     false,
@@ -316,7 +329,6 @@ public class InsumosCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void comprarInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprarInsumoActionPerformed
-      
         if (PrincipalAdministrador.estacerrado(PrincipalAdministrador.compras)) {
             try {
                 PrincipalAdministrador.compras = new Compras();
@@ -331,46 +343,66 @@ public class InsumosCompras extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_comprarInsumoActionPerformed
 
-     public String dar(String fecha)
-    {
-        String fe ="",nueF="";
-        if(fecha.charAt(2)=='/')
-        {
-         fe  +=fecha.substring(6);
-             String   fe2=fecha.substring(3, 5);
-               String fe3=fecha.substring(0,2);
-               nueF="20"+fe+"-"+fe2+"-"+fe3;
-               return nueF;
-        
-    }  else{
-        fe  +=fecha.substring(5);
-             String   fe2=fecha.substring(2, 4);
-               String fe3=fecha.substring(0,1);
-                nueF="20"+fe+"-"+fe2+"-0"+fe3;
-                return nueF;
-        
-                       }
-       }
+    public String dar(String fecha) {
+        String fe = "", nueF = "";
+        if (fecha.charAt(2) == '/') {
+            fe += fecha.substring(6);
+            String fe2 = fecha.substring(3, 5);
+            String fe3 = fecha.substring(0, 2);
+            nueF = "20" + fe + "-" + fe2 + "-" + fe3;
+            return nueF;
+
+        } else {
+            fe += fecha.substring(5);
+            String fe2 = fecha.substring(2, 4);
+            String fe3 = fecha.substring(0, 1);
+            nueF = "20" + fe + "-" + fe2 + "-0" + fe3;
+            return nueF;
+
+        }
+    }
     private void dateChooserCombo1OnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_dateChooserCombo1OnCommit
-       Opciones.listarCompras(dar(dateChooserCombo1.getText()));
+        Opciones.listarCompras(dar(this.dateChooserCombo1.getText()));
     }//GEN-LAST:event_dateChooserCombo1OnCommit
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-int fila=jTable1.getSelectedRow();
-if(fila>-1){
-    int codigo=(int) jTable1.getValueAt(fila,0);
-    float total=(float) jTable1.getValueAt(fila,1);
-    String fecha=(String) jTable1.getValueAt(fila,2);
-    DetallesCompra detalles=new DetallesCompra(new JFrame(),true,codigo,total,fecha);
-    detalles.setVisible(true);
-}else{
-     ErrorAlert wa = new ErrorAlert(new JFrame(), true);
-        wa.titulo.setText("Opssss....");
-        wa.msj.setText("SELECCIONA UNA FILA");
-        wa.msj1.setText("");
-        wa.setVisible(true);
-}
+        int fila = jTable1.getSelectedRow();
+        if (fila > -1) {
+            int codigo = ((Integer) jTable1.getValueAt(fila, 0)).intValue();
+            float total = ((Float) jTable1.getValueAt(fila, 1)).floatValue();
+            String fecha = (String) jTable1.getValueAt(fila, 2);
+            DetallesCompra detalles = new DetallesCompra(new JFrame(), true, codigo, total, fecha);
+            detalles.setVisible(true);
+        } else {
+            ErrorAlert wa = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("Opssss....");
+            ErrorAlert.msj.setText("SELECCIONA UNA FILA");
+            ErrorAlert.msj1.setText("");
+            wa.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        int fila = jTable1.getSelectedRow();
+        if (fila > -1) {
+            int codigo = ((Integer) jTable1.getValueAt(fila, 0)).intValue();
+            Opciones.inactiveC(codigo);
+            Opciones.obtenerInsumos(codigo);
+
+            SuccessAlert a = new SuccessAlert(new JFrame(), true);
+            SuccessAlert.titulo.setText("CANCELADO");
+            SuccessAlert.msj.setText("Cancelado Correctamente");
+            SuccessAlert.msj1.setText("");
+            a.setVisible(true);
+            Opciones.listarCompras("");
+        } else {
+            ErrorAlert wa = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("Opssss....");
+            ErrorAlert.msj.setText("SELECCIONA UNA FILA");
+            ErrorAlert.msj1.setText("");
+            wa.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -381,11 +413,13 @@ if(fila>-1){
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     public static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

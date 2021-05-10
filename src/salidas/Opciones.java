@@ -1,24 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package salidas;
 
 import conexion.ConexionBD;
+import java.io.PrintStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Rojeru San CL
- */
 public class Opciones {
 
     static ConexionBD cc = new ConexionBD();
@@ -29,20 +25,21 @@ public class Opciones {
         int rsu = 0;
         String sql = Sentencias.REGISTRAR;
         try {
-            ps = cn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            ps = cn.prepareStatement(sql, 1);
             ps.setString(1, uc.getDescripcion());
             ps.setDouble(2, uc.getGastado());
             ps.setString(3, uc.getFechaActual().toString());
+            ps.setFloat(4, uc.getCantidad());
+            ps.setFloat(5, uc.getidInsumo());
             rsu = ps.executeUpdate();
-            
-                ResultSet rs= ps.getGeneratedKeys();
-            
-    if (rs.next()){
-//                System.err.println("-------------------->idGenerada :)");
-    return rs.getInt(1);
-    }
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (SQLException ex) {
-            System.out.println("error en insert gasto"+ex);
+            System.out.println("error en insert gasto: " + ex);
         }
         System.out.println(sql);
         return rsu;
@@ -57,17 +54,17 @@ public class Opciones {
             ps.setDouble(2, uc.getGastado());
             ps.setString(3, uc.getFecha());
             ps.setInt(4, uc.getIdgasto());
+
             rsu = ps.executeUpdate();
-        } catch (SQLException ex) {
+        } catch (SQLException localSQLException) {
         }
         System.out.println(sql);
         return rsu;
     }
-    
+
     public static int eliminar(int id) {
         int rsu = 0;
         String sql = Sentencias.ELIMINAR;
-
         try {
             ps = cn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -78,11 +75,10 @@ public class Opciones {
         System.out.println(sql);
         return rsu;
     }
-    
+
     public static int eliminarTodo() {
         int rsu = 0;
         String sql = Sentencias.ELIMINAR_TODO;
-
         try {
             ps = cn.prepareStatement(sql);
             rsu = ps.executeUpdate();
@@ -95,14 +91,14 @@ public class Opciones {
     }
 
     public static void totalGastos() {
-        int filas = salidas.Salidas.tabla.getRowCount();
-        double totalE = 0.0;
+        int filas = Salidas.tabla.getRowCount();
+        double totalE = 0.0D;
         for (int i = 0; i < filas; i++) {
-            totalE = totalE + Double.parseDouble(salidas.Salidas.tabla.getValueAt(i, 1).toString());
+            totalE += Double.parseDouble(Salidas.tabla.getValueAt(i, 1).toString());
         }
-        salidas.Salidas.lblTotal1.setText(String.valueOf(totalE));
+        Salidas.lblTotal1.setText(String.valueOf(totalE));
     }
-    
+
     public static void listar(String busca) {
         DefaultTableModel modelo = (DefaultTableModel) Salidas.tabla.getModel();
 
@@ -114,13 +110,11 @@ public class Opciones {
             sql = Sentencias.LISTAR;
             Salidas.descripcion.setText("");
         } else {
-            sql = "SELECT * FROM gastos WHERE (idgasto LIKE'" + busca + "%' OR "
-                    + "descripcion LIKE'" + busca + "%' OR "
-                    + "gastado LIKE'" + busca + "%' OR fecha_gasto LIKE'" + busca + "%') "
-                    + "ORDER BY fecha_gasto";
+            sql = "SELECT * FROM gastos WHERE (idgasto LIKE'" + busca + "%' OR descripcion LIKE'" + busca + "%' OR gastado LIKE'" + busca + "%' OR fecha_gasto LIKE'" + busca + "%') ORDER BY fecha_gasto";
+
             Salidas.descripcion.setText("");
         }
-        String datos[] = new String[3];
+        String[] datos = new String[3];
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -134,20 +128,18 @@ public class Opciones {
             Logger.getLogger(Opciones.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static void extraerDescripcion(String id) {
         String c = null;
-        String SQL = "SELECT * FROM gastos WHERE idgasto = "+id;
-
+        String SQL = "SELECT * FROM gastos WHERE idgasto = " + id;
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(SQL);
             while (rs.next()) {
                 c = rs.getString(2);
             }
-            System.out.println(c);           
+            System.out.println(c);
             Salidas.descripcion.setText(c);
-
         } catch (SQLException ex) {
             Logger.getLogger(Opciones.class.getName()).log(Level.SEVERE, null, ex);
         }

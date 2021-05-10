@@ -37,27 +37,15 @@ public class Productos extends javax.swing.JDialog {
         jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
         this.setLocation(330, 120);
         AWTUtilities.setOpaque(this, true);
-        
         this.cantidadAlmacen.setVisible(true);
-
         Opciones.listar2("");
         Opciones.iniciarTransaccion();
-
-//        this.tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent lse) {
-//                if (tabla.getSelectedRow() != -1) {
-//                    int fila = tabla.getSelectedRow();
-//                    cantidadAlmacen.setText(tabla.getValueAt(fila, 5).toString());
-//                }
-//            }
-//        });
     }
 
     private void seleccionaFila(String id) {
-        for (int i = 0; i < this.tabla.getRowCount(); i++) {
-            if (id.equals(this.tabla.getValueAt(i, 0).toString())) {
-                this.tabla.setRowSelectionInterval(i, i);
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+            if (id.equals(tabla.getValueAt(i, 0).toString())) {
+                tabla.setRowSelectionInterval(i, i);
                 break;
             }
         }
@@ -282,11 +270,11 @@ public class Productos extends javax.swing.JDialog {
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
 //        FadeEffect.fadeOut(this, 50, 0.1f);
         producto.Opciones.commit();
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
-        Opciones.listar(this.buscar.getText());
+        Opciones.listar2(buscar.getText());
     }//GEN-LAST:event_buscarKeyReleased
 
     private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped
@@ -300,114 +288,64 @@ public class Productos extends javax.swing.JDialog {
     }//GEN-LAST:event_buscarKeyTyped
 
     private void btnMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosActionPerformed
-        if (this.tabla.getRowCount() < 1) {
+        if (tabla.getRowCount() < 1) {
             ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("LA TABLA ESTA VACÍA");
-            er.msj1.setText("");
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("LA TABLA ESTA VACÍA");
+            ErrorAlert.msj1.setText("");
+            er.setVisible(true);
+        } else if (tabla.getSelectedRowCount() < 1) {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("SELECCIONA UN");
+            ErrorAlert.msj1.setText("REGISTRO");
+            er.setVisible(true);
+        } else if (this.txtCantidad.getText().equals("")) {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            ErrorAlert.titulo.setText("OOPS...");
+            ErrorAlert.msj.setText("DEBES INGRESAR UNA");
+            ErrorAlert.msj1.setText("CANTIDAD");
             er.setVisible(true);
         } else {
-            if (this.tabla.getSelectedRowCount() < 1) {
-                ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                er.titulo.setText("OOPS...");
-                er.msj.setText("SELECCIONA UN");
-                er.msj1.setText("REGISTRO");
-                er.setVisible(true);
-            } else {
-                if (this.txtCantidad.getText().equals("")) {
-                    ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                    er.titulo.setText("OOPS...");
-                    er.msj.setText("DEBES INGRESAR UNA");
-                    er.msj1.setText("CANTIDAD");
-                    er.setVisible(true);
-                } else {
-//                    fechCad a=new fechCad(new JFrame(),true);
-//                       a.setVisible(true);
-                    
-                    int fila = this.tabla.getSelectedRow();
+            int fila = tabla.getSelectedRow();
 
-                        insumo.Sentencias s = new insumo.Sentencias();
+            Sentencias s = new Sentencias();
 
-                        float total = Float.parseFloat(this.tabla.getValueAt(fila, 2).toString()) + Float.parseFloat(this.txtCantidad.getText());
+            float total = Float.parseFloat(tabla.getValueAt(fila, 2).toString()) + Float.parseFloat(this.txtCantidad.getText());
 
-                       
-                            int fila1 = this.tabla.getSelectedRow();
-                            s.setExistencia(String.valueOf(total));
-                            
-                            String id = this.tabla.getValueAt(fila1, 0).toString();
-                            s.setIdInsumo(Integer.parseInt(id));
+            int fila1 = tabla.getSelectedRow();
+            s.setExistencia(String.valueOf(total));
 
-                            
-                                
-                                String fila2 = this.tabla.getValueAt(fila1, 0).toString();
-//                                Opciones.listar("");
-                                seleccionaFila(fila2);
-                                Opciones.enviar(this.tabla.getValueAt(fila, 0).toString(), Integer.parseInt(this.txtCantidad.getText()));
-                                int opcion = Opciones.actualizarStock(s);
-                                Compras.setS(s);
-                                this.txtCantidad.setText("");
-                                this.dispose();
-                            
-                        
-                    
-                }
-            }
+            String id = tabla.getValueAt(fila1, 0).toString();
+            s.setIdInsumo(Integer.parseInt(id));
+
+            String fila2 = tabla.getValueAt(fila1, 0).toString();
+
+            seleccionaFila(fila2);
+            Opciones.enviar(tabla.getValueAt(fila, 0).toString(), Integer.parseInt(this.txtCantidad.getText()));
+            int opcion = Opciones.actualizarStock(s);
+            Compras.setS(s);
+            this.txtCantidad.setText("");
+            dispose();
         }
     }//GEN-LAST:event_btnMenosActionPerformed
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         char num = evt.getKeyChar();
-        if ((num < '0' || num > '9')) {
+        String pre = this.txtCantidad.getText();
+        boolean hay = false;
+        for (int i = 0; i < pre.length(); i++) {
+            if (pre.charAt(i) == '.') {
+                hay = true;
+            }
+        }
+        if (((num < '0') || (num > '9')) && ((num != '.') || (hay))) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-//        if (evt.getClickCount() == 0) {
-//            if (this.txtCantidad.getText().equals("")) {
-//                ErrorAlert er = new ErrorAlert(new JFrame(), true);
-//                er.titulo.setText("OOPS...");
-//                er.msj.setText("DEBES INGRESAR UNA");
-//                er.msj1.setText("CANTIDAD");
-//                er.setVisible(true);
-//            } else {
-//                int fila = this.tabla.getSelectedRow();
-//
-//                if (this.tabla.getValueAt(fila, 5).toString().equals("")) {
-//                    ventas.Opciones.enviar(this.tabla.getValueAt(fila, 0).toString(), Integer.parseInt(this.txtCantidad.getText()),
-//                            this.txtNoMesa.getText());
-//                    this.dispose();
-//                } else {
-//
-//                    producto.Sentencias s = new producto.Sentencias();
-//
-//                    int total = Integer.parseInt(this.cantidadAlmacen.getText()) - Integer.parseInt(this.txtCantidad.getText());
-//
-//                    if (total < 0) {
-//                        ErrorAlert er = new ErrorAlert(new JFrame(), true);
-//                        er.titulo.setText("OOPS...");
-//                        er.msj.setText("VERIFICA EL ALMACEN");
-//                        er.msj1.setText("");
-//                        er.setVisible(true);
-//                    } else {
-//                        int fila1 = this.tabla.getSelectedRow();
-//                        s.setStock(String.valueOf(total));
-//                        s.setId(this.tabla.getValueAt(fila1, 0).toString());
-//
-//                        int opcion = producto.Opciones.actualizarStock(s);
-//                        if (opcion != 0) {
-//                            String fila2 = this.tabla.getValueAt(fila1, 0).toString();
-//                            Opciones.listar("");
-//                            seleccionaFila(fila2);
-//                            ventas.Opciones.enviar(this.tabla.getValueAt(fila, 0).toString(), Integer.parseInt(this.txtCantidad.getText()),
-//                            this.txtNoMesa.getText());
-//                            this.txtCantidad.setText("");
-//                            this.dispose();
-//                        }
-//                    }
-//                }
-//            }
-//        }
+
     }//GEN-LAST:event_tablaMouseClicked
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
