@@ -236,6 +236,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         fecha = new javax.swing.JLabel();
         btnVerTickets = new principal.MaterialButton();
+        updateSales = new principal.MaterialButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder1 = new org.jdesktop.swingx.border.DropShadowBorder();
@@ -253,7 +254,6 @@ public class Ventas extends javax.swing.JInternalFrame {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(58, 159, 171), 3));
 
-        txtImporte.setBackground(new java.awt.Color(255, 255, 255));
         txtImporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(58, 159, 171)));
         txtImporte.setForeground(new java.awt.Color(58, 159, 171));
         txtImporte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -389,14 +389,13 @@ public class Ventas extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(12, Short.MAX_VALUE))
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(btnVender, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jCheckBox1)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -477,7 +476,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -511,12 +510,24 @@ public class Ventas extends javax.swing.JInternalFrame {
         btnVerTickets.setBackground(new java.awt.Color(255, 255, 255));
         btnVerTickets.setForeground(new java.awt.Color(58, 159, 171));
         btnVerTickets.setText("Ver Tickets");
-        btnVerTickets.setToolTipText("<html> <head> <style> #contenedor{background:#3A9FAB;color:white; padding-left:10px;padding-right:10px;margin:0; padding-top:5px;padding-bottom:5px;} </style> </head> <body> <h4 id=\"contenedor\">Quitar</h4> </body> </html>");
+        btnVerTickets.setToolTipText("");
         btnVerTickets.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVerTickets.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         btnVerTickets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerTicketsActionPerformed(evt);
+            }
+        });
+
+        updateSales.setBackground(new java.awt.Color(255, 255, 255));
+        updateSales.setForeground(new java.awt.Color(58, 159, 171));
+        updateSales.setText("ACTUALIZAR");
+        updateSales.setToolTipText("");
+        updateSales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updateSales.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        updateSales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateSalesActionPerformed(evt);
             }
         });
 
@@ -531,9 +542,11 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addGap(49, 49, 49)
                 .addComponent(btnVerTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120)
+                .addGap(4, 4, 4)
+                .addComponent(updateSales, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
                 .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -541,7 +554,9 @@ public class Ventas extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel10)
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btnVerTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnVerTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(updateSales, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -855,6 +870,10 @@ public class Ventas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
+    private void updateSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSalesActionPerformed
+        mesasExistentes();
+    }//GEN-LAST:event_updateSalesActionPerformed
+
     public void moverDeMesa(String codigo) {
         try {
             String sql = "delete from ventasp where idProducto=" + codigo + " and mesa='" + NO_MESA + "';";
@@ -1008,6 +1027,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     public static javax.swing.JTable tblMesas;
     public static app.bolivia.swing.JCTextField txtCambio;
     public static app.bolivia.swing.JCTextField txtImporte;
+    private principal.MaterialButton updateSales;
     // End of variables declaration//GEN-END:variables
 
     public static void remove() {

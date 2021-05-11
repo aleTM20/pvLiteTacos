@@ -50,7 +50,7 @@ public class Opciones {
 
     public static int actualizar(Sentencias uc) {
         int rsu = 0;
-        if (uc.getPassword() != "") {
+        if (!uc.getPassword().equals("")) {
             String sql = Sentencias.ACTUALIZAR;
             try {
                 ps = cn.prepareStatement(sql);
@@ -67,13 +67,14 @@ public class Opciones {
             try {
                 ps = cn.prepareStatement(sql);
                 ps.setString(1, uc.getUsuario());
-                ps.setString(3, uc.getTipo());
-                ps.setInt(4, uc.getId());
+                ps.setString(2, uc.getTipo());
+                ps.setInt(3, uc.getId());
                 rsu = ps.executeUpdate();
             } catch (SQLException ex) {
             }
             System.out.println(sql);
         }
+        System.out.println(rsu);
         return rsu;
     }
 

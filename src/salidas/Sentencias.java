@@ -6,7 +6,7 @@ public class Sentencias {
 
     public static String REGISTRAR = "INSERT INTO gastos(descripcion, gastado, fecha_gasto,cantidad,idInsumo) VALUES(?,?,?,?,?)";
 
-    public static String ACTUALIZAR = "UPDATE gastos SET descripcion=?, gastado=?, fecha_gasto=? ,cantidad=0WHERE idgasto=?";
+    public static String ACTUALIZAR = "UPDATE gastos SET descripcion=?, gastado=?, fecha_gasto=? ,cantidad=0 WHERE idgasto=?";
 
     public static String ELIMINAR = "DELETE FROM gastos WHERE idgasto = ?";
 

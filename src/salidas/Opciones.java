@@ -47,6 +47,7 @@ public class Opciones {
 
     public static int actualizar(Sentencias uc) {
         int rsu = 0;
+        System.out.println(uc.getIdgasto());
         String sql = Sentencias.ACTUALIZAR;
         try {
             ps = cn.prepareStatement(sql);
@@ -59,6 +60,7 @@ public class Opciones {
         } catch (SQLException localSQLException) {
         }
         System.out.println(sql);
+        System.out.println(rsu);
         return rsu;
     }
 
