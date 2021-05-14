@@ -186,6 +186,11 @@ public class ModalInsumoM extends javax.swing.JDialog {
         stock.setForeground(new java.awt.Color(58, 159, 171));
         stock.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         stock.setPlaceholder("CANTIDAD");
+        stock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stockActionPerformed(evt);
+            }
+        });
         stock.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 stockKeyTyped(evt);
@@ -309,9 +314,9 @@ public class ModalInsumoM extends javax.swing.JDialog {
                 s.setPrecio_compra(Float.parseFloat(this.precio.getText()));
                 s.setIdInsumo(Integer.parseInt(this.id.getText()));
 
-                int validaStock = 0;
+                float validaStock = 0;
                 if (!this.stock.getText().equals("")) {
-                    validaStock = Integer.parseInt(this.stock.getText());
+                    validaStock = Float.parseFloat(this.stock.getText());
                     s.setExistencia(String.valueOf(validaStock));
                     
                 } else {
@@ -489,6 +494,10 @@ public class ModalInsumoM extends javax.swing.JDialog {
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoActionPerformed
+
+    private void stockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stockActionPerformed
 
     /**
      * @param args the command line arguments

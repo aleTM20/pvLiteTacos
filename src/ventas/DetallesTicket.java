@@ -6,9 +6,13 @@
 package ventas;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import tabla.EstiloTablaHeader;
@@ -47,14 +51,31 @@ public final class DetallesTicket extends java.awt.Dialog {
         this.modelo.addColumn("SUBTOTAL");
 
         this.tabla.setModel(this.modelo);
-
+        
+        TableColumn columnProduct = tabla.getColumn("PRODUCTO");
+        columnProduct.setResizable(false);
+        columnProduct.setPreferredWidth(100);
+        
+        TableColumn columnPrice = tabla.getColumn("PRECIO");
+        columnPrice.setResizable(false);
+        columnPrice.setPreferredWidth(10);
+        
+        TableColumn columnQuantity = tabla.getColumn("CANTIDAD");
+        columnQuantity.setResizable(false);
+        columnQuantity.setPreferredWidth(15);
+        
+        TableColumn columnSub = tabla.getColumn("SUBTOTAL");
+        columnSub.setResizable(false);
+        columnSub.setPreferredWidth(15);
+        
         this.tabla.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
         this.tabla.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
-        this.tabla.setSelectionMode(0);
-        this.jScrollPane1.getViewport().setBackground(new Color(255, 255, 255));
-        this.jScrollPane1.getViewport().setBackground(new Color(255, 255, 255));
-        this.jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
-        this.jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
+        this.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.getViewport().setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.getViewport().setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
+        jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
+        tabla.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "selectColumnCell");
     }
 
     public void llenarTabla(int ticket) {
@@ -96,7 +117,9 @@ public final class DetallesTicket extends java.awt.Dialog {
         fecha = new javax.swing.JLabel();
         total = new javax.swing.JLabel();
         mesa = new javax.swing.JLabel();
-        materialButton1 = new principal.MaterialButton();
+        jPanel2 = new javax.swing.JPanel();
+        cerrar = new principal.MaterialButton();
+        txtOpcion = new javax.swing.JLabel();
 
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -105,15 +128,15 @@ public final class DetallesTicket extends java.awt.Dialog {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(58, 159, 171));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(58, 159, 171), 5));
+        jPanel1.setPreferredSize(new java.awt.Dimension(540, 363));
 
         mesas.setBackground(new java.awt.Color(58, 159, 171));
-        mesas.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        mesas.setForeground(new java.awt.Color(255, 255, 255));
+        mesas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mesas.setForeground(new java.awt.Color(58, 159, 171));
         mesas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mesas.setText("TOTAL:");
-        jPanel1.add(mesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 200, 40));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,51 +151,103 @@ public final class DetallesTicket extends java.awt.Dialog {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 550, 240));
-
         mesa1.setBackground(new java.awt.Color(58, 159, 171));
-        mesa1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        mesa1.setForeground(new java.awt.Color(255, 255, 255));
+        mesa1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mesa1.setForeground(new java.awt.Color(58, 159, 171));
         mesa1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mesa1.setText("FECHA:");
-        jPanel1.add(mesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 200, 40));
 
         mesa2.setBackground(new java.awt.Color(58, 159, 171));
-        mesa2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        mesa2.setForeground(new java.awt.Color(255, 255, 255));
+        mesa2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mesa2.setForeground(new java.awt.Color(58, 159, 171));
         mesa2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mesa2.setText("MESA:");
-        jPanel1.add(mesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 40));
 
         fecha.setBackground(new java.awt.Color(58, 159, 171));
-        fecha.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        fecha.setForeground(new java.awt.Color(255, 255, 255));
+        fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        fecha.setForeground(new java.awt.Color(58, 159, 171));
         fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fecha.setText("--");
-        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 200, 40));
+        fecha.setText("$0.00");
 
         total.setBackground(new java.awt.Color(58, 159, 171));
-        total.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        total.setForeground(new java.awt.Color(255, 255, 255));
+        total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        total.setForeground(new java.awt.Color(58, 159, 171));
         total.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        total.setText("--");
-        jPanel1.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 200, 40));
+        total.setText("$0.00");
 
         mesa.setBackground(new java.awt.Color(58, 159, 171));
-        mesa.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        mesa.setForeground(new java.awt.Color(255, 255, 255));
+        mesa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mesa.setForeground(new java.awt.Color(58, 159, 171));
         mesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mesa.setText("--");
-        jPanel1.add(mesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 200, 40));
+        mesa.setText("$0.00");
 
-        materialButton1.setForeground(new java.awt.Color(58, 159, 171));
-        materialButton1.setText("ACEPTAR");
-        materialButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBackground(new java.awt.Color(58, 159, 171));
+        jPanel2.setPreferredSize(new java.awt.Dimension(535, 50));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cerrar.setBackground(new java.awt.Color(255, 255, 255));
+        cerrar.setForeground(new java.awt.Color(58, 159, 171));
+        cerrar.setText("X");
+        cerrar.setToolTipText("<html> <head> <style> #contenedor{background:white;color:black; padding-left:10px;padding-right:10px;margin:0; padding-top:5px;padding-bottom:5px;} </style> </head> <body> <h4 id=\"contenedor\">Cerrar</h4> </body> </html>");
+        cerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cerrar.setFont(new java.awt.Font("Roboto Medium", 1, 20)); // NOI18N
+        cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                materialButton1ActionPerformed(evt);
+                cerrarActionPerformed(evt);
             }
         });
-        jPanel1.add(materialButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 230, 40));
+        jPanel2.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 60, 50));
+
+        txtOpcion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtOpcion.setForeground(new java.awt.Color(255, 255, 255));
+        txtOpcion.setText("DETALLES DEL TICKET");
+        jPanel2.add(txtOpcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 50));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(mesa2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(mesas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(mesa1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(mesa, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)
+                        .addGap(9, 9, 9))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(420, 420, 420))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mesa2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mesas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mesa1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mesa, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -187,9 +262,9 @@ public final class DetallesTicket extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void materialButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materialButton1ActionPerformed
+    private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
         dispose();
-    }//GEN-LAST:event_materialButton1ActionPerformed
+    }//GEN-LAST:event_cerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,15 +285,17 @@ public final class DetallesTicket extends java.awt.Dialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private principal.MaterialButton cerrar;
     private javax.swing.JLabel fecha;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private principal.MaterialButton materialButton1;
     private javax.swing.JLabel mesa;
     private javax.swing.JLabel mesa1;
     private javax.swing.JLabel mesa2;
     private javax.swing.JLabel mesas;
     private javax.swing.JTable tabla;
     private javax.swing.JLabel total;
+    private javax.swing.JLabel txtOpcion;
     // End of variables declaration//GEN-END:variables
 }

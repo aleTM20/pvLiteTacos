@@ -92,7 +92,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         tblDescripcion.setModel(modelo);
         TableColumn columna = tblDescripcion.getColumn("Codigo");
         columna.setResizable(false);
-        columna.setPreferredWidth(30);
+        columna.setPreferredWidth(10);
         TableColumn columnaP = tblDescripcion.getColumn("Cantidad");
         columnaP.setResizable(false);
         columnaP.setPreferredWidth(10);

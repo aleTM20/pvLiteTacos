@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.waiter.administrator;
+package view.administrator;
 
 import producto.*;
 import alertas.principal.AWTUtilities;
@@ -11,7 +11,9 @@ import alertas.principal.ErrorAlert;
 import contract.administrator.BoxContract;
 import contract.login.LoginContract;
 import exception.ExceptionPvLite;
+import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
@@ -45,8 +47,18 @@ public class InitialBox extends javax.swing.JDialog implements BoxContract.View 
     public InitialBox(Frame parent, boolean modal, LoginContract.View view, User user) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        // Determine the new location of the window
+        int w = this.getSize().width;
+        int h = this.getSize().height;
+        int x = (dim.width-w)/2;
+        int y = (dim.height-h)/2;
+
+        // Move the window
+        this.setLocation(x, y);
+        
         AWTUtilities.setOpaque(this, false);
-        Ubicar(0);
         this.view = view;
         this.user = user;
         this.presenter = new BoxPresenter(this);
@@ -68,7 +80,7 @@ public class InitialBox extends javax.swing.JDialog implements BoxContract.View 
         txtInitialBalance = new app.bolivia.swing.JCTextField();
         btnContinue = new principal.MaterialButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtAreaComment = new javax.swing.JTextArea();
         txtComment = new javax.swing.JLabel();
         titulo2 = new javax.swing.JLabel();
 
@@ -145,15 +157,15 @@ public class InitialBox extends javax.swing.JDialog implements BoxContract.View 
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(58, 159, 171)));
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(58, 159, 171));
-        jTextArea1.setRows(5);
-        jTextArea1.setToolTipText("");
-        jTextArea1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(58, 159, 171), 2, true));
-        jTextArea1.setSelectionColor(new java.awt.Color(58, 159, 171));
-        jScrollPane1.setViewportView(jTextArea1);
+        txtAreaComment.setBackground(new java.awt.Color(255, 255, 255));
+        txtAreaComment.setColumns(20);
+        txtAreaComment.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtAreaComment.setForeground(new java.awt.Color(58, 159, 171));
+        txtAreaComment.setRows(5);
+        txtAreaComment.setToolTipText("");
+        txtAreaComment.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(58, 159, 171), 2, true));
+        txtAreaComment.setSelectionColor(new java.awt.Color(58, 159, 171));
+        jScrollPane1.setViewportView(txtAreaComment);
 
         panel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 320, -1));
 
@@ -201,24 +213,11 @@ public class InitialBox extends javax.swing.JDialog implements BoxContract.View 
         if (!initialBalanceText.equals("")) {
             initialBalance = Float.parseFloat(initialBalanceText);
         }
-        presenter.createInitialBalance(this.user.getIdUser(), initialBalance, txtComment.getText());
+        presenter.createInitialBalance(this.user.getIdUser(), initialBalance, txtAreaComment.getText());
     }//GEN-LAST:event_btnContinueActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        task = new TimerTask() {
-            @Override
-            public void run() {
-                if (i == 352) {
-                    timer.cancel();
-                } else {
-                    Ubicar(i);
-                    i += 32;
-                    Trasparencia((float) i / 352);
-                }
-            }
-        };
-        timer = new Timer();
-        timer.schedule(task, 0, 2);
+
     }//GEN-LAST:event_formWindowOpened
 
     private void txtInitialBalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInitialBalanceActionPerformed
@@ -232,7 +231,7 @@ public class InitialBox extends javax.swing.JDialog implements BoxContract.View 
             if (!initialBalanceText.equals("")) {
                 initialBalance = Float.parseFloat(initialBalanceText);
             }
-            presenter.createInitialBalance(this.user.getIdUser(), initialBalance, txtComment.getText());
+            presenter.createInitialBalance(this.user.getIdUser(), initialBalance, txtAreaComment.getText());
         }
     }//GEN-LAST:event_txtInitialBalanceKeyReleased
 
@@ -241,10 +240,10 @@ public class InitialBox extends javax.swing.JDialog implements BoxContract.View 
     private principal.MaterialButton cerrar;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private org.edisoncor.gui.panel.Panel panel1;
     public static javax.swing.JLabel titulo;
     public static javax.swing.JLabel titulo2;
+    private javax.swing.JTextArea txtAreaComment;
     public static javax.swing.JLabel txtComment;
     public static app.bolivia.swing.JCTextField txtInitialBalance;
     // End of variables declaration//GEN-END:variables

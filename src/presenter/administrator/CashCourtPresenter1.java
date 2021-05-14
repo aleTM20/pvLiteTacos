@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import model.Court;
 import model.Spents;
 import model.Tickets;
@@ -58,12 +59,15 @@ public class CashCourtPresenter1 implements CashCourtContract1.Presenter {
     public void onLoadMoneyGenerated(String dateToday) {
         float moneyGenerated = this.model.onLoadMoneyGeneratedToday(dateToday);
         float expenseMoney = this.model.onLoadExpenseMoneyToday(dateToday);
-        float initialBalance = this.model.onLoadInitialBalanceToday(dateToday);
+        Map<String, String> initialMap = this.model.onLoadInitialBalanceToday(dateToday);
+        float initialBalance = Float.parseFloat(initialMap.get("initialBalance"));
+        String comment = initialMap.get("comment");
         float total = (moneyGenerated + initialBalance) - expenseMoney;
         this.view.onShowResumeMoney(moneyGenerated > 0 ? "$" + decimalFormat.format(moneyGenerated) : "$0.00", 
                 expenseMoney > 0 ? "$" + decimalFormat.format(expenseMoney) : "$0.00",
                 initialBalance > 0 ? "$" + decimalFormat.format(initialBalance) : "$0.00",
-                total > 0 ? "$" + decimalFormat.format(total) : "$0.00");
+                total > 0 ? "$" + decimalFormat.format(total) : "$0.00",
+                !"".equals(comment) ? comment : "Sin commentarios");
     }
 
     @Override

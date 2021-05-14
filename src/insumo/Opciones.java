@@ -1,6 +1,7 @@
 package insumo;
 
 import conexion.ConexionBD;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Opciones {
@@ -123,7 +126,7 @@ public class Opciones {
         String unidad_medida = null;
         String precio = null;
         String exis = null;
-        float total = 0;
+        int total = 0;
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -139,7 +142,7 @@ public class Opciones {
 
         int c = 0;
         int j = 0;
-        total = Float.parseFloat(precio) * Integer.parseInt(cant);
+        total = Integer.parseInt(precio) * Integer.parseInt(cant);
         for (int i = 0; i < Compras.tablaCompras.getRowCount(); i++) {
             Object com = Compras.tablaCompras.getValueAt(i, 0);
             Object cant1 = Compras.tablaCompras.getValueAt(i, 3);

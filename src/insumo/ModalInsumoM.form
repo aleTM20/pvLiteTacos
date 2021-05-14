@@ -267,6 +267,7 @@
                 <Property name="placeholder" type="java.lang.String" value="CANTIDAD"/>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stockActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="stockKeyTyped"/>
               </Events>
               <AuxValues>

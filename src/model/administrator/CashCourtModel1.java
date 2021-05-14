@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Court;
 import model.Spents;
 import model.connection.PVLConnection;
@@ -39,7 +41,7 @@ public class CashCourtModel1 extends PVLConnection implements CashCourtContract1
             if (rs.next()) {
                 total = rs.getFloat("total");
             }
-            
+
         } catch (SQLException ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar los tickets", ex.toString()));
         }
@@ -77,7 +79,7 @@ public class CashCourtModel1 extends PVLConnection implements CashCourtContract1
             if (rs.next()) {
                 spent = rs.getFloat("spent");
             }
-            
+
         } catch (SQLException ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar los gastos", ex.toString()));
         }
@@ -85,19 +87,23 @@ public class CashCourtModel1 extends PVLConnection implements CashCourtContract1
     }
 
     @Override
-    public float onLoadInitialBalanceToday(String dateToday) {
-        float initialBalance = 0;
+    public Map<String, String> onLoadInitialBalanceToday(String dateToday) {
+        Map<String, String> initialMap = new HashMap<String, String>();
         try {
-            String sql = "SELECT saldoInicial as initialBalance FROM cortecaja WHERE fecha = '" + dateToday + "'";
+            String sql = "SELECT saldoInicial as initialBalance, comentarios FROM cortecaja WHERE fecha = '" + dateToday + "'";
             Statement st = getConnection().createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
-                initialBalance = rs.getFloat("initialBalance");
+                initialMap.put("initialBalance", rs.getFloat("initialBalance") + "");
+                initialMap.put("comment", rs.getString("comentarios"));
+            } else {
+                initialMap.put("initialBalance", "0.00");
+                initialMap.put("comment", "");
             }
         } catch (SQLException ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar saldo inicial", ex.toString()));
         }
-        return initialBalance;
+        return initialMap;
     }
 
     @Override

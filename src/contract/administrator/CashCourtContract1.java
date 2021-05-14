@@ -7,6 +7,7 @@ package contract.administrator;
 
 import exception.ExceptionPvLite;
 import java.util.List;
+import java.util.Map;
 import model.Court;
 import model.Spents;
 
@@ -20,7 +21,7 @@ public interface CashCourtContract1 {
 
         public void onShowTicketsToday(List<Court> court);
 
-        public void onShowResumeMoney(String moneyGenerated, String expenseMoney, String initialBalance, String total);
+        public void onShowResumeMoney(String moneyGenerated, String expenseMoney, String initialBalance, String total, String comment);
 
         public void cleanTable();
         
@@ -57,7 +58,7 @@ public interface CashCourtContract1 {
 
         public float onLoadExpenseMoneyToday(String dateToday);
 
-        public float onLoadInitialBalanceToday(String dateToday);
+        public Map<String, String> onLoadInitialBalanceToday(String dateToday);
 
         public void onLoadSpentToday(String dateToday);
 

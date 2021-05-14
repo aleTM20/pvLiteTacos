@@ -5,15 +5,12 @@
  */
 package view.administrator;
 
-import exception.ExceptionPvLite;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.List;
-import model.Court;
 
 /**
  *
- * @author Rojeru San
+ * @author pv_lite_team
  */
 public class DetailsCashCourt extends javax.swing.JDialog {
 
@@ -22,7 +19,7 @@ public class DetailsCashCourt extends javax.swing.JDialog {
     /**
      * Creates new form Principal
      */
-    public DetailsCashCourt(java.awt.Frame parent, boolean modal, String moneyGenerated, String expenseMoney, String initialBalance, String total) {
+    public DetailsCashCourt(java.awt.Frame parent, boolean modal, String moneyGenerated, String expenseMoney, String initialBalance, String total, String comment) {
         super(parent, modal);
         this.setLocationRelativeTo(null);
         initComponents();
@@ -41,6 +38,7 @@ public class DetailsCashCourt extends javax.swing.JDialog {
         this.spentMoneyM.setText(expenseMoney);
         this.initialBalanceM.setText(initialBalance);
         this.totalM.setText(total);
+        this.lblComment.setText("<html>" + comment + "</html>");
     }
 
   
@@ -66,6 +64,7 @@ public class DetailsCashCourt extends javax.swing.JDialog {
         salesMoneyM = new javax.swing.JLabel();
         spentMoneyM = new javax.swing.JLabel();
         totalM = new javax.swing.JLabel();
+        lblComment = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(58, 159, 171));
@@ -160,6 +159,11 @@ public class DetailsCashCourt extends javax.swing.JDialog {
         totalM.setForeground(new java.awt.Color(58, 159, 171));
         totalM.setText("$5000.00");
 
+        lblComment.setBackground(new java.awt.Color(58, 159, 171));
+        lblComment.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        lblComment.setForeground(new java.awt.Color(58, 159, 171));
+        lblComment.setText("<html>SALDO INICIAL:< SALDO INICIAL: SALDO INICIAL: SALDO INICIAL: SALDO INICIAL: SALDO INICIAL: SALDO INICIAL: SALDO INICIAL:</html>");
+
         javax.swing.GroupLayout spentMoneyLayout = new javax.swing.GroupLayout(spentMoney);
         spentMoney.setLayout(spentMoneyLayout);
         spentMoneyLayout.setHorizontalGroup(
@@ -168,6 +172,7 @@ public class DetailsCashCourt extends javax.swing.JDialog {
             .addGroup(spentMoneyLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(spentMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblComment, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(spentMoneyLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -190,10 +195,12 @@ public class DetailsCashCourt extends javax.swing.JDialog {
             spentMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(spentMoneyLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblComment, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(spentMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(initialBalanceM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(initialBalanceM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(spentMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,8 +212,8 @@ public class DetailsCashCourt extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(spentMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(totalM, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(totalM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -217,7 +224,9 @@ public class DetailsCashCourt extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spentMoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(spentMoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -258,6 +267,7 @@ public class DetailsCashCourt extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblComment;
     private javax.swing.JLabel salesMoneyM;
     private javax.swing.JPanel spentMoney;
     private javax.swing.JLabel spentMoneyM;

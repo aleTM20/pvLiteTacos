@@ -22,7 +22,7 @@ import presenter.login.LoginPresenter;
 import principal.PrincipalAdministrador;
 import principal.PrincipalMesero;
 import usuarios.Opciones;
-import view.waiter.administrator.InitialBox;
+import view.administrator.InitialBox;
 
 /**
  *
