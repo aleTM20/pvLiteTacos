@@ -76,6 +76,7 @@ public final class DetallesTicket extends java.awt.Dialog {
         jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
         jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
         tabla.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "selectColumnCell");
+        
     }
 
     public void llenarTabla(int ticket) {
@@ -110,8 +111,6 @@ public final class DetallesTicket extends java.awt.Dialog {
 
         jPanel1 = new javax.swing.JPanel();
         mesas = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
         mesa1 = new javax.swing.JLabel();
         mesa2 = new javax.swing.JLabel();
         fecha = new javax.swing.JLabel();
@@ -120,6 +119,8 @@ public final class DetallesTicket extends java.awt.Dialog {
         jPanel2 = new javax.swing.JPanel();
         cerrar = new principal.MaterialButton();
         txtOpcion = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
 
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -131,55 +132,49 @@ public final class DetallesTicket extends java.awt.Dialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(58, 159, 171), 5));
         jPanel1.setPreferredSize(new java.awt.Dimension(540, 363));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mesas.setBackground(new java.awt.Color(58, 159, 171));
         mesas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         mesas.setForeground(new java.awt.Color(58, 159, 171));
         mesas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mesas.setText("TOTAL:");
-
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(tabla);
+        jPanel1.add(mesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 160, 20));
 
         mesa1.setBackground(new java.awt.Color(58, 159, 171));
         mesa1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         mesa1.setForeground(new java.awt.Color(58, 159, 171));
         mesa1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mesa1.setText("FECHA:");
+        jPanel1.add(mesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 180, 20));
 
         mesa2.setBackground(new java.awt.Color(58, 159, 171));
         mesa2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         mesa2.setForeground(new java.awt.Color(58, 159, 171));
         mesa2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mesa2.setText("MESA:");
+        jPanel1.add(mesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 160, 20));
 
         fecha.setBackground(new java.awt.Color(58, 159, 171));
         fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         fecha.setForeground(new java.awt.Color(58, 159, 171));
         fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fecha.setText("$0.00");
+        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 180, 20));
 
         total.setBackground(new java.awt.Color(58, 159, 171));
         total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         total.setForeground(new java.awt.Color(58, 159, 171));
         total.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         total.setText("$0.00");
+        jPanel1.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 160, 20));
 
         mesa.setBackground(new java.awt.Color(58, 159, 171));
         mesa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         mesa.setForeground(new java.awt.Color(58, 159, 171));
         mesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mesa.setText("$0.00");
+        jPanel1.add(mesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 160, 20));
 
         jPanel2.setBackground(new java.awt.Color(58, 159, 171));
         jPanel2.setPreferredSize(new java.awt.Dimension(535, 50));
@@ -203,51 +198,29 @@ public final class DetallesTicket extends java.awt.Dialog {
         txtOpcion.setText("DETALLES DEL TICKET");
         jPanel2.add(txtOpcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(mesa2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(mesas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(mesa1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(mesa, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)
-                        .addGap(9, 9, 9))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(420, 420, 420))
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, -1, 49));
+
+        tabla.setBackground(new java.awt.Color(0, 0, 0));
+        tabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tabla.setForeground(new java.awt.Color(255, 255, 255));
+        tabla.setModel(new javax.swing.table.DefaultTableModel(new Object[0][], new String[] {"No.TICKET", "FECHA", "$ TOTAL", "VENDEDOR", "MESA", "STATUS" })
+            {
+                boolean[] canEdit = { false, false, false, false, false, false };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex)
+                {
+                    return this.canEdit[columnIndex];
+                }
+            }
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mesa2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mesas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mesa1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mesa, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tabla.setDoubleBuffered(true);
+        tabla.setRowHeight(20);
+        tabla.setSelectionBackground(new java.awt.Color(0, 153, 255));
+        tabla.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tabla);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 113, 520, 240));
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -294,8 +267,8 @@ public final class DetallesTicket extends java.awt.Dialog {
     private javax.swing.JLabel mesa1;
     private javax.swing.JLabel mesa2;
     private javax.swing.JLabel mesas;
-    private javax.swing.JTable tabla;
+    public static javax.swing.JTable tabla;
     private javax.swing.JLabel total;
-    private javax.swing.JLabel txtOpcion;
+    public static javax.swing.JLabel txtOpcion;
     // End of variables declaration//GEN-END:variables
 }
