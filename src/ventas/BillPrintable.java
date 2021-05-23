@@ -88,7 +88,7 @@ public class BillPrintable implements Printable {
                 g2d.setFont(new Font("Arial", 0, 10));
 
                 String dirName = "C:\\TaquitosToluca";
-                BufferedImage img = ImageIO.read(new File(dirName, "la161.jpg"));
+                BufferedImage img = ImageIO.read(new File(dirName, "tacosToluca.jpg"));
                 g2d.drawImage(img, null, 30, 0);
                 y = 130;
                 g2d.drawString("       TAQUITOS TOLUCA S.A de C.V   ", 15, y);

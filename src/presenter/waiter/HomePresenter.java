@@ -5,20 +5,9 @@
  */
 package presenter.waiter;
 
-import java.sql.PreparedStatement;
 import contract.waiter.HomeContract;
 import exception.ExceptionPvLite;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Product;
-import model.connection.DBConnection;
 import model.queries.product.Query;
-import sun.rmi.server.Dispatcher;
 
 /**
  *
@@ -26,11 +15,10 @@ import sun.rmi.server.Dispatcher;
  */
 public class HomePresenter implements HomeContract.Presenter {
 
-    private HomeContract.View view;
+    private final HomeContract.View view;
 
     public HomePresenter(HomeContract.View view) {
         this.view = view;
-
     }
 
     @Override

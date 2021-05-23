@@ -340,7 +340,7 @@ public class InsumosCaducidad extends javax.swing.JInternalFrame {
                 return nueF;
         
                        }
-       }
+       }                        
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed

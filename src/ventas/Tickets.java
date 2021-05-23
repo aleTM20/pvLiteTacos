@@ -601,7 +601,7 @@ public class Tickets extends javax.swing.JDialog {
         int fila = tabla.getSelectedRow();
         if (fila > -1) {
             int codigo = ((Integer) tabla.getValueAt(fila, 0));
-            DetallesTicket detalles = new DetallesTicket(new JFrame(), true, codigo);
+            TicketDetail detalles = new TicketDetail(new JFrame(), true, codigo);
             detalles.validate();
             detalles.setVisible(true);
         } else {

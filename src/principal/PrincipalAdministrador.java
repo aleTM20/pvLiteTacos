@@ -108,6 +108,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         btnInsumos = new principal.MaterialButtomRectangle();
         btnCompras = new principal.MaterialButtomRectangle();
         btnCashCourt1 = new principal.MaterialButtomRectangle();
+        btnMerma = new principal.MaterialButtomRectangle();
         escritorio = new principal.Escritorio();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -165,7 +166,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(usuario)
@@ -302,7 +303,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnCashCourt1.setBackground(new java.awt.Color(0, 204, 204));
+        btnCashCourt1.setBackground(new java.awt.Color(0, 180, 180));
         btnCashCourt1.setForeground(new java.awt.Color(255, 255, 255));
         btnCashCourt1.setText("CORTE CAJA");
         btnCashCourt1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -310,6 +311,17 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         btnCashCourt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCashCourt1ActionPerformed(evt);
+            }
+        });
+
+        btnMerma.setBackground(new java.awt.Color(0, 102, 102));
+        btnMerma.setForeground(new java.awt.Color(255, 255, 255));
+        btnMerma.setText("VER MERMA");
+        btnMerma.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMerma.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        btnMerma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMermaActionPerformed(evt);
             }
         });
 
@@ -324,6 +336,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnMerma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCashCourt1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnInsumos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -361,7 +374,9 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
                 .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCashCourt1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMerma, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -536,6 +551,19 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCashCourt1ActionPerformed
 
+    private void btnMermaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMermaActionPerformed
+        if (estacerrado(this.InsumosCaducidad)) {
+            this.InsumosCaducidad = new InsumosCaducidad();
+            int width = escritorio.getWidth();
+            int Height = escritorio.getHeight();
+            this.InsumosCaducidad.setSize(width, Height);
+            escritorio.add(this.InsumosCaducidad);
+            this.InsumosCaducidad.show();
+        } else {
+            this.InsumosCaducidad.show();
+        }
+    }//GEN-LAST:event_btnMermaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButtomRectangle btnAbout;
@@ -543,6 +571,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
     private principal.MaterialButtomRectangle btnCompras;
     private principal.MaterialButtomRectangle btnGastos;
     private principal.MaterialButtomRectangle btnInsumos;
+    private principal.MaterialButtomRectangle btnMerma;
     private principal.MaterialButtomRectangle btnProductos;
     private principal.MaterialButtomRectangle btnUsuarios;
     private principal.MaterialButtomRectangle btnVentas;
