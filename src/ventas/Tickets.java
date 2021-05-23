@@ -600,10 +600,10 @@ public class Tickets extends javax.swing.JDialog {
     private void verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verActionPerformed
         int fila = tabla.getSelectedRow();
         if (fila > -1) {
-            int codigo = ((Integer) tabla.getValueAt(fila, 0)).intValue();
+            int codigo = ((Integer) tabla.getValueAt(fila, 0));
             DetallesTicket detalles = new DetallesTicket(new JFrame(), true, codigo);
-            detalles.setVisible(true);
             detalles.validate();
+            detalles.setVisible(true);
         } else {
             ErrorAlert wa = new ErrorAlert(new JFrame(), true);
             ErrorAlert.titulo.setText("Opssss....");

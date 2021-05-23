@@ -35,6 +35,9 @@ public final class DetallesTicket extends java.awt.Dialog {
 
     /**
      * Creates new form DetallesTicket
+     * @param parent
+     * @param modal
+     * @param ticket
      */
     public DetallesTicket(java.awt.Frame parent, boolean modal, int ticket) {
         super(parent, modal);
@@ -45,12 +48,12 @@ public final class DetallesTicket extends java.awt.Dialog {
     }
 
     public void efectosTabla() {
-        this.modelo.addColumn("PRODUCTO");
-        this.modelo.addColumn("PRECIO");
-        this.modelo.addColumn("CANTIDAD");
-        this.modelo.addColumn("SUBTOTAL");
+        modelo.addColumn("PRODUCTO");
+        modelo.addColumn("PRECIO");
+        modelo.addColumn("CANTIDAD");
+        modelo.addColumn("SUBTOTAL");
 
-        this.tabla.setModel(this.modelo);
+        tabla.setModel(modelo);
         
         TableColumn columnProduct = tabla.getColumn("PRODUCTO");
         columnProduct.setResizable(false);
@@ -68,9 +71,9 @@ public final class DetallesTicket extends java.awt.Dialog {
         columnSub.setResizable(false);
         columnSub.setPreferredWidth(15);
         
-        this.tabla.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
-        this.tabla.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
-        this.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabla.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
+        tabla.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.getViewport().setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.getViewport().setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
@@ -88,9 +91,9 @@ public final class DetallesTicket extends java.awt.Dialog {
             Object[] datos = new Object[4];
             while (rs.next()) {
                 datos[0] = rs.getString("nombre");
-                datos[1] = Float.valueOf(rs.getFloat("precio"));
-                datos[2] = Integer.valueOf(rs.getInt("cantidad"));
-                datos[3] = Float.valueOf(rs.getFloat("importe"));
+                datos[1] = rs.getFloat("precio");
+                datos[2] = rs.getInt("cantidad");
+                datos[3] = rs.getFloat("importe");
                 this.modelo.addRow(datos);
                 this.mesa.setText(rs.getString("mesa"));
                 this.total.setText("$" + rs.getFloat("total"));
@@ -109,6 +112,7 @@ public final class DetallesTicket extends java.awt.Dialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame2 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         mesas = new javax.swing.JLabel();
         mesa1 = new javax.swing.JLabel();
@@ -128,6 +132,9 @@ public final class DetallesTicket extends java.awt.Dialog {
                 closeDialog(evt);
             }
         });
+
+        jInternalFrame2.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        jInternalFrame2.setVisible(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(58, 159, 171), 5));
@@ -222,7 +229,9 @@ public final class DetallesTicket extends java.awt.Dialog {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 113, 520, 240));
 
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+        jInternalFrame2.getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        add(jInternalFrame2, java.awt.BorderLayout.NORTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -243,7 +252,7 @@ public final class DetallesTicket extends java.awt.Dialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 DetallesTicket dialog = new DetallesTicket(new java.awt.Frame(), true, 4);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -253,13 +262,14 @@ public final class DetallesTicket extends java.awt.Dialog {
                 });
                 dialog.setVisible(true);
             }
-        });
+        });*/
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButton cerrar;
     private javax.swing.JLabel fecha;
+    private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
