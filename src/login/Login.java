@@ -232,8 +232,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordKeyReleased
 
     private void btnVerTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTicketsActionPerformed
-        Settings settings = new Settings(this, true);
-        settings.setVisible(true);
+       // Settings settings = new Settings(this, true);
+       // settings.setVisible(true);
     }//GEN-LAST:event_btnVerTicketsActionPerformed
 
     /**

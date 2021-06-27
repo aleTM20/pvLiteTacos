@@ -37,7 +37,7 @@ public class LoginModel extends PVLConnection implements LoginContract.Model {
             } else {
                 presenter.onShowInitialBalanceModal(user);
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar saldo inicial", ex.toString()));
         }
     }
@@ -53,7 +53,7 @@ public class LoginModel extends PVLConnection implements LoginContract.Model {
             } else {
                 presenter.onErrorLogin();
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             presenter.onError(new ExceptionPvLite("Error al revisar credenciales", ex.toString()));
         }
 

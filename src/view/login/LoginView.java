@@ -31,7 +31,7 @@ import view.administrator.InitialBox;
 public class LoginView extends javax.swing.JFrame implements LoginContract.View {
 
     int x, y;
-    private final LoginPresenter presenter;
+    private LoginPresenter presenter;
 
     /**
      * Creates new form Login
@@ -43,15 +43,20 @@ public class LoginView extends javax.swing.JFrame implements LoginContract.View 
         AWTUtilities.setOpaque(this, false);
         FadeEffect.fadeInFrame(this, 50, 0.1f);
         this.setLocationRelativeTo(null);
+        this.setPrensenter();
         this.txtUser.requestFocus();
-        presenter = new LoginPresenter(this);
         txtPassword.setMargin(new Insets(10, 10, 10, 10));
     }
 
-    
+    public void setPrensenter() {
+        presenter = new LoginPresenter(this);
+
+    }
+
     public static void main(String[] args) {
         new LoginView().setVisible(true);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,7 +117,7 @@ public class LoginView extends javax.swing.JFrame implements LoginContract.View 
         btnServerSettings.setBackground(new java.awt.Color(255, 255, 255));
         btnServerSettings.setForeground(new java.awt.Color(58, 159, 171));
         btnServerSettings.setText("RED");
-        btnServerSettings.setToolTipText("<html> <head> <style> #contenedor{background:#3A9FAB;color:white; padding-left:10px;padding-right:10px;margin:0; padding-top:5px;padding-bottom:5px;} </style> </head> <body> <h4 id=\"contenedor\">Quitar</h4> </body> </html>");
+        btnServerSettings.setToolTipText("<html> <head> <style> #contenedor{background:#3A9FAB;color:white; padding-left:10px;padding-right:10px;margin:0; padding-top:5px;padding-bottom:5px;} </style> </head> <body> <h4 id=\"contenedor\">Modificar datos de red</h4> </body> </html>");
         btnServerSettings.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnServerSettings.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         btnServerSettings.addActionListener(new java.awt.event.ActionListener() {

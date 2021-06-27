@@ -44,7 +44,7 @@ public class BoxModel extends PVLConnection implements BoxContract.Model {
             pst.setString(9, hour);
             pst.executeUpdate();
             presenter.onShowAdministratorView();
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             presenter.onError(new ExceptionPvLite("Error en insertar saldo inicial", ex.toString()));
         }
     }

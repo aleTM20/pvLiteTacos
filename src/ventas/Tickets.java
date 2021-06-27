@@ -377,38 +377,38 @@ public class Tickets extends javax.swing.JDialog {
 
         dateChooserCombo1.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
             new datechooser.view.appearance.ViewAppearance("custom",
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
-                    new java.awt.Color(0, 0, 0),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(187, 187, 187),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
-                    new java.awt.Color(0, 0, 0),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(187, 187, 187),
                     new java.awt.Color(0, 0, 255),
                     true,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                     new java.awt.Color(0, 0, 255),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                     new java.awt.Color(128, 128, 128),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
-                    new java.awt.Color(0, 0, 0),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(187, 187, 187),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
-                    new java.awt.Color(0, 0, 0),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(187, 187, 187),
                     new java.awt.Color(255, 0, 0),
                     false,
                     false,
@@ -539,8 +539,13 @@ public class Tickets extends javax.swing.JDialog {
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
-        String dato = buscar.getText();
-        llenarTabla("SELECT * FROM `ticket` where vendedor like '%" + dato + "%' or idTicket like '%" + dato + "%' or mesa like '%" + dato + "%'  ORDER by idTicket DESC");
+        String textToSearch = buscar.getText();
+        System.out.println(dar(this.dateChooserCombo1.getText()));
+        if (textToSearch.trim().equals("")) {
+            llenarTabla("SELECT * FROM ticket where (fecha BETWEEN '" + dar(this.dateChooserCombo1.getText()) + "' and '" + dar(this.dateChooserCombo2.getText()) + "' ) ORDER by idTicket DESC");
+        } else {
+            llenarTabla("SELECT * FROM ticket where (fecha BETWEEN '" + dar(this.dateChooserCombo1.getText()) + "' and '" + dar(this.dateChooserCombo2.getText()) + "' ) and vendedor like '%" + textToSearch + "%' or idTicket like '%" + textToSearch + "%' or mesa like '%" + textToSearch + "%'  ORDER by idTicket DESC");
+        }
     }//GEN-LAST:event_buscarKeyReleased
 
     private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped
@@ -553,10 +558,12 @@ public class Tickets extends javax.swing.JDialog {
     }//GEN-LAST:event_buscarKeyTyped
 
     private void dateChooserCombo1OnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_dateChooserCombo1OnCommit
+        buscar.setText("");
         llenarTabla("SELECT * FROM ticket where (fecha BETWEEN '" + dar(this.dateChooserCombo1.getText()) + "' and '" + dar(this.dateChooserCombo2.getText()) + "' ) ORDER by idTicket DESC");
     }//GEN-LAST:event_dateChooserCombo1OnCommit
 
     private void dateChooserCombo2OnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_dateChooserCombo2OnCommit
+        this.buscar.setText("");
         llenarTabla("SELECT * FROM ticket where (fecha BETWEEN '" + dar(this.dateChooserCombo1.getText()) + "' and '" + dar(this.dateChooserCombo2.getText()) + "' ) ORDER by idTicket DESC");
     }//GEN-LAST:event_dateChooserCombo2OnCommit
 

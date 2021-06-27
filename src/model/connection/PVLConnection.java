@@ -90,14 +90,13 @@ public class PVLConnection {
         }
     }
 
-    public Connection getConnection() {
+    public Connection getConnection() throws Exception{
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //System.out.println("conectando a: " + this.url);
             conect = DriverManager.getConnection(this.url, this.user, this.password);
         } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error en la conexión" + e);
-            System.exit(0);
+            throw e;
         }
         return conect;
     }

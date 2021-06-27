@@ -42,7 +42,7 @@ public class CashCourtModel1 extends PVLConnection implements CashCourtContract1
                 total = rs.getFloat("total");
             }
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar los tickets", ex.toString()));
         }
         return total;
@@ -64,7 +64,7 @@ public class CashCourtModel1 extends PVLConnection implements CashCourtContract1
                         rs.getString("hora")));
             }
             this.presenter.onLoadedTicketsToday(court);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar los tickets", ex.toString()));
         }
     }
@@ -80,7 +80,7 @@ public class CashCourtModel1 extends PVLConnection implements CashCourtContract1
                 spent = rs.getFloat("spent");
             }
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar los gastos", ex.toString()));
         }
         return spent;
@@ -100,7 +100,7 @@ public class CashCourtModel1 extends PVLConnection implements CashCourtContract1
                 initialMap.put("initialBalance", "0.00");
                 initialMap.put("comment", "");
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar saldo inicial", ex.toString()));
         }
         return initialMap;
@@ -122,7 +122,7 @@ public class CashCourtModel1 extends PVLConnection implements CashCourtContract1
                         rs.getString("fecha_gasto")));
             }
             this.presenter.onLoadedSpentToday(spent);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar los gastos tabla", ex.toString()));
         }
     }

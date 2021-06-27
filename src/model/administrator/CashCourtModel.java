@@ -49,7 +49,7 @@ public class CashCourtModel extends PVLConnection implements CashCourtContract.M
                         rs.getFloat("efectivo")));
             }
             this.presenter.onLoadedTickets(tickets);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             presenter.onError(new ExceptionPvLite("Error en consultar los tickets", ex.toString()));
         }
     }

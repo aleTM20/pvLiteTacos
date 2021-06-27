@@ -13,10 +13,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import view.login.LoginView;
 
 /**
  *
- * @author Rojeru San
+ * @author pv_lite_team
  */
 public class Settings extends javax.swing.JDialog {
 
@@ -25,16 +26,17 @@ public class Settings extends javax.swing.JDialog {
     TimerTask task;
     int i = 32;
     private final String PATH = "C:\\TaquitosToluca\\settingsIpAddress.txt";
-
+    private final LoginView loginView;
     /**
      * Creates new form ModalElegir
      */
-    public Settings(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Settings(LoginView loginView, boolean modal) {
+        super(loginView, modal);
         initComponents();
         setLocationRelativeTo(null);
         AWTUtilities.setOpaque(this, false);
         Ubicar(0);
+        this.loginView = loginView;
         firstOctet.requestFocus();
         chargeIPAddress();
     }
@@ -155,6 +157,7 @@ public class Settings extends javax.swing.JDialog {
                 //System.out.println(ipAddress);
                 writeSettings(ipAddress, userText, passwordText, dataBaseText);
                 dispose();
+                this.loginView.setPrensenter();
             } else {
                 lblError.setText("IP Address invalida!!!");
             }
@@ -667,50 +670,6 @@ public class Settings extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtPasswordServerKeyReleased
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Settings dialog = new Settings(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButton btnSettings;
